@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 div.content_wrapper [data-ruby] {
   position: relative;
 }
