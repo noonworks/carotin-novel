@@ -1,0 +1,47 @@
+/*
+    GENERAL
+*/
+.align_right {
+    text-align: right;
+}
+
+/*
+    VERTICAL
+*/
+div.content_wrapper {
+  -webkit-writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  writing-mode: vertical-rl;
+  font-feature-settings: 'pkna';
+}
+div.content_wrapper cite, div.content_wrapper address {
+  font-style: normal;
+}
+div.content_wrapper a {
+  text-decoration: none;
+}
+
+/* 
+    HEADER
+*/
+div.content_wrapper header {
+  margin-left: 3em;
+  text-align: right;
+}
+div.content_wrapper header h1 {
+  text-align: left;
+  text-indent: 2em;
+  font-weight: 100;
+}
+div.content_wrapper header p.author {
+  font-size: 1.25em;
+  padding-bottom: 1em;
+}
+
+/*
+    FOOTER
+*/
+div.content_wrapper footer {
+  margin-right: 3em;
+  text-align: right;
+}

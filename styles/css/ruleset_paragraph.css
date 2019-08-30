@@ -1,0 +1,11 @@
+div.content_wrapper p {
+  margin: 0;
+}
+
+div.content_wrapper p.fullspace-indent {
+  text-indent: 1em;
+}
+
+div.content_wrapper section {
+  margin: 0 1em;
+}

@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'GenEiKoburiMin6R';
+  src: url('../fonts/GenEiKoburiMin6-R.ttf') format('truetype');
+}
+
+div.content_wrapper {
+  font-family: 'GenEiKoburiMin6R', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', 'HGP明朝B', serif;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  font-size: 18px;
+}
+
+div.content_wrapper [data-ruby]::before {
+  font-size: 0.4em;
+  margin-right: -0.8em;
+}
