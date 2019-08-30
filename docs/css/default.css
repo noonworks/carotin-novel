@@ -3,21 +3,12 @@
 /*
     GENERAL
 */
-.align_right {
-    text-align: right;
+body {
+  margin: 0;
+  padding: 0;
 }
-
-/*
-    VERTICAL
-*/
-div.content_wrapper {
-  -webkit-writing-mode: vertical-rl;
-  -ms-writing-mode: tb-rl;
-  writing-mode: vertical-rl;
-  font-feature-settings: 'pkna';
-  height: 92%;
-  margin-top: 3%;
-  padding: 0 2em;
+.align_right {
+  text-align: right;
 }
 div.content_wrapper cite, div.content_wrapper address {
   font-style: normal;
@@ -32,11 +23,73 @@ div.content_wrapper h2 {
   font-weight: 100;
 }
 
-/* 
+/*
+    MAIN WRAPPER
+*/
+div.content_wrapper {
+  /* SIZE */
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: scroll;
+  /* VERTICAL */
+  -webkit-writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  writing-mode: vertical-rl;
+  font-feature-settings: 'pkna';
+}
+/* Smartphone */
+div.content_wrapper {
+  height: 100%;
+}
+/* Larger devices */
+@media (min-width:640px) {
+  div.content_wrapper {
+    height: 100vh;
+  }
+}
+
+/*
+    PAGES
+*/
+div.content_wrapper div.page {
+  margin: 0;
+  padding: 3vh 2em;
+  min-width: 100%;
+  box-sizing: border-box;
+  /* CENTERING */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*
+    SECTION
+*/
+div.content_wrapper section {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+div.content_wrapper section.full {
+  height: 100%;
+}
+div.content_wrapper section.align_right {
+  height: 100%;
+  text-align: right;
+}
+
+/*
     HEADER
 */
 div.content_wrapper header {
+  margin: 0;
   margin-left: 3em;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
   text-align: right;
 }
 div.content_wrapper header h1 {
@@ -53,6 +106,10 @@ div.content_wrapper header p.author {
     FOOTER
 */
 div.content_wrapper footer {
+  margin: 0;
   margin-right: 3em;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
   text-align: right;
 }
