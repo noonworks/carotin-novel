@@ -13,12 +13,21 @@ div.content_wrapper {
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
   font-feature-settings: 'pkna';
+  height: 92%;
+  margin-top: 3%;
+  padding: 0 2em;
 }
 div.content_wrapper cite, div.content_wrapper address {
   font-style: normal;
 }
 div.content_wrapper a {
   text-decoration: none;
+}
+div.content_wrapper h2 {
+  text-indent: 1em;
+  margin: 0 1.25em;
+  font-size: 1.25em;
+  font-weight: 100;
 }
 
 /* 
