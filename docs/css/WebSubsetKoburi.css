@@ -11,20 +11,17 @@ div.content_wrapper {
   letter-spacing: 0.02em;
 }
 
-div.content_wrapper [data-ruby]::before {
+/* Custom Ruby */
+.custom_ruby div.content_wrapper rb[data-ruby]::before {
   font-size: 0.4em;
   margin-right: -0.8em;
 }
 
-/*
-  Smartphone
-*/
+/* Smartphone */
 div.content_wrapper {
   font-size: 16px;
 }
-/*
-  Larger devices
-*/
+/* Larger devices */
 @media (min-width:640px) {
   div.content_wrapper {
     font-size: 18px;

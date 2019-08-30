@@ -1,10 +1,10 @@
 @charset "utf-8";
 
-div.content_wrapper [data-ruby] {
+.custom_ruby div.content_wrapper rb[data-ruby] {
   position: relative;
 }
 
-div.content_wrapper [data-ruby]::before {
+.custom_ruby div.content_wrapper rb[data-ruby]::before {
   content: attr(data-ruby);
   white-space: nowrap;
   position: absolute;
@@ -12,6 +12,6 @@ div.content_wrapper [data-ruby]::before {
   text-align: center;
 }
 
-div.content_wrapper ruby rt {
+.custom_ruby div.content_wrapper ruby rt {
   display: none;
 }
