@@ -1,14 +1,13 @@
-function isChromeDesktop() {
-  const agent = window.navigator.userAgent;
-  const chrome_mobile = /Chrome\/[0-9\.]+ Mobile/;
-  if (chrome_mobile.test(agent)) { return false; }
-  const chrome = /Chrome\/[0-9\.]+/;
-  if (chrome.test(agent)) { return true; }
+function needsCustomRuby() {
+  const parser = new UAParser();
+  const result = parser.getResult();
+  if (!result || !result.browser || !result.device || !result.browser.name) { return false; }
+  if (result.browser.name.toLowerCase() == 'chrome' && result.device.type != 'mobile') { return true; }
   return false;
 }
 
 function initialize() {
-  if (isChromeDesktop()) {
+  if (needsCustomRuby()) {
     document.querySelector('body').classList.add('custom_ruby');
   }
 }
