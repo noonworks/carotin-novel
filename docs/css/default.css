@@ -164,3 +164,6 @@ div.content_wrapper footer {
   height: 100%;
   text-align: right;
 }
+div.content_wrapper footer:first-child {
+  margin-right: 0;
+}
