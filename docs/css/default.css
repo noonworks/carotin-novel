@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 /*
-    GENERAL
+//  GENERAL
 */
 body {
   margin: 0;
@@ -24,7 +24,19 @@ div.content_wrapper h2 {
 }
 
 /*
-    MAIN WRAPPER
+//  RUBY
+*/
+div.content_wrapper ruby {
+  text-align: start;
+  ruby-align: distribute-space;
+  ruby-align: space-around;
+}
+div.content_wrapper rt {
+  text-align: inherit;
+}
+
+/*
+//  MAIN WRAPPER
 */
 div.content_wrapper {
   /* SIZE */
@@ -51,7 +63,7 @@ div.content_wrapper {
 }
 
 /*
-    PAGES
+//  PAGES
 */
 div.content_wrapper div.page {
   margin: 0;
@@ -66,7 +78,7 @@ div.content_wrapper div.page {
 }
 
 /*
-    SECTION
+//  SECTION
 */
 div.content_wrapper section {
   margin: 0;
@@ -82,7 +94,7 @@ div.content_wrapper section.align_right {
 }
 
 /*
-    HEADER
+//  HEADER
 */
 div.content_wrapper header {
   margin: 0;
@@ -103,7 +115,7 @@ div.content_wrapper header p.author {
 }
 
 /*
-    FOOTER
+//  FOOTER
 */
 div.content_wrapper footer {
   margin: 0;

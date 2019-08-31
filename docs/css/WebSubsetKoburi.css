@@ -1,22 +1,17 @@
 @charset "utf-8";
 
+/*
+//  FONT SETTING
+*/
 @font-face {
   font-family: 'WebSubsetKoburi';
   src: url('../fonts/WebSubsetKoburi.ttf') format('truetype');
 }
-
 div.content_wrapper {
   font-family: 'WebSubsetKoburi', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', 'HGP明朝B', serif;
   line-height: 1.5;
   letter-spacing: 0.02em;
 }
-
-/* Custom Ruby */
-.custom_ruby div.content_wrapper rb[data-ruby]::before {
-  font-size: 0.4em;
-  margin-right: -0.8em;
-}
-
 /* Smartphone */
 div.content_wrapper {
   font-size: 16px;
@@ -26,4 +21,12 @@ div.content_wrapper {
   div.content_wrapper {
     font-size: 18px;
   }
+}
+
+/*
+//  CUSTOM RUBY
+*/
+.custom_ruby div.content_wrapper rb[data-ruby]::before {
+  font-size: 0.4em;
+  margin-right: -0.8em;
 }
