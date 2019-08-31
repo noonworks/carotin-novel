@@ -6,7 +6,21 @@ function needsCustomRuby() {
   return false;
 }
 
+// FOR EDGE
+function deleteTextNodeInRuby() {
+  const emptyVal = /^\s*$/;
+  const rubies = document.querySelectorAll('.content_wrapper ruby');
+  rubies.forEach((rby) => {
+    rby.childNodes.forEach((c) => {
+      if (c.nodeType == Node.TEXT_NODE && emptyVal.test(c.nodeValue)) {
+        rby.removeChild(c);
+      }
+    });
+  });
+}
+
 function initialize() {
+  deleteTextNodeInRuby();
   if (needsCustomRuby()) {
     document.querySelector('body').classList.add('custom_ruby');
   }
