@@ -9,5 +9,12 @@ div.content_wrapper p.fullspace-indent {
 }
 
 div.content_wrapper section {
-  margin: 0 1em;
+  margin: 0;
+  margin-left: 1.5rem;
+}
+div.content_wrapper section:last-child {
+  margin-left: 0;
+}
+div.content_wrapper section+footer {
+  margin-right: 1rem;
 }
