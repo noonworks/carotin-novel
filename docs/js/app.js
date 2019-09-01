@@ -1,3 +1,4 @@
+// FOR DESKTOP CHROME
 function needsCustomRuby() {
   const parser = new UAParser();
   const result = parser.getResult();
@@ -19,11 +20,24 @@ function deleteTextNodeInRuby() {
   });
 }
 
+function setScrollEvent() {
+  const wrapper = document.querySelector('div.content_wrapper');
+  if (wrapper) {
+    wrapper.addEventListener('mousewheel', e => {
+      if (e.deltaX != 0) { return; }
+      e.stopPropagation();
+      e.preventDefault();
+      wrapper.scrollLeft += e.deltaY * -1;
+    }, { passive: false });
+  }
+}
+
 function initialize() {
   deleteTextNodeInRuby();
   if (needsCustomRuby()) {
     document.querySelector('body').classList.add('custom_ruby');
   }
+  setScrollEvent();
 }
 
 window.addEventListener('DOMContentLoaded', initialize);
