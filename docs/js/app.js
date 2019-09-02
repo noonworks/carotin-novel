@@ -33,31 +33,12 @@ function setScrollEvent() {
   }
 }
 
-// Scroll for Mobile devices
-function setMobileScroll() {
-  if (!window.DeviceOrientationEvent) { return; }
-  let tilt;
-  let offset;
-  const wrapper = document.querySelector('div.content_wrapper');
-  window.addEventListener('deviceorientation', e => {
-    tilt = e.gamma;
-    offset = offset || tilt;
-    if ((tilt - offset) ** 2 > 9) {
-      wrapper.scrollBy(Math.round((0.2 * (tilt - offset)) ** 3), 0);
-    }
-  });
-  wrapper.addEventListener('touchend', () => {
-    offset = tilt;
-  });
-}
-
 function initialize() {
   deleteTextNodeInRuby();
   if (needsCustomRuby()) {
     document.querySelector('body').classList.add('custom_ruby');
   }
   setScrollEvent();
-  setMobileScroll();
 }
 
 window.addEventListener('DOMContentLoaded', initialize);
