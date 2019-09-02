@@ -1,3 +1,5 @@
+const SLIDE_PAD_SIZE = 45;
+
 // FOR DESKTOP CHROME
 function needsCustomRuby() {
   const parser = new UAParser();
@@ -22,32 +24,86 @@ function deleteTextNodeInRuby() {
 
 // Scroll for Desktop Browsers
 function setScrollEvent() {
-  const wrapper = document.querySelector('div.content_wrapper');
-  if (wrapper) {
-    wrapper.addEventListener('mousewheel', e => {
-      if (e.deltaX != 0) { return; }
-      e.stopPropagation();
-      e.preventDefault();
-      wrapper.scrollLeft += e.deltaY * -1;
-    }, { passive: false });
-  }
+  content_wrapper.addEventListener('mousewheel', e => {
+    if (e.deltaX != 0) { return; }
+    e.stopPropagation();
+    e.preventDefault();
+    scrollLeft(e.deltaY * -1);
+  }, { passive: false });
 }
 
 // Virtual slide pad
 function initializeSlidePad() {
   const padarea = document.querySelector('div.slidepad');
-  const mgr = nipplejs.create({
+  const slide_pad_manager = nipplejs.create({
     zone: padarea,
     color: 'white',
-    size: 90,
+    size: SLIDE_PAD_SIZE * 2,
     position: { left: '50%', top: '50%' },
     mode: 'static',
     lockY: true,
     restOpacity: 0.8
   });
+  slide_pad_manager.on('move', (e, data) => {
+    slide_scroll_data = data;
+  }).on('start', () => {
+    startSlideScroll();
+  }).on('end', () => {
+    stopSlideScroll();
+  });
 }
 
+// slide scroll
+let slide_scroll_id = -1;
+let slide_scroll_prev_dt;
+let slide_scroll_data;
+function startSlideScroll() {
+  window.cancelAnimationFrame(slide_scroll_id);
+  const loop = () => {
+    doSlideScroll();
+    slide_scroll_id = window.requestAnimationFrame(loop);
+  };
+  slide_scroll_prev_dt = (new Date()).getTime();
+  slide_scroll_id = window.requestAnimationFrame(loop);
+}
+function stopSlideScroll() {
+  window.cancelAnimationFrame(slide_scroll_id);
+  slide_scroll_id = -1;
+  slide_scroll_data = undefined;
+  slide_scroll_prev_dt = undefined;
+}
+function doSlideScroll() {
+  if (!slide_scroll_prev_dt) {
+    stopSlideScroll();
+    return;
+  }
+  if (!slide_scroll_data || !slide_scroll_data.direction || !slide_scroll_data.distance) {
+    return;
+  }
+  const cur = (new Date()).getTime();
+  if (cur - slide_scroll_prev_dt < 50) {
+    return;
+  }
+  slide_scroll_prev_dt = cur;
+  const direction = slide_scroll_data.direction.y == 'up' ? 1 : -1;
+  const distanceRate = slide_scroll_data.distance / SLIDE_PAD_SIZE;
+  const speed = 10 * Math.pow(distanceRate, 2);
+  scrollLeft(speed * direction);
+}
+
+// scroll
+function scrollLeft(x, smooth) {
+  content_wrapper.scrollTo({
+    left: content_wrapper.scrollLeft + x,
+    behavior: smooth ? 'smooth' : 'auto'
+  });
+  // content_wrapper.scrollLeft += x;
+}
+
+// initialize
+let content_wrapper;
 function initialize() {
+  content_wrapper = document.querySelector('div.content_wrapper');
   deleteTextNodeInRuby();
   if (needsCustomRuby()) {
     document.querySelector('body').classList.add('custom_ruby');
