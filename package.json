@@ -10,5 +10,8 @@
   "license": "MIT",
   "devDependencies": {
     "superstatic": "^6.0.4"
+  },
+  "dependencies": {
+    "nipplejs": "^0.8.3"
   }
 }
