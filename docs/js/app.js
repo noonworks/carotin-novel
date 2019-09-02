@@ -33,12 +33,27 @@ function setScrollEvent() {
   }
 }
 
+// Virtual slide pad
+function initializeSlidePad() {
+  const padarea = document.querySelector('div.slidepad');
+  const mgr = nipplejs.create({
+    zone: padarea,
+    color: 'white',
+    size: 90,
+    position: { left: '50%', top: '50%' },
+    mode: 'static',
+    lockY: true,
+    restOpacity: 0.8
+  });
+}
+
 function initialize() {
   deleteTextNodeInRuby();
   if (needsCustomRuby()) {
     document.querySelector('body').classList.add('custom_ruby');
   }
   setScrollEvent();
+  initializeSlidePad();
 }
 
 window.addEventListener('DOMContentLoaded', initialize);
