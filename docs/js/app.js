@@ -35,6 +35,7 @@ function setScrollEvent() {
 // Virtual slide pad
 function initializeSlidePad() {
   const padarea = document.querySelector('div.slidepad');
+  const scrollmgr = new SlideScrollManager();
   const slide_pad_manager = nipplejs.create({
     zone: padarea,
     color: 'white',
@@ -45,59 +46,82 @@ function initializeSlidePad() {
     restOpacity: 0.8
   });
   slide_pad_manager.on('move', (e, data) => {
-    slide_scroll_data = data;
+    scrollmgr.setSpeed(data);
   }).on('start', () => {
-    startSlideScroll();
+    scrollmgr.start();
   }).on('end', () => {
-    stopSlideScroll();
+    scrollmgr.stop();
   });
 }
 
 // slide scroll
-let slide_scroll_id = -1;
-let slide_scroll_prev_dt;
-let slide_scroll_data;
-function startSlideScroll() {
-  window.cancelAnimationFrame(slide_scroll_id);
-  const loop = () => {
-    doSlideScroll();
-    slide_scroll_id = window.requestAnimationFrame(loop);
-  };
-  slide_scroll_prev_dt = (new Date()).getTime();
-  slide_scroll_id = window.requestAnimationFrame(loop);
-}
-function stopSlideScroll() {
-  window.cancelAnimationFrame(slide_scroll_id);
-  slide_scroll_id = -1;
-  slide_scroll_data = undefined;
-  slide_scroll_prev_dt = undefined;
-}
-function doSlideScroll() {
-  if (!slide_scroll_prev_dt) {
-    stopSlideScroll();
-    return;
+class SlideScrollManager {
+  constructor() {
+    this._animationId = -1;
+    this._resetSpeed();
+    this._scrollStartPos = 0;
+    this._scrollStartDt = null;
   }
-  if (!slide_scroll_data || !slide_scroll_data.direction || !slide_scroll_data.distance) {
-    return;
+
+  start() {
+    window.cancelAnimationFrame(this._animationId);
+    this._scrollStartPos = content_wrapper.scrollLeft;
+    this._scrollStartDt = (new Date()).getTime();
+    const loop = () => {
+      this._draw();
+      this._animationId = window.requestAnimationFrame(loop);
+    };
+    this._animationId = window.requestAnimationFrame(loop);
   }
-  const cur = (new Date()).getTime();
-  if (cur - slide_scroll_prev_dt < 50) {
-    return;
+
+  stop() {
+    window.cancelAnimationFrame(this._animationId);
+    this._animationId = -1;
+    this._resetSpeed();
+    this._scrollStartPos = 0;
+    this._scrollStartDt = null;
   }
-  slide_scroll_prev_dt = cur;
-  const direction = slide_scroll_data.direction.y == 'up' ? 1 : -1;
-  const distanceRate = slide_scroll_data.distance / SLIDE_PAD_SIZE;
-  const speed = 10 * Math.pow(distanceRate, 2);
-  scrollLeft(speed * direction);
+
+  setSpeed(data) {
+    if (!data || !data.direction || !data.distance) {
+      this._resetSpeed();
+      return;
+    }
+    const direction = data.direction.y == 'up' ? 1 : -1;
+    const distance = data.distance / SLIDE_PAD_SIZE;
+    const speed = Math.pow(distance, 2) * direction;
+    if (this._previous_speed != speed) {
+      this._previous_speed = this._speed;
+      this._speed = speed;
+      this.start();
+    }
+  }
+
+  _resetSpeed() {
+    this._previous_speed = 0;
+    this._speed = 0;
+  }
+
+  _draw() {
+    if (!this._scrollStartDt) {
+      return;
+    }
+    const t = (new Date()).getTime() - this._scrollStartDt;
+    const pos = this._scrollStartPos + this._speed * t;
+    scrollTo(pos, false);
+  }
 }
 
 // scroll
 function scrollLeft(x, smooth) {
+  scrollTo(content_wrapper.scrollLeft + x, smooth);
+}
+
+function scrollTo(x, smooth) {
   content_wrapper.scrollTo({
-    left: content_wrapper.scrollLeft + x,
+    left: x,
     behavior: smooth ? 'smooth' : 'auto'
   });
-  // content_wrapper.scrollLeft += x;
 }
 
 // initialize
