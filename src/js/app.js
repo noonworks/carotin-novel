@@ -1,3 +1,5 @@
+import nipplejs from 'nipplejs';
+
 const SLIDE_PAD_SIZE = 45;
 
 // FOR DESKTOP CHROME
