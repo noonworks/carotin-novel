@@ -1,0 +1,13 @@
+@charset 'utf-8';
+
+div.page {
+  margin: 0;
+  padding: $page-margin-top $page-margin-right $page-margin-bottom $page-margin-left;
+  min-width: 100%;
+  box-sizing: border-box;
+  // Centering
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,11 @@
+@charset 'utf-8';
+
+$media_breakpoints: (
+  'desktop': 'screen and (min-width: 640px)'
+) !default;
+
+@mixin mq($bp: desktop) {
+  @media #{map-get($media_breakpoints, $bp)} {
+    @content;
+  }
+}

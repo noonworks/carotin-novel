@@ -1,0 +1,17 @@
+@charset 'utf-8';
+
+$main-wrapper-selector: 'div.content_wrapper';
+$custom-ruby-selector: '.custom_ruby '#{$main-wrapper-selector};
+$self-fonts: 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', 'HGP明朝B', serif;
+
+//
+// margines
+//
+$page-margin-top: 3vh;
+$page-margin-bottom: 4vh;
+$page-margin-right: 3em;
+$page-margin-left: 3em;
+
+$margin-header-footer: 2.5rem;
+
+$margin-paragraph: 1.5rem;

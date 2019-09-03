@@ -1,0 +1,13 @@
+@charset 'utf-8';
+
+footer {
+  margin: 0;
+  margin-right: $margin-header-footer;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
+  text-align: right;
+  &:first-child {
+    margin-right: 0;
+  }
+}

@@ -1,20 +1,19 @@
-@charset "utf-8";
+@charset 'utf-8';
 
-div.content_wrapper p {
+p {
   margin: 0;
+  &.fullspace-indent {
+    text-indent: 1em;
+  }
 }
 
-div.content_wrapper p.fullspace-indent {
-  text-indent: 1em;
-}
-
-div.content_wrapper section {
+section {
   margin: 0;
-  margin-left: 1.5rem;
-}
-div.content_wrapper section:last-child {
-  margin-left: 0;
-}
-div.content_wrapper section+footer {
-  margin-right: 1rem;
+  margin-left: $margin-paragraph;
+  &:last-child {
+    margin-left: 0;
+  }
+  + footer {
+    margin-right: $margin-header-footer - $margin-paragraph;
+  }
 }

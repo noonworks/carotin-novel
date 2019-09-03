@@ -1,8 +1,8 @@
-@charset "utf-8";
+@charset 'utf-8';
+@import './variables.scss';
+@import './mixin/media.scss';
+@import './mixin/color.scss';
 
-/*
-//  GENERAL
-*/
 body {
   margin: 0;
   padding: 0;
@@ -11,197 +11,76 @@ body {
 .align_right {
   text-align: right;
 }
-div.content_wrapper cite, div.content_wrapper address {
-  font-style: normal;
-}
-div.content_wrapper a {
-  text-decoration: none;
-}
-div.content_wrapper h2 {
-  margin: 0;
-  margin-left: 1.75rem;
-  text-indent: 1em;
-  font-size: 1.25em;
-  font-weight: 100;
-}
-div.content_wrapper h2:first-child {
-  margin-right: 0.25rem;
-}
 
-/*
-//  RUBY
-*/
-div.content_wrapper ruby {
-  text-align: start;
-  ruby-align: distribute-space;
-  ruby-align: space-around;
-}
-div.content_wrapper rt {
-  text-align: inherit;
-}
-
-/*
+//
 //  MAIN WRAPPER
-*/
-div.content_wrapper {
-  /* SIZE */
+//
+#{$main-wrapper-selector} {
+  // Size
   margin: 0;
   padding: 0;
   width: 100%;
   box-sizing: border-box;
   overflow-x: scroll;
   overflow-y: hidden;
-  /* VERTICAL */
+  // Vertical
   -webkit-writing-mode: vertical-rl;
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
   font-feature-settings: 'pkna';
-  /* LAYOUT */
+  // Layout
   position: relative;
-}
-/* Smartphone */
-div.content_wrapper {
+  // Colors
+  background-color: $background-base-color;
+  color: $text-base-color;
+  // Smartphone
   height: 100%;
-}
-/* Larger devices */
-@media (min-width:640px) {
-  div.content_wrapper {
+  // Larger devices
+  @include mq() {
     height: 100vh;
   }
-}
 
-/*
-//  SHADOW
-*/
-div.content_wrapper div.shadow {
-  position: fixed;
-  top: 2.5vh;
-  left: 0;
-  width: 3.5em;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background: linear-gradient(90deg, rgba(255,255,255,0.95), transparent);
-}
-/* Smartphone */
-div.content_wrapper div.shadow {
-  height: 96%;
-}
-/* Larger devices */
-@media (min-width:640px) {
-  div.content_wrapper div.shadow {
-    height: 96vh;
+  //
+  // Elements in Vertical area
+  //
+  cite, address {
+    font-style: normal;
   }
+  a {
+    text-decoration: none;
+  }
+  h2 {
+    margin: 0;
+    margin-left: 1.75rem;
+    text-indent: 1em;
+    font-size: 1.25em;
+    font-weight: 100;
+    &:first-child {
+      margin-right: 0.25rem;
+    }
+  }
+  ruby {
+    text-align: start;
+    ruby-align: distribute-space;
+    ruby-align: space-around;
+    rt {
+      text-align: inherit;
+    }
+  }
+  @import './parts_in_wrapper/shadow.scss';
+  @import './parts_in_wrapper/slidepad.scss';
+  @import './parts_in_wrapper/header.scss';
+  @import './parts_in_wrapper/footer.scss';
+  @import './parts_in_wrapper/section.scss';
+  @import './parts_in_wrapper/page.scss';
 }
 
-/*
-//  SLIDE PAD
-*/
-:root {
-  --slide-pad-size: 45px;
-}
-div.content_wrapper div.slidepad {
-  /* POSITION */
-  position: fixed;
-  bottom: 2em;
-  right: 3em;
-  /* SIZE */
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  width: var(--slide-pad-size);
-  height: calc(var(--slide-pad-size) * 3);
-  /* LINE */
-  writing-mode: horizontal-tb;
-  font-feature-settings: normal;
-  /* DESIGN */
-  overflow: hidden;
-  border-radius: calc(var(--slide-pad-size) / 2);
-  background-color: rgba(192, 192, 192, 0.25);
-  box-shadow: inset 0px 0px 2px 0px rgba(192, 192, 192, 0.75);
-  opacity: 0.6;
-}
-div.content_wrapper div.slidepad div.nipple div.back {
-  background-color: transparent !important;
-}
-div.content_wrapper div.slidepad div.nipple div.front {
-  opacity: 0.8 !important;
-  box-shadow: 0px 0px 2px 0px rgba(128, 128, 128, 0.75);
+// Custom Ruby
+#{$custom-ruby-selector} {
+  @import './parts_in_wrapper/custom_ruby.scss';
 }
 
-/*
-//  PAGES
-*/
-div.content_wrapper div.page {
-  margin: 0;
-  padding: 3vh 3em 4vh 3em;
-  min-width: 100%;
-  box-sizing: border-box;
-  /* CENTERING */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+// Rules
+#{$main-wrapper-selector} {
+  @import './rulesets/paragraph.scss';
 }
-
-/*
-//  SECTION
-*/
-div.content_wrapper section {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-div.content_wrapper section.full {
-  height: 100%;
-}
-div.content_wrapper section.align_right {
-  height: 100%;
-  text-align: right;
-}
-
-/*
-//  HEADER
-*/
-div.content_wrapper header {
-  margin: 0;
-  margin-left: 2.5rem;
-  padding: 0;
-  box-sizing: border-box;
-  height: 100%;
-  text-align: right;
-}
-div.content_wrapper header > h1:first-child {
-  margin: 0;
-  padding: 2em 0;
-  box-sizing: border-box;
-  text-align: left;
-  font-size: 2em;
-  font-weight: 100;
-}
-div.content_wrapper header p.author {
-  margin: 0;
-  margin-right: 1rem;
-  padding: 0;
-  padding-bottom: 0.8em;
-  box-sizing: border-box;
-  font-size: 1.25em;
-}
-
-/*
-//  FOOTER
-*/
-div.content_wrapper footer {
-  margin: 0;
-  margin-right: 2.5rem;
-  padding: 0;
-  box-sizing: border-box;
-  height: 100%;
-  text-align: right;
-}
-div.content_wrapper footer:first-child {
-  margin-right: 0;
-}
-
-@import './custom_ruby.scss';
-@import './rulesets/paragraph.scss';

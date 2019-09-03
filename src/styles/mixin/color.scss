@@ -1,0 +1,15 @@
+@charset 'utf-8';
+
+$background-base-color: rgba(var(--background-base, '255, 255, 255'), var(--background-base-a, 1));
+$text-base-color: rgba(var(--text-base, '0, 0, 0'), var(--text-base-a, 1));
+
+@mixin color-template() {
+  :root {
+    // background-base
+    --background-base: #{$background-base};
+    --background-base-a: #{$background-base-a};
+    // text-base
+    --text-base: #{$text-base};
+    --text-base-a: #{$text-base-a};
+  }
+}

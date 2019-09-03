@@ -1,0 +1,26 @@
+@charset 'utf-8';
+@import '../variables.scss';
+@import '../mixin/media.scss';
+
+@font-face {
+  font-family: 'WebSubsetKoburi';
+  src: url('../../fonts/WebSubsetKoburi.ttf') format('truetype');
+}
+
+#{$main-wrapper-selector} {
+  font-family: 'WebSubsetKoburi', $self-fonts;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  // Smartphone
+  font-size: 16px;
+  // Larger devices
+  @include mq() {
+    font-size: 18px;
+  }
+}
+
+// Custom Ruby
+#{$custom-ruby-selector} rb[data-ruby]::before {
+  font-size: 0.4em;
+  margin-right: -0.8em;
+}
