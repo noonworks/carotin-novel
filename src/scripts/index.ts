@@ -1,4 +1,5 @@
 import nipplejs from 'nipplejs';
+import UAParser from 'ua-parser-js';
 
 const SLIDE_PAD_SIZE = 45;
 

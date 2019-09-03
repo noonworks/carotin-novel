@@ -6,17 +6,19 @@
   "scripts": {
     "serve": "superstatic docs --port 8080 --host localhost",
     "dev": "parcel src\\index.html",
-    "build": "parcel build src\\index.html"
+    "build": "parcel build src\\index.html --no-source-maps"
   },
   "author": "@noonworks",
   "license": "MIT",
   "devDependencies": {
     "marked": "^0.7.0",
     "parcel-bundler": "^1.12.3",
+    "sass": "^1.22.10",
     "superstatic": "^6.0.4",
     "typescript": "^3.6.2"
   },
   "dependencies": {
-    "nipplejs": "^0.8.3"
+    "nipplejs": "^0.8.3",
+    "ua-parser-js": "^0.7.20"
   }
 }
