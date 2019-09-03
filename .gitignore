@@ -91,3 +91,4 @@ typings/
 *.url
 /jp_fonts
 *.lnk
+/dist/
