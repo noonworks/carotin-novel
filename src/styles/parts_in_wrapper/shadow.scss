@@ -8,7 +8,7 @@ div.shadow {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background: linear-gradient(90deg, rgba(255,255,255,0.95), transparent);
+  background: linear-gradient(90deg, $background-overlay-shadow-color, transparent);
   // Smartphone
   height: 96%;
   // Larger devices

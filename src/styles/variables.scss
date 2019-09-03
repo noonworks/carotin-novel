@@ -5,6 +5,20 @@ $custom-ruby-selector: '.custom_ruby '#{$main-wrapper-selector};
 $self-fonts: 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', 'HGP明朝B', serif;
 
 //
+// Colors
+//
+$background-base-color: define-color('background-base');
+$background-overlay-shadow-color: define-color('background-overlay-shadow');
+$text-base-color: define-color('text-base');
+$link-base-color: define-color('link-base');
+$link-active-color: define-color('link-active');
+$link-visited-color: define-color('link-visited');
+$slidepad-opacity: define-color-value('slidepad-opacity');
+$slidepad-back-color: define-color('slidepad-back');
+$slidepad-back-shadow-color: define-color('slidepad-back-shadow');
+$slidepad-front-shadow-color: define-color('slidepad-front-shadow');
+
+//
 // margines
 //
 $page-margin-top: 3vh;

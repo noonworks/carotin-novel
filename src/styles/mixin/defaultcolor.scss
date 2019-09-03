@@ -1,0 +1,41 @@
+@charset 'utf-8';
+
+$default-colors: (
+  background-base: (
+    color: '255, 255, 255',
+    alpha: 1
+  ),
+  background-overlay-shadow: (
+    color: '255, 255, 255',
+    alpha: 0.95
+  ),
+  text-base: (
+    color: '0, 0, 0',
+    alpha: 1
+  ),
+  link-base: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  link-active: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  link-visited: (
+    color: '129, 0, 0',
+    alpha: 1
+  ),
+  slidepad-opacity: 0.6,
+  slidepad-back: (
+    color: '192, 192, 192',
+    alpha: 0.25,
+  ),
+  slidepad-back-shadow: (
+    color: '192, 192, 192',
+    alpha: 0.75,
+  ),
+  slidepad-front-shadow: (
+    color: '128, 128, 128',
+    alpha: 0.75,
+  ),
+);

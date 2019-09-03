@@ -1,15 +1,27 @@
 @charset 'utf-8';
+@import './defaultcolor.scss';
 
-$background-base-color: rgba(var(--background-base, '255, 255, 255'), var(--background-base-a, 1));
-$text-base-color: rgba(var(--text-base, '0, 0, 0'), var(--text-base-a, 1));
+@function define-color($name) {
+  $ca: map-get($default-colors, $name);
+  $c: map-get($ca, 'color');
+  $a: map-get($ca, 'alpha');
+  @return rgba(var(--#{$name}, #{$c}), var(--#{$name}-a, #{$a}));
+}
 
-@mixin color-template() {
+@function define-color-value($name) {
+  $v: map-get($default-colors, $name);
+  @return var(--#{$name}, #{$v});
+}
+
+@mixin color-template($colors) {
   :root {
-    // background-base
-    --background-base: #{$background-base};
-    --background-base-a: #{$background-base-a};
-    // text-base
-    --text-base: #{$text-base};
-    --text-base-a: #{$text-base-a};
+    @each $name, $value in $colors {
+      @if type-of($value) == 'map' {
+        --#{$name}: #{map-get($value, 'color')};
+        --#{$name}-a: #{map-get($value, 'alpha')};
+      } @else {
+        --#{$name}: #{$value};
+      }
+    }
   }
 }
