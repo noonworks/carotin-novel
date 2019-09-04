@@ -50,6 +50,10 @@ $colors: (
     color: '115, 86, 50',
     alpha: 0.75,
   ),
+  loader-primary: (
+    color: '108, 91, 91',
+    alpha: 1,
+  ),
 );
 
 @include color-template($colors, 'brown');
