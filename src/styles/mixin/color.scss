@@ -13,8 +13,8 @@
   @return var(--#{$name}, #{$v});
 }
 
-@mixin color-template($colors) {
-  :root {
+@mixin color-template($colors, $schema: 'default') {
+  :root[data-color-scheme="#{$schema}"] {
     @each $name, $value in $colors {
       @if type-of($value) == 'map' {
         --#{$name}: #{map-get($value, 'color')};

@@ -2,4 +2,4 @@
 @import '../mixin/defaultcolor.scss';
 @import '../mixin/color.scss';
 
-@include color-template($default-colors);
+@include color-template($default-colors, 'default');

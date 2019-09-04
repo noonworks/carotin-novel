@@ -11,10 +11,15 @@ $background-base-color: define-color('background-base');
 $background-overlay-shadow-color: define-color('background-overlay-shadow');
 $text-base-color: define-color('text-base');
 $link-base-color: define-color('link-base');
+$link-base-decoration: define-color-value('link-base-decoration');
+$link-hover-color: define-color('link-hover');
+$link-hover-decoration: define-color-value('link-hover-decoration');
 $link-active-color: define-color('link-active');
+$link-active-decoration: define-color-value('link-active-decoration');
 $link-visited-color: define-color('link-visited');
 $slidepad-opacity: define-color-value('slidepad-opacity');
 $slidepad-back-color: define-color('slidepad-back');
+$slidepad-front-color: define-color('slidepad-front');
 $slidepad-back-shadow-color: define-color('slidepad-back-shadow');
 $slidepad-front-shadow-color: define-color('slidepad-front-shadow');
 

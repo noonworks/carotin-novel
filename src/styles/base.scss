@@ -47,9 +47,14 @@ body {
     font-style: normal;
   }
   a {
-    text-decoration: none;
+    text-decoration: $link-base-decoration;
     color: $link-base-color;
+    &:hover {
+      text-decoration: $link-hover-decoration;
+      color: $link-hover-color;
+    }
     &:active {
+      text-decoration: $link-active-decoration;
       color: $link-active-color;
     }
     &:visited {

@@ -1,52 +1,55 @@
 @charset 'utf-8';
+@import '../mixin/color.scss';
 
-$default-colors: (
+$colors: (
   background-base: (
-    color: '255, 255, 255',
+    color: '217, 211, 193',
     alpha: 1
   ),
   background-overlay-shadow: (
-    color: '255, 255, 255',
+    color: '217, 211, 193',
     alpha: 0.95
   ),
   text-base: (
-    color: '0, 0, 0',
+    color: '64, 42, 30',
     alpha: 1
   ),
   link-base: (
-    color: '0, 102, 203',
+    color: '160, 54, 54',
     alpha: 1
   ),
   link-base-decoration: 'none',
   link-hover: (
-    color: '0, 102, 203',
+    color: '160, 54, 54',
     alpha: 1
   ),
   link-hover-decoration: 'underline',
   link-active: (
-    color: '0, 102, 203',
+    color: '160, 54, 54',
     alpha: 1
   ),
   link-active-decoration: 'underline',
   link-visited: (
-    color: '129, 0, 0',
+    color: '114, 39, 39',
     alpha: 1
   ),
-  slidepad-opacity: 0.6,
+  slidepad-opacity: 0.95,
   slidepad-back: (
-    color: '192, 192, 192',
+    color: '191, 176, 147',
     alpha: 0.25,
   ),
   slidepad-front: (
-    color: '255, 255, 255',
+    color: '238, 235, 235',
     alpha: 1,
   ),
   slidepad-back-shadow: (
-    color: '192, 192, 192',
-    alpha: 0.75,
+    color: '115, 86, 50',
+    alpha: 0.3,
   ),
   slidepad-front-shadow: (
-    color: '128, 128, 128',
+    color: '115, 86, 50',
     alpha: 0.75,
   ),
 );
+
+@include color-template($colors, 'brown');
