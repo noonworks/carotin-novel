@@ -1,4 +1,4 @@
-import { IStore, DeepPartial, IStoreData } from "./IStore";
+import { IStore, DeepPartial, IStoreData, IWorkStore } from "./IStore";
 import { APP_ID } from "./define";
 import deepEqual from 'deep-equal';
 
@@ -27,6 +27,13 @@ export class StoreManager {
 
   constructor() {
     this.cache = this.load();
+  }
+
+  public getWork(id: string): IWorkStore {
+    if (this.cache.works.hasOwnProperty(id)) {
+      return this.cache.works[id];
+    }
+    return null;
   }
 
   public update(obj: DeepPartial<IStoreData>) {

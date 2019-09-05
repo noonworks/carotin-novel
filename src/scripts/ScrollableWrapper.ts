@@ -19,10 +19,14 @@ export class ScrollableWrapper {
   }
 
   public scrollTo(x: number, smooth: boolean) {
-    this._dom.scrollTo({
-      left: x,
-      behavior: smooth ? 'smooth' : 'auto'
-    });
+    if (!this._dom.scrollTo) {
+      this._dom.scrollLeft = x;
+    } else {
+      this._dom.scrollTo({
+        left: x,
+        behavior: smooth ? 'smooth' : 'auto'
+      });
+    }
   }
 
   private setScrollEvent() {

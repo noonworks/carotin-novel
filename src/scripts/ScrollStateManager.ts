@@ -1,14 +1,17 @@
 import { StoreManagerInstance } from "./StoreManager";
-import { IPageStore, DeepPartial, IStoreData } from "./IStore";
+import { IPageStore, DeepPartial, IStoreData, IWorkStore } from "./IStore";
+import { ScrollableWrapper } from "./ScrollableWrapper";
 
 export class ScrollStateManager {
   private articleId = '';
   private animationId = -1;
   private saveQueueId = -1;
   private prevState: IPageStore = null;
+  private wrapper: ScrollableWrapper;
 
-  constructor(contentElement: HTMLElement) {
-    this.articleId = this.getArticleId(contentElement);
+  constructor(wrapper: ScrollableWrapper) {
+    this.wrapper = wrapper;
+    this.articleId = this.getArticleId(wrapper.dom);
   }
 
   public start(): void {
@@ -26,6 +29,55 @@ export class ScrollStateManager {
 
   public bookmark(): void {
     this.save(false);
+  }
+
+  public restore(): Promise<void> {
+    const bm = StoreManagerInstance.getWork(this.articleId);
+    if (bm != null) {
+      return this.doRestore(bm);
+    }
+    return new Promise((resolve: () => void, _) => {
+      resolve();
+    });
+  }
+
+  private doRestore(bm: IWorkStore): Promise<void> {
+    return new Promise((resolve: () => void, reject: (reason?: any) => void) => {
+      let ps = bm.autosave || bm.bookmark;
+      // console.log(ps);
+      if (!ps) {
+        resolve();
+        return;
+      }
+      this.moveToBookmark(ps).then(resolve).catch(reject);
+    });
+  }
+
+  private moveToBookmark(ps: IPageStore): Promise<void> {
+    const pages = this.wrapper.dom.querySelectorAll('div.page');
+    let element: HTMLElement = null;
+    pages.forEach((p) => {
+      if (!element) {
+        if (p.getAttribute('data-page-id') == ps.page) {
+          element = p as HTMLElement;
+        }
+      }
+    });
+    if (!element) {
+      return new Promise((_, reject: (reason?: any) => void) => {
+        reject('Page not found.');
+      });
+    }
+    const pos = Math.round(element.scrollWidth * ps.scrolldepth);
+    // console.log('pos ' + pos);
+    return new Promise((resolve: () => void, _) => {
+      element.scrollIntoView();
+      element.offsetLeft;
+      setTimeout(() => {
+        this.wrapper.scrollToLeft(pos * -1, false);
+        resolve();
+      }, 300);
+    });
   }
 
   private getArticleId(contentElement: HTMLElement): string {
@@ -66,31 +118,30 @@ export class ScrollStateManager {
     return false;
   }
 
+  private getRightTopElement(): HTMLElement {
+    let page = document.elementFromPoint(window.innerWidth - 1, 0);
+    while (page && page.parentElement) {
+      if (page.tagName.toLowerCase() == 'div' && page.classList.contains('page')) {
+        return page as HTMLElement;
+      }
+      page = page.parentElement;
+    }
+    return null;
+  }
+
   private getState(): IPageStore {
     const ret: IPageStore = {
       page: null,
       scrolldepth: null,
       update: (new Date()).getTime(),
     };
-    let e = document.elementFromPoint(100, 40);
-    while (e.parentElement) {
-      if (e.tagName.toLowerCase() == 'div' && e.classList.contains('page')) {
-        break;
-      }
-      e = e.parentElement;
-    }
-    if (e) {
-      ret.page = e.getAttribute('data-page-id');
-      const boxW = e.scrollWidth;
-      const winW = window.innerWidth;
-      const curRight = e.getBoundingClientRect().right;
-      ret.scrolldepth = (curRight - winW) / (boxW - winW);
+    const page = this.getRightTopElement();
+    if (page) {
+      ret.page = page.getAttribute('data-page-id');
+      const curR = page.getBoundingClientRect().right - window.innerWidth;
+      ret.scrolldepth = curR / page.scrollWidth;
+      // console.log(curR + '=' + Math.round(page.scrollWidth * ret.scrolldepth) + '/' + page.scrollWidth + '=' + ret.scrolldepth);
     }
     return ret;
-  }
-
-  private getLeft(scrolldepth: number, boxWidth: number): number {
-    const width = boxWidth - window.innerWidth;
-    return Math.round(width * (scrolldepth - 1));
   }
 }
