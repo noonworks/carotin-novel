@@ -11,14 +11,18 @@
   "author": "@noonworks",
   "license": "MIT",
   "devDependencies": {
+    "css-loader": "^3.2.0",
     "marked": "^0.7.0",
+    "mini-css-extract-plugin": "^0.8.0",
     "parcel-bundler": "^1.12.3",
     "sass": "^1.22.10",
+    "sass-loader": "^8.0.0",
     "superstatic": "^6.0.4",
     "ts-loader": "^6.0.4",
     "typescript": "^3.6.2",
     "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.8"
+    "webpack-cli": "^3.3.8",
+    "webpack-fix-style-only-entries": "^0.3.1"
   },
   "dependencies": {
     "@types/deep-equal": "^1.0.1",
