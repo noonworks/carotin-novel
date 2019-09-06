@@ -1,20 +1,16 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 
-const entries = {
-  'scripts/carotin': './src/scripts/index.ts',
-  'styles/carotin': './src/styles/base.scss',
-  'styles/fonts/WebSubsetKoburi': './src/styles/fonts/WebSubsetKoburi.scss'
-};
+module.exports = (_, { mode }) => ({
+  entry: {
+    'scripts/carotin': './src/scripts/index.ts',
+    'styles/carotin': './src/styles/base.scss',
+    'styles/fonts/WebSubsetKoburi': './src/styles/fonts/WebSubsetKoburi.scss'
+  },
 
-module.exports = {
-  mode: "development",
-
-  entry: entries,
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    filename: mode == 'production' ? '[name].min.js' : '[name].js',
+    path: path.resolve(__dirname, 'doc')
   },
 
   resolve: {
@@ -49,10 +45,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new FixStyleOnlyEntriesPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: mode == 'production' ? '[name].min.css' : '[name].css',
+      chunkFilename: mode == 'production' ? '[id].min.css' : '[id].css',
     })
   ]
-};
+});

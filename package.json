@@ -6,23 +6,37 @@
   "scripts": {
     "serve": "superstatic docs --port 8080 --host localhost",
     "dev": "parcel src\\index.html",
-    "build": "webpack"
+    "wp:min": "webpack --mode=production",
+    "wp:dev": "webpack --mode=development",
+    "wp:both": "run-p wp:dev wp:min",
+    "wp:fix": "rimraf doc/styles/**/*.js",
+    "cp:fonts": "cpx \"src/fonts/*\" doc/styles/fonts",
+    "cp:html": "cpx \"src/**/*.html\" doc",
+    "doc:copy": "run-p cp:fonts cp:html",
+    "doc:min": "rimraf doc/**/*.min.*",
+    "dist:copy": "cpx \"doc/**/*.{js,css}\" dist",
+    "dist:rm": "rimraf dist/styles/fonts",
+    "build:serve": "run-s wp:dev wp:fix doc:copy doc:min",
+    "build:dist": "run-s wp:both wp:fix doc:copy dist:copy dist:rm doc:min",
+    "clean": "rimraf dist doc"
   },
   "author": "@noonworks",
   "license": "MIT",
   "devDependencies": {
+    "cpx": "^1.5.0",
     "css-loader": "^3.2.0",
     "marked": "^0.7.0",
     "mini-css-extract-plugin": "^0.8.0",
+    "npm-run-all": "^4.1.5",
     "parcel-bundler": "^1.12.3",
+    "rimraf": "^3.0.0",
     "sass": "^1.22.10",
     "sass-loader": "^8.0.0",
     "superstatic": "^6.0.4",
     "ts-loader": "^6.0.4",
     "typescript": "^3.6.2",
     "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.8",
-    "webpack-fix-style-only-entries": "^0.3.1"
+    "webpack-cli": "^3.3.8"
   },
   "dependencies": {
     "@types/deep-equal": "^1.0.1",
