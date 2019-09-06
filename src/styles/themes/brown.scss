@@ -1,5 +1,5 @@
 @charset 'utf-8';
-@import '../mixin/color.scss';
+@import '../mixin/theme.scss';
 
 $colors: (
   background-base: (
@@ -56,4 +56,4 @@ $colors: (
   ),
 );
 
-@include color-template($colors, 'brown');
+@include theme-template($colors, 'brown');

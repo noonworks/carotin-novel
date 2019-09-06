@@ -1,21 +1,21 @@
 @charset 'utf-8';
-@import './defaultcolor.scss';
+@import './default_theme.scss';
 
-@function define-color($name) {
+@function define-theme-color($name) {
   $ca: map-get($default-colors, $name);
   $c: map-get($ca, 'color');
   $a: map-get($ca, 'alpha');
   @return rgba(var(--#{$name}, #{$c}), var(--#{$name}-a, #{$a}));
 }
 
-@function define-color-value($name) {
+@function define-theme-value($name) {
   $v: map-get($default-colors, $name);
   @return var(--#{$name}, #{$v});
 }
 
-@mixin color-template($colors, $schema: 'default') {
-  :root[data-color-scheme="#{$schema}"] {
-    @each $name, $value in $colors {
+@mixin theme-template($theme, $schema: 'default') {
+  :root[data-style-theme="#{$schema}"] {
+    @each $name, $value in $theme {
       @if type-of($value) == 'map' {
         --#{$name}: #{map-get($value, 'color')};
         --#{$name}-a: #{map-get($value, 'alpha')};

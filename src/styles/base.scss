@@ -1,5 +1,5 @@
 @charset 'utf-8';
-@import './mixin/color.scss';
+@import './mixin/theme.scss';
 @import './mixin/media.scss';
 @import './variables.scss';
 
@@ -97,3 +97,6 @@ body {
 #{$main-wrapper-selector} {
   @import './rulesets/paragraph.scss';
 }
+
+// colors
+@import './themes/index.scss';

@@ -1,5 +1,0 @@
-@charset 'utf-8';
-@import '../mixin/defaultcolor.scss';
-@import '../mixin/color.scss';
-
-@include color-template($default-colors, 'default');

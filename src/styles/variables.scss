@@ -7,22 +7,22 @@ $self-fonts: 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro
 //
 // Colors
 //
-$background-base-color: define-color('background-base');
-$background-overlay-shadow-color: define-color('background-overlay-shadow');
-$text-base-color: define-color('text-base');
-$link-base-color: define-color('link-base');
-$link-base-decoration: define-color-value('link-base-decoration');
-$link-hover-color: define-color('link-hover');
-$link-hover-decoration: define-color-value('link-hover-decoration');
-$link-active-color: define-color('link-active');
-$link-active-decoration: define-color-value('link-active-decoration');
-$link-visited-color: define-color('link-visited');
-$slidepad-opacity: define-color-value('slidepad-opacity');
-$slidepad-back-color: define-color('slidepad-back');
-$slidepad-front-color: define-color('slidepad-front');
-$slidepad-back-shadow-color: define-color('slidepad-back-shadow');
-$slidepad-front-shadow-color: define-color('slidepad-front-shadow');
-$loader-primary-color: define-color('loader-primary');
+$background-base-color: define-theme-color('background-base');
+$background-overlay-shadow-color: define-theme-color('background-overlay-shadow');
+$text-base-color: define-theme-color('text-base');
+$link-base-color: define-theme-color('link-base');
+$link-base-decoration: define-theme-value('link-base-decoration');
+$link-hover-color: define-theme-color('link-hover');
+$link-hover-decoration: define-theme-value('link-hover-decoration');
+$link-active-color: define-theme-color('link-active');
+$link-active-decoration: define-theme-value('link-active-decoration');
+$link-visited-color: define-theme-color('link-visited');
+$slidepad-opacity: define-theme-value('slidepad-opacity');
+$slidepad-back-color: define-theme-color('slidepad-back');
+$slidepad-front-color: define-theme-color('slidepad-front');
+$slidepad-back-shadow-color: define-theme-color('slidepad-back-shadow');
+$slidepad-front-shadow-color: define-theme-color('slidepad-front-shadow');
+$loader-primary-color: define-theme-color('loader-primary');
 
 //
 // margines
