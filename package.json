@@ -24,6 +24,7 @@
     "@types/deep-equal": "^1.0.1",
     "@types/node": "^12.7.4",
     "@types/store": "^2.0.2",
+    "@types/ua-parser-js": "^0.7.33",
     "deep-equal": "^1.1.0",
     "deepmerge": "^4.0.0",
     "nipplejs": "^0.8.3",
