@@ -1,8 +1,8 @@
 export class ScrollableWrapper {
   private _dom: HTMLElement;
 
-  constructor(selector: string) {
-    this._dom = document.querySelector(selector);
+  constructor(HTMLElement: HTMLElement) {
+    this._dom = HTMLElement;
     this.setScrollEvent();
   }
 
@@ -29,8 +29,8 @@ export class ScrollableWrapper {
     }
   }
 
-  private setScrollEvent() {
-    this._dom.addEventListener('mousewheel', (e: MouseWheelEvent) => {
+  private setScrollEvent(): void {
+    this._dom.addEventListener('wheel', (e: MouseWheelEvent) => {
       if (e.deltaX != 0) { return; }
       e.stopPropagation();
       e.preventDefault();

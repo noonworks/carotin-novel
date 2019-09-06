@@ -58,7 +58,7 @@ class SlideScrollManager {
     this.scrollStartDt = -1;
   }
 
-  public setSpeed(data): void {
+  public setSpeed(data: nipplejs.JoystickOutputData): void {
     if (!data || !data.direction || !data.distance) {
       this.resetSpeed();
       return;

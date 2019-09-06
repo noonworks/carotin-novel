@@ -29,7 +29,7 @@ export class StoreManager {
     this.cache = this.load();
   }
 
-  public getWork(id: string): IWorkStore {
+  public getWork(id: string): IWorkStore | null {
     if (this.cache.works.hasOwnProperty(id)) {
       return this.cache.works[id];
     }

@@ -6,7 +6,7 @@ export class ScrollStateManager {
   private articleId = '';
   private animationId = -1;
   private saveQueueId = -1;
-  private prevState: IPageStore = null;
+  private prevState: IPageStore | null = null;
   private wrapper: ScrollableWrapper;
 
   constructor(wrapper: ScrollableWrapper) {
@@ -54,15 +54,14 @@ export class ScrollStateManager {
   }
 
   private moveToBookmark(ps: IPageStore): Promise<void> {
-    const pages = this.wrapper.dom.querySelectorAll('div.page');
-    let element: HTMLElement = null;
-    pages.forEach((p) => {
-      if (!element) {
-        if (p.getAttribute('data-page-id') == ps.page) {
-          element = p as HTMLElement;
-        }
+    const pages = Array.from(this.wrapper.dom.querySelectorAll('div.page'));
+    let element: HTMLElement | null = null;
+    for (let i = 0; i < pages.length; i++) {
+      if (pages[i].getAttribute('data-page-id') == ps.page) {
+        element = pages[i] as HTMLElement;
+        break;
       }
-    });
+    }
     if (!element) {
       return new Promise((_, reject: (reason?: any) => void) => {
         reject('Page not found.');
@@ -71,8 +70,10 @@ export class ScrollStateManager {
     const pos = Math.round(element.scrollWidth * ps.scrolldepth);
     // console.log('pos ' + pos);
     return new Promise((resolve: () => void, _) => {
-      element.scrollIntoView();
-      element.offsetLeft;
+      if (element) {
+        element.scrollIntoView();
+        element.offsetLeft;
+      }
       setTimeout(() => {
         this.wrapper.scrollToLeft(pos * -1, false);
         resolve();
@@ -95,9 +96,12 @@ export class ScrollStateManager {
     }
     if (this.isSame(this.prevState, s)) { return; }
     this.prevState = s;
-    const upd: DeepPartial<IStoreData> = {
+    const upd = {
       works: {
-        [this.articleId]: {},
+        [this.articleId]: {
+          autosave: {},
+          bookmark: {},
+        },
       }
     };
     if (auto) {
@@ -118,7 +122,7 @@ export class ScrollStateManager {
     return false;
   }
 
-  private getRightTopElement(): HTMLElement {
+  private getRightTopElement(): HTMLElement | null {
     let page = document.elementFromPoint(window.innerWidth - 1, 0);
     while (page && page.parentElement) {
       if (page.tagName.toLowerCase() == 'div' && page.classList.contains('page')) {
@@ -131,13 +135,13 @@ export class ScrollStateManager {
 
   private getState(): IPageStore {
     const ret: IPageStore = {
-      page: null,
-      scrolldepth: null,
+      page: '',
+      scrolldepth: 0,
       update: (new Date()).getTime(),
     };
     const page = this.getRightTopElement();
     if (page) {
-      ret.page = page.getAttribute('data-page-id');
+      ret.page = page.getAttribute('data-page-id') || '';
       const curR = page.getBoundingClientRect().right - window.innerWidth;
       ret.scrolldepth = curR / page.scrollWidth;
       // console.log(curR + '=' + Math.round(page.scrollWidth * ret.scrolldepth) + '/' + page.scrollWidth + '=' + ret.scrolldepth);

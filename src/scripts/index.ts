@@ -6,16 +6,26 @@ import { Loader } from './loader';
 
 // initialize
 function initialize() {
-  const wrapper = new ScrollableWrapper('div.content_wrapper');
+  const body = document.querySelector('body');
+  const wrapperDom = document.querySelector('div.content_wrapper') as HTMLElement;
+  const loaderDom = document.querySelector('div.loader') as HTMLElement;
+  if (!body || !wrapperDom || !loaderDom) {
+    // show error
+    return;
+  }
+  const wrapper = new ScrollableWrapper(wrapperDom);
   // start loading
-  const loader = new Loader(document.querySelector('body'));
+  const loader = new Loader(loaderDom);
   loader.set('circle');
   loader.show();
   // fix dom
   deleteTextNodeInRuby(wrapper.dom);
-  setCustomRuby(document.querySelector('body'));
+  setCustomRuby(body);
   // add parts
-  const slidepad = new Slidepad(document.querySelector('div.slidepad'), wrapper);
+  const slidepad = document.querySelector('div.slidepad');
+  if (slidepad) {
+    new Slidepad(slidepad as HTMLElement, wrapper);
+  }
   // scroll document to bookmarks
   const scrollStateManager = new ScrollStateManager(wrapper);
   scrollStateManager.restore().then(() => {

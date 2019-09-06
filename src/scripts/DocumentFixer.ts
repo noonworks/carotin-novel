@@ -5,7 +5,7 @@ export function deleteTextNodeInRuby(wrapper: HTMLElement) {
   const rubies = wrapper.querySelectorAll('ruby');
   rubies.forEach((rby) => {
     rby.childNodes.forEach((c) => {
-      if (c.nodeType == Node.TEXT_NODE && emptyVal.test(c.nodeValue)) {
+      if (c.nodeType == Node.TEXT_NODE && c.nodeValue && emptyVal.test(c.nodeValue)) {
         rby.removeChild(c);
       }
     });
