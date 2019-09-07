@@ -11,7 +11,7 @@ export class Loader {
   private svgelements: ISvgElements;
 
   constructor(wrapper: HTMLElement) {
-    this.wrapper = wrapper.querySelector('div.loader');
+    this.wrapper = wrapper;
     this.svgelements = {
       circle: circleLoader,
     };
