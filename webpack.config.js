@@ -49,5 +49,9 @@ module.exports = (_, { mode }) => ({
       filename: mode == 'production' ? '[name].min.css' : '[name].css',
       chunkFilename: mode == 'production' ? '[id].min.css' : '[id].css',
     })
-  ]
+  ],
+  devServer: {
+    contentBase: path.join(__dirname, 'doc'),
+    host: '0.0.0.0'
+  }
 });

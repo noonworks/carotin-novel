@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "superstatic docs --port 8080 --host localhost",
+    "serve": "webpack-dev-server",
     "dev": "parcel src\\index.html",
     "wp:min": "webpack --mode=production",
     "wp:dev": "webpack --mode=development",
@@ -16,7 +16,7 @@
     "doc:min": "rimraf doc/**/*.min.*",
     "dist:copy": "cpx \"doc/**/*.{js,css}\" dist",
     "dist:rm": "rimraf dist/styles/fonts",
-    "build:serve": "run-s wp:dev wp:fix doc:copy doc:min",
+    "build": "run-s wp:dev wp:fix doc:copy doc:min",
     "build:dist": "run-s wp:both wp:fix doc:copy dist:copy dist:rm doc:min",
     "clean": "rimraf dist doc"
   },
@@ -36,7 +36,8 @@
     "ts-loader": "^6.0.4",
     "typescript": "^3.6.2",
     "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.8"
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
     "@types/deep-equal": "^1.0.1",
