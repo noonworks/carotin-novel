@@ -1,11 +1,15 @@
 import { IStore, DeepPartial, IStoreData, IWorkStore } from "./IStore";
 import { APP_ID } from "./define";
 import deepEqual from 'deep-equal';
+import deepmerge from 'deepmerge';
+import store from 'store/dist/store.modern';
+import defaults from 'store/plugins/defaults';
 
-const deepmerge = require('deepmerge');
-const store = require('store');
-const defaultsPlugin = require('store/plugins/defaults');
-store.addPlugin(defaultsPlugin);
+store.addPlugin(defaults);
+
+interface IDefaultPluginAdded extends StoreJsAPI {
+  defaults: (defaultValue: {}) => {};
+}
 
 const emptyStore: IStore = {
   [APP_ID]: {
@@ -41,7 +45,7 @@ export class StoreManager {
     if (deepEqual(this.cache, d)) {
       return;
     }
-    this.save(d);
+    this.save(d as IStoreData);
   }
 
   private save(data: IStoreData): void {
@@ -56,7 +60,7 @@ export class StoreManager {
     let d = store.get(APP_ID);
     if (!d) {
       this.emptyInStorage = true;
-      store.defaults(emptyStore);
+      (store as IDefaultPluginAdded).defaults(emptyStore);
       d = store.get(APP_ID);
     }
     return d;
