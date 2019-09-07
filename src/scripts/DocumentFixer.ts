@@ -1,4 +1,4 @@
-import { UAParser } from 'ua-parser-js';
+const UAParser = require('ua-parser-js');
 
 export function deleteTextNodeInRuby(wrapper: HTMLElement) {
   const emptyVal = /^\s*$/;
@@ -13,8 +13,7 @@ export function deleteTextNodeInRuby(wrapper: HTMLElement) {
 }
 
 export function setCustomRuby(body: HTMLElement) {
-  const parser = new UAParser();
-  const result = parser.getResult();
+  const result = UAParser();
   if (!result || !result.browser || !result.device || !result.browser.name) { return; }
   if (result.browser.name.toLowerCase() == 'chrome' && result.device.type != 'mobile') {
     body.classList.add('custom_ruby');

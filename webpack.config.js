@@ -17,6 +17,10 @@ module.exports = (_, { mode }) => ({
     extensions: [".ts", ".js", ".scss"]
   },
 
+  externals: {
+    'ua-parser-js': 'UAParser'
+  },
+
   module: {
     rules: [
       // TypeScript
