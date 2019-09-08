@@ -1,7 +1,10 @@
 // Port by @noonworks
 // Original: SVG-Loaders By Sam Herbert(@sherb) https://github.com/SamHerbert/SVG-Loaders
 
-export const circleLoader = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+export const circleLoader = document.createElementNS(
+  'http://www.w3.org/2000/svg',
+  'svg'
+);
 circleLoader.setAttribute('width', '44');
 circleLoader.setAttribute('height', '44');
 circleLoader.setAttribute('viewBox', '0 0 44 44');

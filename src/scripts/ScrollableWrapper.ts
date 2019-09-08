@@ -18,7 +18,7 @@ export class ScrollableWrapper {
     this.scrollTo(this._dom.scrollLeft + x, smooth);
   }
 
-  public scrollTo(x: number, smooth: boolean) {
+  public scrollTo(x: number, smooth: boolean): void {
     if (!this._dom.scrollTo) {
       this._dom.scrollLeft = x;
     } else {
@@ -30,11 +30,17 @@ export class ScrollableWrapper {
   }
 
   private setScrollEvent(): void {
-    this._dom.addEventListener('wheel', (e: MouseWheelEvent) => {
-      if (e.deltaX != 0) { return; }
-      e.stopPropagation();
-      e.preventDefault();
-      this.scrollToLeft(e.deltaY * -1, false);
-    }, { passive: false });
+    this._dom.addEventListener(
+      'wheel',
+      (e: MouseWheelEvent) => {
+        if (e.deltaX != 0) {
+          return;
+        }
+        e.stopPropagation();
+        e.preventDefault();
+        this.scrollToLeft(e.deltaY * -1, false);
+      },
+      { passive: false }
+    );
   }
 }

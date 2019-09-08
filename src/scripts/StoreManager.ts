@@ -1,5 +1,5 @@
-import { IStore, DeepPartial, IStoreData, IWorkStore } from "./IStore";
-import { APP_ID } from "./define";
+import { Store, DeepPartial, StoreData, WorkStore } from './IStore';
+import { APP_ID } from './define';
 import deepEqual from 'deep-equal';
 import deepmerge from 'deepmerge';
 import store from 'store/dist/store.modern';
@@ -7,48 +7,47 @@ import defaults from 'store/plugins/defaults';
 
 store.addPlugin(defaults);
 
-interface IDefaultPluginAdded extends StoreJsAPI {
+interface DefaultPluginAdded extends StoreJsAPI {
   defaults: (defaultValue: {}) => {};
 }
 
-const emptyStore: IStore = {
+const emptyStore: Store = {
   [APP_ID]: {
     version: '0.0.1',
     config: {
-      update: (new Date()).getTime(),
+      update: new Date().getTime()
     },
-    works: {
-    }
+    works: {}
   }
-}
+};
 
 const SAVE_INTERVAL = 100;
 
 export class StoreManager {
   private emptyInStorage = false;
-  private cache: IStoreData;
+  private cache: StoreData;
   private saveQueueId = -1;
 
   constructor() {
     this.cache = this.load();
   }
 
-  public getWork(id: string): IWorkStore | null {
-    if (this.cache.works.hasOwnProperty(id)) {
+  public getWork(id: string): WorkStore | null {
+    if (Object.hasOwnProperty.call(this.cache.works, id)) {
       return this.cache.works[id];
     }
     return null;
   }
 
-  public update(obj: DeepPartial<IStoreData>) {
+  public update(obj: DeepPartial<StoreData>): void {
     const d = deepmerge(this.cache, obj);
     if (deepEqual(this.cache, d)) {
       return;
     }
-    this.save(d as IStoreData);
+    this.save(d as StoreData);
   }
 
-  private save(data: IStoreData): void {
+  private save(data: StoreData): void {
     this.cache = data;
     window.clearTimeout(this.saveQueueId);
     this.saveQueueId = window.setTimeout(() => {
@@ -56,11 +55,11 @@ export class StoreManager {
     }, SAVE_INTERVAL);
   }
 
-  private load(): IStoreData {
+  private load(): StoreData {
     let d = store.get(APP_ID);
     if (!d) {
       this.emptyInStorage = true;
-      (store as IDefaultPluginAdded).defaults(emptyStore);
+      (store as DefaultPluginAdded).defaults(emptyStore);
       d = store.get(APP_ID);
     }
     return d;

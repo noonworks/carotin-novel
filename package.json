@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --ext .ts --ignore-path .gitignore ./src",
+    "lint:fix": "eslint --fix --ext .ts --ignore-path .gitignore ./src",
     "serve": "webpack-dev-server",
     "dev": "parcel src\\index.html",
     "wp:min": "webpack --mode=production",
