@@ -1,33 +1,33 @@
-import { APP_ID } from "./define";
+import { APP_ID } from './define';
 
 export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;
 };
 
-export interface IStore {
-  [APP_ID]: IStoreData,
+export interface Store {
+  [APP_ID]: StoreData;
 }
 
-export interface IStoreData {
+export interface StoreData {
   version: string;
-  config: IConfigStore;
-  works: IWorksStore;
+  config: ConfigStore;
+  works: WorksStore;
 }
 
-export interface IConfigStore {
+export interface ConfigStore {
   update: number;
 }
 
-export interface IWorksStore {
-  [key: string]: IWorkStore;
+export interface WorksStore {
+  [key: string]: WorkStore;
 }
 
-export interface IWorkStore {
-  autosave: IPageStore;
-  bookmark: IPageStore;
+export interface WorkStore {
+  autosave: PageStore;
+  bookmark: PageStore;
 }
 
-export interface IPageStore {
+export interface PageStore {
   page: string;
   scrolldepth: number;
   update: number;

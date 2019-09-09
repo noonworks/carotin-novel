@@ -14,7 +14,7 @@
 }
 
 @mixin theme-template($theme, $schema: 'default') {
-  :root[data-style-theme="#{$schema}"] {
+  :root[data-style-theme='#{$schema}'] {
     @each $name, $value in $theme {
       @if type-of($value) == 'map' {
         --#{$name}: #{map-get($value, 'color')};

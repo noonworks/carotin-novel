@@ -12,3 +12,8 @@ end_of_line = crlf
 
 [package.json]
 end_of_line = lf
+
+[.prettierrc]
+indent_style = space
+indent_size = 2
+end_of_line = lf

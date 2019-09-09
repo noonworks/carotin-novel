@@ -3,7 +3,25 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint",
+      "git add"
+    ],
+    "*.scss": [
+      "stylelint",
+      "git add"
+    ]
+  },
   "scripts": {
+    "lint": "run-p lint:ts lint:scss",
+    "lint:ts": "eslint --ext .ts --ignore-path .gitignore ./src",
+    "lint:scss": "stylelint --ignore-path .gitignore ./src/styles/**/*.scss",
     "serve": "webpack-dev-server",
     "dev": "parcel src\\index.html",
     "wp:min": "webpack --mode=production",
@@ -13,27 +31,41 @@
     "cp:fonts": "cpx \"src/fonts/*\" doc/styles/fonts",
     "cp:html": "cpx \"src/**/*.html\" doc",
     "doc:copy": "run-p cp:fonts cp:html",
-    "doc:min": "run-p doc:mincss doc:minjs",
-    "doc:mincss": "rimraf doc/styles/**/*.min.css",
-    "doc:minjs": "rimraf doc/scripts/carotin.js",
+    "del:dist": "run-p del:mincss del:devjs",
+    "del:mincss": "rimraf doc/styles/**/*.min.css",
+    "del:devjs": "rimraf doc/scripts/carotin.js",
     "dist:copy": "run-p dist:css dist:js",
     "dist:css": "cpx \"doc/**/*.css\" dist",
     "dist:js": "cpx \"doc/**/*.min.js\" dist",
     "dist:rm": "rimraf dist/styles/fonts",
-    "build": "run-s wp:dev wp:fix doc:copy doc:min",
-    "build:dist": "run-s wp:both wp:fix doc:copy dist:copy dist:rm doc:min",
-    "clean": "rimraf dist doc"
+    "build": "run-s wp:dev wp:fix doc:copy",
+    "build:dist": "run-s wp:both wp:fix doc:copy dist:copy dist:rm del:dist",
+    "clean": "rimraf dist doc",
+    "precommit": "lint-staged"
   },
   "author": "@noonworks",
   "license": "MIT",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.1.0",
+    "@typescript-eslint/parser": "^2.1.0",
     "cpx": "^1.5.0",
     "css-loader": "^3.2.0",
+    "eslint": "^6.3.0",
+    "eslint-config-prettier": "^6.2.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
     "mini-css-extract-plugin": "^0.8.0",
     "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "prettier-stylelint": "^0.4.2",
     "rimraf": "^3.0.0",
     "sass": "^1.22.10",
     "sass-loader": "^8.0.0",
+    "stylelint": "^10.1.0",
+    "stylelint-config-recess-order": "^2.0.3",
+    "stylelint-config-standard": "^18.3.0",
+    "stylelint-scss": "^3.10.1",
     "ts-loader": "^6.0.4",
     "typescript": "^3.6.2",
     "webpack": "^4.39.3",
@@ -44,7 +76,6 @@
     "@types/deep-equal": "^1.0.1",
     "@types/node": "^12.7.4",
     "@types/store": "^2.0.2",
-    "@types/ua-parser-js": "^0.7.33",
     "deep-equal": "^1.1.0",
     "deepmerge": "^4.0.0",
     "nipplejs": "^0.8.3",

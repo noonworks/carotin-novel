@@ -1,19 +1,19 @@
-import { circleLoader } from "./circle";
+import { circleLoader } from './circle';
 
 export type LoaderTypes = 'circle';
 
-interface ISvgElements {
+interface SvgElements {
   circle: SVGElement;
 }
 
 export class Loader {
   private wrapper: HTMLElement;
-  private svgelements: ISvgElements;
+  private svgelements: SvgElements;
 
   constructor(wrapper: HTMLElement) {
     this.wrapper = wrapper;
     this.svgelements = {
-      circle: circleLoader,
+      circle: circleLoader
     };
   }
 

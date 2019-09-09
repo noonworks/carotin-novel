@@ -1,12 +1,12 @@
-import { StoreManagerInstance } from "./StoreManager";
-import { IPageStore, DeepPartial, IStoreData, IWorkStore } from "./IStore";
-import { ScrollableWrapper } from "./ScrollableWrapper";
+import { StoreManagerInstance } from './StoreManager';
+import { PageStore, WorkStore } from './IStore';
+import { ScrollableWrapper } from './ScrollableWrapper';
 
 export class ScrollStateManager {
   private articleId = '';
   private animationId = -1;
   private saveQueueId = -1;
-  private prevState: IPageStore | null = null;
+  private prevState: PageStore | null = null;
   private wrapper: ScrollableWrapper;
 
   constructor(wrapper: ScrollableWrapper) {
@@ -16,7 +16,7 @@ export class ScrollStateManager {
 
   public start(): void {
     window.cancelAnimationFrame(this.animationId);
-    const loop = () => {
+    const loop = (): void => {
       this.autoSave();
       this.animationId = window.requestAnimationFrame(loop);
     };
@@ -36,24 +36,28 @@ export class ScrollStateManager {
     if (bm != null) {
       return this.doRestore(bm);
     }
-    return new Promise((resolve: () => void, _) => {
+    return new Promise((resolve: () => void): void => {
       resolve();
     });
   }
 
-  private doRestore(bm: IWorkStore): Promise<void> {
-    return new Promise((resolve: () => void, reject: (reason?: any) => void) => {
-      let ps = bm.autosave || bm.bookmark;
-      // console.log(ps);
-      if (!ps) {
-        resolve();
-        return;
+  private doRestore(bm: WorkStore): Promise<void> {
+    return new Promise(
+      (resolve: () => void, reject: (reason?: Error) => void): void => {
+        const ps = bm.autosave || bm.bookmark;
+        // console.log(ps);
+        if (!ps) {
+          resolve();
+          return;
+        }
+        this.moveToBookmark(ps)
+          .then(resolve)
+          .catch(reject);
       }
-      this.moveToBookmark(ps).then(resolve).catch(reject);
-    });
+    );
   }
 
-  private moveToBookmark(ps: IPageStore): Promise<void> {
+  private moveToBookmark(ps: PageStore): Promise<void> {
     const pages = Array.from(this.wrapper.dom.querySelectorAll('div.page'));
     let element: HTMLElement | null = null;
     for (let i = 0; i < pages.length; i++) {
@@ -63,13 +67,13 @@ export class ScrollStateManager {
       }
     }
     if (!element) {
-      return new Promise((_, reject: (reason?: any) => void) => {
-        reject('Page not found.');
+      return new Promise((_, reject: (reason?: Error) => void): void => {
+        reject(new Error('Page not found.'));
       });
     }
     const pos = Math.round(element.scrollWidth * ps.scrolldepth);
     // console.log('pos ' + pos);
-    return new Promise((resolve: () => void, _) => {
+    return new Promise((resolve: () => void): void => {
       if (element) {
         element.scrollIntoView();
         element.offsetLeft;
@@ -83,25 +87,31 @@ export class ScrollStateManager {
 
   private getArticleId(contentElement: HTMLElement): string {
     const data = contentElement.getAttribute('data-article-id');
-    if (data) { return data; }
+    if (data) {
+      return data;
+    }
     return location.pathname;
   }
 
   private save(auto: boolean): void {
     const s = this.getState();
-    if (s.page == null || s.scrolldepth == null) { return; }
+    if (s.page == null || s.scrolldepth == null) {
+      return;
+    }
     if (this.prevState == null) {
       this.prevState = s;
       return;
     }
-    if (this.isSame(this.prevState, s)) { return; }
+    if (this.isSame(this.prevState, s)) {
+      return;
+    }
     this.prevState = s;
     const upd = {
       works: {
         [this.articleId]: {
           autosave: {},
-          bookmark: {},
-        },
+          bookmark: {}
+        }
       }
     };
     if (auto) {
@@ -115,8 +125,11 @@ export class ScrollStateManager {
     }, 500);
   }
 
-  private isSame(stateA: IPageStore, stateB: IPageStore) {
-    if (stateA.page == stateB.page && stateA.scrolldepth == stateB.scrolldepth) {
+  private isSame(stateA: PageStore, stateB: PageStore): boolean {
+    if (
+      stateA.page == stateB.page &&
+      stateA.scrolldepth == stateB.scrolldepth
+    ) {
       return true;
     }
     return false;
@@ -125,7 +138,10 @@ export class ScrollStateManager {
   private getRightTopElement(): HTMLElement | null {
     let page = document.elementFromPoint(window.innerWidth - 1, 0);
     while (page && page.parentElement) {
-      if (page.tagName.toLowerCase() == 'div' && page.classList.contains('page')) {
+      if (
+        page.tagName.toLowerCase() == 'div' &&
+        page.classList.contains('page')
+      ) {
         return page as HTMLElement;
       }
       page = page.parentElement;
@@ -133,11 +149,11 @@ export class ScrollStateManager {
     return null;
   }
 
-  private getState(): IPageStore {
-    const ret: IPageStore = {
+  private getState(): PageStore {
+    const ret: PageStore = {
       page: '',
       scrolldepth: 0,
-      update: (new Date()).getTime(),
+      update: new Date().getTime()
     };
     const page = this.getRightTopElement();
     if (page) {

@@ -92,3 +92,4 @@ typings/
 /jp_fonts
 *.lnk
 /dist/
+/doc/scripts/carotin.js

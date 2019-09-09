@@ -3,30 +3,6 @@ import { ScrollableWrapper } from './ScrollableWrapper';
 
 const SLIDE_PAD_SIZE = 45;
 
-export class Slidepad {
-  constructor(slidepadArea: HTMLElement, contentArea: ScrollableWrapper) {
-    const scrollmgr = new SlideScrollManager(contentArea);
-    const slide_pad_manager = nipplejs.create({
-      zone: slidepadArea,
-      color: 'white',
-      size: SLIDE_PAD_SIZE * 2,
-      position: { left: '50%', top: '50%' },
-      mode: 'static',
-      lockY: true,
-      restOpacity: 0.8
-    });
-    slide_pad_manager.on('move', (_, data) => {
-      scrollmgr.setSpeed(data);
-    });
-    slide_pad_manager.on('start', () => {
-      scrollmgr.start();
-    })
-    slide_pad_manager.on('end', () => {
-      scrollmgr.stop();
-    });
-  }
-}
-
 class SlideScrollManager {
   private animationId = -1;
   private previousSpeed = 0;
@@ -42,8 +18,8 @@ class SlideScrollManager {
   public start(): void {
     window.cancelAnimationFrame(this.animationId);
     this.scrollStartPos = this.wrapper.scrollLeft;
-    this.scrollStartDt = (new Date()).getTime();
-    const loop = () => {
+    this.scrollStartDt = new Date().getTime();
+    const loop = (): void => {
       this.draw();
       this.animationId = window.requestAnimationFrame(loop);
     };
@@ -82,8 +58,32 @@ class SlideScrollManager {
     if (this.scrollStartDt < 0) {
       return;
     }
-    const t = (new Date()).getTime() - this.scrollStartDt;
+    const t = new Date().getTime() - this.scrollStartDt;
     const pos = this.scrollStartPos + this.speed * t;
     this.wrapper.scrollTo(pos, false);
+  }
+}
+
+export class Slidepad {
+  constructor(slidepadArea: HTMLElement, contentArea: ScrollableWrapper) {
+    const scrollmgr = new SlideScrollManager(contentArea);
+    const slidePadManager = nipplejs.create({
+      zone: slidepadArea,
+      color: 'white',
+      size: SLIDE_PAD_SIZE * 2,
+      position: { left: '50%', top: '50%' },
+      mode: 'static',
+      lockY: true,
+      restOpacity: 0.8
+    });
+    slidePadManager.on('move', (_, data) => {
+      scrollmgr.setSpeed(data);
+    });
+    slidePadManager.on('start', () => {
+      scrollmgr.start();
+    });
+    slidePadManager.on('end', () => {
+      scrollmgr.stop();
+    });
   }
 }

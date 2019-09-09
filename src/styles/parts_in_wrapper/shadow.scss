@@ -5,12 +5,15 @@ div.shadow {
   top: 2.5vh;
   left: 0;
   width: 3.5em;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background: linear-gradient(90deg, $background-overlay-shadow-color, transparent);
-  // Smartphone
   height: 96%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    $background-overlay-shadow-color,
+    transparent
+  );
   // Larger devices
   @include mq() {
     height: 96vh;
