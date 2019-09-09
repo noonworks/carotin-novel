@@ -10,11 +10,11 @@ module.exports = (_, { mode }) => ({
 
   output: {
     filename: mode == 'production' ? '[name].min.js' : '[name].js',
-    path: path.resolve(__dirname, 'doc')
+    path: path.resolve(__dirname, 'docs')
   },
 
   resolve: {
-    extensions: [".ts", ".js", ".scss"]
+    extensions: ['.ts', '.js', '.scss']
   },
 
   externals: {
@@ -26,7 +26,7 @@ module.exports = (_, { mode }) => ({
       // TypeScript
       {
         test: /\.ts$/,
-        use: "ts-loader",
+        use: 'ts-loader',
         exclude: /node_modules/
       },
       // SCSS
@@ -35,14 +35,14 @@ module.exports = (_, { mode }) => ({
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               url: false,
               importLoaders: 2 // 2 => postcss-loader, sass-loader
             }
           },
           {
-            loader: "sass-loader"
+            loader: 'sass-loader'
           }
         ]
       }
@@ -51,7 +51,7 @@ module.exports = (_, { mode }) => ({
   plugins: [
     new MiniCssExtractPlugin({
       filename: mode == 'production' ? '[name].min.css' : '[name].css',
-      chunkFilename: mode == 'production' ? '[id].min.css' : '[id].css',
+      chunkFilename: mode == 'production' ? '[id].min.css' : '[id].css'
     })
   ],
   devServer: {
