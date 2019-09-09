@@ -1,5 +1,9 @@
 {
-  // "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
+  "javascript.format.enable": false,
+  "prettier.eslintIntegration": true,
+  "prettier.stylelintIntegration": true,
+  // eslint
   "eslint.autoFixOnSave": true,
   "eslint.validate": [
     "javascript",
@@ -12,5 +16,6 @@
       "language": "typescriptreact",
       "autoFix": true
     }
-  ]
+  ],
+  "eslint.alwaysShowStatus": true
 }
