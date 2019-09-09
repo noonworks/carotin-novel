@@ -2,6 +2,7 @@
 
 p {
   margin: 0;
+
   &.fullspace-indent {
     text-indent: 1em;
   }
@@ -10,9 +11,11 @@ p {
 section {
   margin: 0;
   margin-left: $margin-paragraph;
+
   &:last-child {
     margin-left: 0;
   }
+
   + footer {
     margin-right: $margin-header-footer - $margin-paragraph;
   }

@@ -4,10 +4,11 @@
 @import './variables.scss';
 
 body {
-  margin: 0;
   padding: 0;
+  margin: 0;
   overflow: hidden;
 }
+
 .align_right {
   text-align: right;
 }
@@ -16,25 +17,20 @@ body {
 //  MAIN WRAPPER
 //
 #{$main-wrapper-selector} {
-  // Size
-  margin: 0;
-  padding: 0;
-  width: 100%;
+  position: relative;
   box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
   overflow-x: scroll;
   overflow-y: hidden;
-  // Vertical
+  color: $text-base-color;
+  background-color: $background-base-color;
   -webkit-writing-mode: vertical-rl;
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
   font-feature-settings: 'pkna';
-  // Layout
-  position: relative;
-  // Colors
-  background-color: $background-base-color;
-  color: $text-base-color;
-  // Smartphone
-  height: 100%;
   // Larger devices
   @include mq() {
     height: 100vh;
@@ -43,42 +39,52 @@ body {
   //
   // Elements in Vertical area
   //
-  cite, address {
+  cite,
+  address {
     font-style: normal;
   }
+
   a {
-    text-decoration: $link-base-decoration;
     color: $link-base-color;
+    text-decoration: $link-base-decoration;
+
     &:hover {
-      text-decoration: $link-hover-decoration;
       color: $link-hover-color;
+      text-decoration: $link-hover-decoration;
     }
+
     &:active {
-      text-decoration: $link-active-decoration;
       color: $link-active-color;
+      text-decoration: $link-active-decoration;
     }
+
     &:visited {
       color: $link-visited-color;
     }
   }
+
   h2 {
     margin: 0;
     margin-left: 1.75rem;
-    text-indent: 1em;
     font-size: 1.25em;
     font-weight: 100;
+    text-indent: 1em;
+
     &:first-child {
       margin-right: 0.25rem;
     }
   }
+
   ruby {
     text-align: start;
     ruby-align: distribute-space;
     ruby-align: space-around;
+
     rt {
       text-align: inherit;
     }
   }
+
   @import './parts_in_wrapper/loader.scss';
   @import './parts_in_wrapper/shadow.scss';
   @import './parts_in_wrapper/slidepad.scss';
@@ -86,16 +92,14 @@ body {
   @import './parts_in_wrapper/footer.scss';
   @import './parts_in_wrapper/section.scss';
   @import './parts_in_wrapper/page.scss';
+
+  // Rules
+  @import './rulesets/paragraph.scss';
 }
 
 // Custom Ruby
 #{$custom-ruby-selector} {
   @import './parts_in_wrapper/custom_ruby.scss';
-}
-
-// Rules
-#{$main-wrapper-selector} {
-  @import './rulesets/paragraph.scss';
 }
 
 // colors

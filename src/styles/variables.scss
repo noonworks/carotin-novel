@@ -1,14 +1,17 @@
 @charset 'utf-8';
 
 $main-wrapper-selector: 'div.content_wrapper';
-$custom-ruby-selector: '.custom_ruby '#{$main-wrapper-selector};
-$self-fonts: 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', 'HGP明朝B', serif;
+$custom-ruby-selector: '.custom_ruby ' #{$main-wrapper-selector};
+$self-fonts: 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN',
+  'Hiragino Mincho Pro', 'HGP明朝B';
 
 //
 // Colors
 //
 $background-base-color: define-theme-color('background-base');
-$background-overlay-shadow-color: define-theme-color('background-overlay-shadow');
+$background-overlay-shadow-color: define-theme-color(
+  'background-overlay-shadow'
+);
 $text-base-color: define-theme-color('text-base');
 $link-base-color: define-theme-color('link-base');
 $link-base-decoration: define-theme-value('link-base-decoration');

@@ -36,24 +36,24 @@ $colors: (
   slidepad-opacity: 0.95,
   slidepad-back: (
     color: '191, 176, 147',
-    alpha: 0.25,
+    alpha: 0.25
   ),
   slidepad-front: (
     color: '238, 235, 235',
-    alpha: 1,
+    alpha: 1
   ),
   slidepad-back-shadow: (
     color: '115, 86, 50',
-    alpha: 0.3,
+    alpha: 0.3
   ),
   slidepad-front-shadow: (
     color: '115, 86, 50',
-    alpha: 0.75,
+    alpha: 0.75
   ),
   loader-primary: (
     color: '108, 91, 91',
-    alpha: 1,
-  ),
+    alpha: 1
+  )
 );
 
 @include theme-template($colors, 'brown');

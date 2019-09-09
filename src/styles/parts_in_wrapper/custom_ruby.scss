@@ -4,16 +4,17 @@ ruby {
   rt {
     display: none;
   }
+
   rb[data-ruby] {
     position: relative;
+
     &::before {
-      content: attr(data-ruby);
-      white-space: nowrap;
       position: absolute;
       min-height: 100%;
       text-align: center;
+      white-space: nowrap;
+      content: attr(data-ruby);
       font-feature-settings: normal;
     }
   }
 }
-
