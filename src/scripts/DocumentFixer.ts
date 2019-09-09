@@ -1,4 +1,14 @@
-import { UAParser } from 'ua-parser-js';
+declare class UAParser {
+  constructor();
+  getResult(): {
+    browser: {
+      name: string | undefined;
+    };
+    device: {
+      type: string | undefined;
+    };
+  };
+}
 
 export function deleteTextNodeInRuby(wrapper: HTMLElement): void {
   const emptyVal = /^\s*$/;
