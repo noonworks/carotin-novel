@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --ext .ts --ignore-path .gitignore ./src",
-    "lint:fix": "eslint --fix --ext .ts --ignore-path .gitignore ./src",
+    "lint": "run-p lint:ts lint:scss",
+    "lint:ts": "eslint --ext .ts --ignore-path .gitignore ./src",
     "lint:scss": "stylelint --ignore-path .gitignore ./src/styles/**/*.scss",
     "serve": "webpack-dev-server",
     "dev": "parcel src\\index.html",
