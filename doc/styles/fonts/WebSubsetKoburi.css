@@ -5,9 +5,9 @@
 }
 div.content_wrapper {
   font-family: "WebSubsetKoburi", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Hiragino Mincho Pro", "HGP明朝B", serif;
+  font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
-  font-size: 16px;
 }
 @media screen and (min-width: 640px) {
   div.content_wrapper {
@@ -16,6 +16,6 @@ div.content_wrapper {
 }
 
 .custom_ruby div.content_wrapper rb[data-ruby]::before {
-  font-size: 0.4em;
   margin-right: -0.8em;
+  font-size: 0.4em;
 }
