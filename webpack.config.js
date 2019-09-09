@@ -55,7 +55,7 @@ module.exports = (_, { mode }) => ({
     })
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'doc'),
+    contentBase: path.join(__dirname, 'docs'),
     host: '0.0.0.0'
   }
 });
