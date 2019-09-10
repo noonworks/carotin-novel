@@ -1,9 +1,33 @@
 import { ScrollableWrapper } from '../scroll/ScrollableWrapper';
 import { SlideScrollManager } from './SlideScrollManager';
 import nipplejs from 'nipplejs';
+import { updateCSSCustomProperty, CSSCustomProperty } from '../util';
 
 export type SlidePadSize = 'small' | 'middle' | 'large';
 const AttributeName = 'data-slide-pad-size';
+
+interface Position {
+  top: string;
+  right: string;
+  bottom: string;
+  left: string;
+}
+type Positions = 'top' | 'right' | 'bottom' | 'left';
+const POSITION_PREFIX = '--slide-pad-position-';
+
+function getMovePosition(pos: Partial<Position>): CSSCustomProperty[] {
+  const change: { key: string; val: string }[] = [];
+  for (const key in pos) {
+    const p = pos[key as Positions];
+    if (p) {
+      change.push({
+        key: POSITION_PREFIX + key,
+        val: p
+      });
+    }
+  }
+  return change;
+}
 
 export class SlidepadManager {
   private slidePadArea: HTMLElement;
@@ -14,6 +38,16 @@ export class SlidepadManager {
   constructor(slidepadArea: HTMLElement, contentArea: ScrollableWrapper) {
     this.slidePadArea = slidepadArea;
     this.scrollManager = new SlideScrollManager(contentArea);
+  }
+
+  public move(pos: Partial<Position>): void {
+    const change = getMovePosition(pos);
+    if (change.length == 0) {
+      return;
+    }
+    change.forEach(c => {
+      updateCSSCustomProperty(c);
+    });
   }
 
   public changeSize(size: SlidePadSize): void {
