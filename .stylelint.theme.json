@@ -1,0 +1,7 @@
+{
+  "extends": [],
+  "plugins": ["./carotin-novel-theme"],
+  "rules": {
+    "plugin/carotin-novel-theme": true
+  }
+}

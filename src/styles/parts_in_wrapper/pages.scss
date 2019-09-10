@@ -1,0 +1,25 @@
+@charset 'utf-8';
+
+div.pages_wrapper {
+  padding: 0;
+  margin: 0;
+
+  div.page {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
+    padding: $page-margin-top $page-margin-right $page-margin-bottom
+      $page-margin-left;
+    margin: 0;
+    // Concept code
+    // -webkit-mask-image: linear-gradient(
+    //   to left,
+    //   rgba(0, 0, 0, 1) calc(100vw - 3em),
+    //   transparent 100vw
+    // );
+    // -webkit-mask-attachment: fixed;
+  }
+}

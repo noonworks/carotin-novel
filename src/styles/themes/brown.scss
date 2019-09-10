@@ -1,14 +1,10 @@
 @charset 'utf-8';
 @import '../mixin/theme.scss';
 
-$colors: (
+$theme-brown: (
   background-base: (
     color: '217, 211, 193',
     alpha: 1
-  ),
-  background-overlay-shadow: (
-    color: '217, 211, 193',
-    alpha: 0.95
   ),
   text-base: (
     color: '64, 42, 30',
@@ -56,4 +52,4 @@ $colors: (
   )
 );
 
-@include theme-template($colors, 'brown');
+@include theme-template($theme-brown, 'brown');

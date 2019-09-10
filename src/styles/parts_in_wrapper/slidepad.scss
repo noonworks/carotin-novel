@@ -1,23 +1,43 @@
 @charset 'utf-8';
 
 $slidepad_size: 45px;
+$slidepad_size_large: 60px;
+$slidepad_size_small: 30px;
+
+@at-root {
+  :root[data-slide-pad-size='middle'] {
+    --slide-pad-size: #{$slidepad_size};
+  }
+
+  :root[data-slide-pad-size='large'] {
+    --slide-pad-size: #{$slidepad_size_large};
+  }
+
+  :root[data-slide-pad-size='small'] {
+    --slide-pad-size: #{$slidepad_size_small};
+  }
+}
 
 div.slidepad {
   position: fixed;
   right: 3em;
   bottom: 2em;
   box-sizing: border-box;
-  width: $slidepad_size;
-  height: $slidepad_size * 3;
+  width: var(--slide-pad-size, #{$slidepad_size});
+  height: calc(var(--slide-pad-size, #{$slidepad_size}) * 3);
   padding: 0;
   margin: 0;
   overflow: hidden;
   background-color: $slidepad-back-color;
-  border-radius: $slidepad_size / 2;
+  border-radius: calc(var(--slide-pad-size, #{$slidepad_size}) / 2);
   box-shadow: inset 0 0 2px 0 $slidepad-back-shadow-color;
   opacity: $slidepad-opacity;
   writing-mode: horizontal-tb;
   font-feature-settings: normal;
+
+  &.hidden {
+    opacity: 0 !important;
+  }
 
   div.nipple {
     div.back {

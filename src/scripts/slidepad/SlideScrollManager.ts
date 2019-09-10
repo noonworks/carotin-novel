@@ -1,9 +1,7 @@
+import { ScrollableWrapper } from '../scroll/ScrollableWrapper';
 import nipplejs from 'nipplejs';
-import { ScrollableWrapper } from './ScrollableWrapper';
 
-const SLIDE_PAD_SIZE = 45;
-
-class SlideScrollManager {
+export class SlideScrollManager {
   private animationId = -1;
   private previousSpeed = 0;
   private speed = 0;
@@ -34,13 +32,13 @@ class SlideScrollManager {
     this.scrollStartDt = -1;
   }
 
-  public setSpeed(data: nipplejs.JoystickOutputData): void {
+  public setSpeed(data: nipplejs.JoystickOutputData, size: number): void {
     if (!data || !data.direction || !data.distance) {
       this.resetSpeed();
       return;
     }
     const direction = data.direction.y == 'up' ? 1 : -1;
-    const distance = data.distance / SLIDE_PAD_SIZE;
+    const distance = data.distance / size;
     const speed = Math.pow(distance, 2) * direction;
     if (this.previousSpeed != speed) {
       this.previousSpeed = this.speed;
@@ -61,29 +59,5 @@ class SlideScrollManager {
     const t = new Date().getTime() - this.scrollStartDt;
     const pos = this.scrollStartPos + this.speed * t;
     this.wrapper.scrollTo(pos, false);
-  }
-}
-
-export class Slidepad {
-  constructor(slidepadArea: HTMLElement, contentArea: ScrollableWrapper) {
-    const scrollmgr = new SlideScrollManager(contentArea);
-    const slidePadManager = nipplejs.create({
-      zone: slidepadArea,
-      color: 'white',
-      size: SLIDE_PAD_SIZE * 2,
-      position: { left: '50%', top: '50%' },
-      mode: 'static',
-      lockY: true,
-      restOpacity: 0.8
-    });
-    slidePadManager.on('move', (_, data) => {
-      scrollmgr.setSpeed(data);
-    });
-    slidePadManager.on('start', () => {
-      scrollmgr.start();
-    });
-    slidePadManager.on('end', () => {
-      scrollmgr.stop();
-    });
   }
 }

@@ -1,4 +1,4 @@
-import { APP_ID } from './define';
+import { APP_ID } from '../define';
 
 export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;

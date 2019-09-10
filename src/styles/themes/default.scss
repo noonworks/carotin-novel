@@ -1,4 +1,4 @@
 @charset 'utf-8';
 @import '../mixin/theme.scss';
 
-@include theme-template($default-colors, 'default');
+@include theme-template($default-theme, 'default');

@@ -1,5 +1,5 @@
 import { Store, DeepPartial, StoreData, WorkStore } from './IStore';
-import { APP_ID } from './define';
+import { APP_ID } from '../define';
 import deepEqual from 'deep-equal';
 import deepmerge from 'deepmerge';
 import store from 'store/dist/store.modern';

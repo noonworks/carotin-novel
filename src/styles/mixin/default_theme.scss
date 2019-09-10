@@ -1,13 +1,9 @@
 @charset 'utf-8';
 
-$default-colors: (
+$default-theme: (
   background-base: (
     color: '255, 255, 255',
     alpha: 1
-  ),
-  background-overlay-shadow: (
-    color: '255, 255, 255',
-    alpha: 0.95
   ),
   text-base: (
     color: '0, 0, 0',

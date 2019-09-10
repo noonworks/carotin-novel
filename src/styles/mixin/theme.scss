@@ -2,14 +2,14 @@
 @import './default_theme.scss';
 
 @function define-theme-color($name) {
-  $ca: map-get($default-colors, $name);
+  $ca: map-get($default-theme, $name);
   $c: map-get($ca, 'color');
   $a: map-get($ca, 'alpha');
   @return rgba(var(--#{$name}, #{$c}), var(--#{$name}-a, #{$a}));
 }
 
 @function define-theme-value($name) {
-  $v: map-get($default-colors, $name);
+  $v: map-get($default-theme, $name);
   @return var(--#{$name}, #{$v});
 }
 

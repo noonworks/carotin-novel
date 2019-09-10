@@ -8,8 +8,19 @@ body {
   text-align: right;
 }
 
+div.bg_wrapper {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: rgba(var(--background-base, 255, 255, 255), var(--background-base-a, 1));
+}
+
 div.content_wrapper {
   position: relative;
+  z-index: 2;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -18,7 +29,6 @@ div.content_wrapper {
   overflow-x: scroll;
   overflow-y: hidden;
   color: rgba(var(--text-base, 0, 0, 0), var(--text-base-a, 1));
-  background-color: rgba(var(--background-base, 255, 255, 255), var(--background-base-a, 1));
   -webkit-writing-mode: vertical-rl;
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
@@ -127,29 +137,44 @@ div.content_wrapper div.shadow {
   padding: 0;
   margin: 0;
   overflow: hidden;
-  background: linear-gradient(90deg, rgba(var(--background-overlay-shadow, 255, 255, 255), var(--background-overlay-shadow-a, 0.95)), transparent);
+  background: linear-gradient(90deg, rgba(var(--background-base, 255, 255, 255), var(--background-base-a, 1)), transparent);
 }
 @media screen and (min-width: 640px) {
   div.content_wrapper div.shadow {
     height: 96vh;
   }
 }
+:root[data-slide-pad-size=middle] {
+  --slide-pad-size: 45px;
+}
+
+:root[data-slide-pad-size=large] {
+  --slide-pad-size: 60px;
+}
+
+:root[data-slide-pad-size=small] {
+  --slide-pad-size: 30px;
+}
+
 div.content_wrapper div.slidepad {
   position: fixed;
   right: 3em;
   bottom: 2em;
   box-sizing: border-box;
-  width: 45px;
-  height: 135px;
+  width: var(--slide-pad-size, 45px);
+  height: calc(var(--slide-pad-size, 45px) * 3);
   padding: 0;
   margin: 0;
   overflow: hidden;
   background-color: rgba(var(--slidepad-back, 192, 192, 192), var(--slidepad-back-a, 0.25));
-  border-radius: 22.5px;
+  border-radius: calc(var(--slide-pad-size, 45px) / 2);
   box-shadow: inset 0 0 2px 0 rgba(var(--slidepad-back-shadow, 192, 192, 192), var(--slidepad-back-shadow-a, 0.75));
   opacity: var(--slidepad-opacity, 0.6);
   writing-mode: horizontal-tb;
   font-feature-settings: normal;
+}
+div.content_wrapper div.slidepad.hidden {
+  opacity: 0 !important;
 }
 div.content_wrapper div.slidepad div.nipple div.back {
   background-color: transparent !important;
@@ -209,7 +234,11 @@ div.content_wrapper section.align_right {
   height: 100%;
   text-align: right;
 }
-div.content_wrapper div.page {
+div.content_wrapper div.pages_wrapper {
+  padding: 0;
+  margin: 0;
+}
+div.content_wrapper div.pages_wrapper div.page {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -254,8 +283,6 @@ div.content_wrapper section + footer {
 :root[data-style-theme=default] {
   --background-base: 255, 255, 255;
   --background-base-a: 1;
-  --background-overlay-shadow: 255, 255, 255;
-  --background-overlay-shadow-a: 0.95;
   --text-base: 0, 0, 0;
   --text-base-a: 1;
   --link-base: 0, 102, 203;
@@ -285,8 +312,6 @@ div.content_wrapper section + footer {
 :root[data-style-theme=brown] {
   --background-base: 217, 211, 193;
   --background-base-a: 1;
-  --background-overlay-shadow: 217, 211, 193;
-  --background-overlay-shadow-a: 0.95;
   --text-base: 64, 42, 30;
   --text-base-a: 1;
   --link-base: 160, 54, 54;
