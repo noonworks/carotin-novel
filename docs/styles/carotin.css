@@ -156,10 +156,19 @@ div.content_wrapper div.shadow {
   --slide-pad-size: 30px;
 }
 
+:root {
+  --slide-pad-position-top: auto;
+  --slide-pad-position-right: 3em;
+  --slide-pad-position-bottom: 2em;
+  --slide-pad-position-left: auto;
+}
+
 div.content_wrapper div.slidepad {
   position: fixed;
-  right: 3em;
-  bottom: 2em;
+  top: var(--slide-pad-position-top, auto);
+  right: var(--slide-pad-position-right, 3em);
+  bottom: var(--slide-pad-position-bottom, 2em);
+  left: var(--slide-pad-position-left, auto);
   box-sizing: border-box;
   width: var(--slide-pad-size, 45px);
   height: calc(var(--slide-pad-size, 45px) * 3);
