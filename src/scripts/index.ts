@@ -43,6 +43,8 @@ function initialize(): void {
     })
     .catch((reason: Error) => {
       console.log(reason);
+      // start events
+      scrollStateManager.start();
       // finish loading
       loader.hide();
     });
