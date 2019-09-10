@@ -9,11 +9,7 @@ div.shadow {
   padding: 0;
   margin: 0;
   overflow: hidden;
-  background: linear-gradient(
-    90deg,
-    $background-overlay-shadow-color,
-    transparent
-  );
+  background: linear-gradient(90deg, $background-base-color, transparent);
   // Larger devices
   @include mq() {
     height: 96vh;
