@@ -1,8 +1,8 @@
 import { deleteTextNodeInRuby, setCustomRuby } from './DocumentFixer';
 import { ScrollableWrapper } from './ScrollableWrapper';
-import { Slidepad } from './Slidepad';
 import { ScrollStateManager } from './ScrollStateManager';
 import { Loader } from './loader';
+import { SlidepadManager } from './slidepad/SlidePadManager';
 
 // initialize
 function initialize(): void {
@@ -25,8 +25,11 @@ function initialize(): void {
   setCustomRuby(body);
   // add parts
   const slidepad = document.querySelector('div.slidepad');
+  let slidePadManager: SlidepadManager | null = null;
   if (slidepad) {
-    new Slidepad(slidepad as HTMLElement, wrapper);
+    slidePadManager = new SlidepadManager(slidepad as HTMLElement, wrapper);
+    slidePadManager.changeSize('middle');
+    slidePadManager.show();
   }
   // scroll document to bookmarks
   const scrollStateManager = new ScrollStateManager(wrapper);
