@@ -1,6 +1,6 @@
 import { deleteTextNodeInRuby, setCustomRuby } from './DocumentFixer';
-import { ScrollableWrapper } from './ScrollableWrapper';
-import { ScrollStateManager } from './ScrollStateManager';
+import { ScrollableWrapper } from './scroll/ScrollableWrapper';
+import { ScrollStateManager } from './scroll/ScrollStateManager';
 import { Loader } from './loader';
 import { SlidepadManager } from './slidepad/SlidePadManager';
 

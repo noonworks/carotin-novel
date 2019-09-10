@@ -1,4 +1,4 @@
-import { ScrollableWrapper } from '../ScrollableWrapper';
+import { ScrollableWrapper } from '../scroll/ScrollableWrapper';
 import nipplejs from 'nipplejs';
 
 export class SlideScrollManager {

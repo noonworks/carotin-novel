@@ -1,5 +1,5 @@
-import { StoreManagerInstance } from './StoreManager';
-import { PageStore, WorkStore } from './IStore';
+import { StoreManagerInstance } from '../store/StoreManager';
+import { PageStore, WorkStore } from '../store/IStore';
 import { ScrollableWrapper } from './ScrollableWrapper';
 
 export class ScrollStateManager {
