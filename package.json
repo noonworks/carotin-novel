@@ -19,9 +19,10 @@
     ]
   },
   "scripts": {
-    "lint": "run-p lint:ts lint:scss",
+    "lint": "run-p lint:ts lint:scss lint:theme",
     "lint:ts": "eslint --ext .ts --ignore-path .gitignore ./src",
     "lint:scss": "stylelint --ignore-path .gitignore ./src/styles/**/*.scss",
+    "lint:theme": "stylelint ./docs/styles/carotin.css  --config .stylelint.theme.json",
     "serve": "webpack-dev-server",
     "dev": "parcel src\\index.html",
     "wp:min": "webpack --mode=production",
@@ -39,7 +40,7 @@
     "dist:js": "cpx \"docs/**/*.min.js\" dist",
     "dist:rm": "rimraf dist/styles/fonts",
     "build": "run-s wp:dev wp:fix docs:copy",
-    "build:dist": "run-s wp:both wp:fix docs:copy dist:copy dist:rm del:dist",
+    "build:dist": "run-s wp:both wp:fix docs:copy dist:copy dist:rm del:dist lint",
     "clean": "rimraf dist docs",
     "precommit": "lint-staged"
   },
