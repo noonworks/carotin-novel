@@ -16,12 +16,21 @@ $slidepad_size_small: 30px;
   :root[data-slide-pad-size='small'] {
     --slide-pad-size: #{$slidepad_size_small};
   }
+
+  :root {
+    --slide-pad-position-top: auto;
+    --slide-pad-position-right: 3em;
+    --slide-pad-position-bottom: 2em;
+    --slide-pad-position-left: auto;
+  }
 }
 
 div.slidepad {
   position: fixed;
-  right: 3em;
-  bottom: 2em;
+  top: var(--slide-pad-position-top, auto);
+  right: var(--slide-pad-position-right, 3em);
+  bottom: var(--slide-pad-position-bottom, 2em);
+  left: var(--slide-pad-position-left, auto);
   box-sizing: border-box;
   width: var(--slide-pad-size, #{$slidepad_size});
   height: calc(var(--slide-pad-size, #{$slidepad_size}) * 3);
