@@ -24,7 +24,6 @@
     "lint:scss": "stylelint --ignore-path .gitignore ./src/styles/**/*.scss",
     "lint:theme": "stylelint ./docs/styles/carotin.css  --config .stylelint.theme.json",
     "serve": "webpack-dev-server",
-    "dev": "parcel src\\index.html",
     "wp:min": "webpack --mode=production",
     "wp:dev": "webpack --mode=development",
     "wp:both": "run-p wp:dev wp:min",
@@ -80,7 +79,6 @@
     "deep-equal": "^1.1.0",
     "deepmerge": "^4.0.0",
     "nipplejs": "^0.8.3",
-    "scroll-out": "^2.2.7",
     "store": "^2.0.12"
   }
 }
