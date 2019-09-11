@@ -19,4 +19,8 @@ div.menu-content-wrapper {
     @import './title.scss';
     @import './list.scss';
   }
+
+  div.menu-top {
+    margin-bottom: 1rem;
+  }
 }
