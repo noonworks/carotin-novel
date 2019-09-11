@@ -1,4 +1,4 @@
-import { deleteTextNodeInRuby, setCustomRuby } from './DocumentFixer';
+import { deleteTextNodeInRuby, setCustomRuby } from './util';
 import { ScrollableWrapper } from './scroll/ScrollableWrapper';
 import { ScrollStateManager } from './scroll/ScrollStateManager';
 import { Loader } from './loader';
