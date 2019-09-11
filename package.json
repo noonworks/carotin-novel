@@ -24,7 +24,6 @@
     "lint:scss": "stylelint --ignore-path .gitignore ./src/styles/**/*.scss",
     "lint:theme": "stylelint ./docs/styles/carotin.css  --config .stylelint.theme.json",
     "serve": "webpack-dev-server",
-    "dev": "parcel src\\index.html",
     "wp:min": "webpack --mode=production",
     "wp:dev": "webpack --mode=development",
     "wp:both": "run-p wp:dev wp:min",
