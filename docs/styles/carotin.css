@@ -18,7 +18,7 @@ div.bg_wrapper {
   background-color: rgba(var(--background-base, 255, 255, 255), var(--background-base-a, 1));
 }
 
-div.content_wrapper {
+div.carotin_novel {
   position: relative;
   z-index: 2;
   box-sizing: border-box;
@@ -33,47 +33,49 @@ div.content_wrapper {
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
   font-feature-settings: "pkna";
+  -webkit-mask-image: linear-gradient(to left, black calc(100vw - 3em), transparent 100vw);
+  mask-image: linear-gradient(to left, black calc(100vw - 3em), transparent 100vw);
 }
 @media screen and (min-width: 640px) {
-  div.content_wrapper {
+  div.carotin_novel {
     height: 100vh;
   }
 }
-div.content_wrapper cite,
-div.content_wrapper address {
+div.carotin_novel cite,
+div.carotin_novel address {
   font-style: normal;
 }
-div.content_wrapper a {
+div.carotin_novel a {
   color: rgba(var(--link-base, 0, 102, 203), var(--link-base-a, 1));
   text-decoration: var(--link-base-decoration, none);
 }
-div.content_wrapper a:hover {
+div.carotin_novel a:hover {
   color: rgba(var(--link-hover, 0, 102, 203), var(--link-hover-a, 1));
   text-decoration: var(--link-hover-decoration, underline);
 }
-div.content_wrapper a:active {
+div.carotin_novel a:active {
   color: rgba(var(--link-active, 0, 102, 203), var(--link-active-a, 1));
   text-decoration: var(--link-active-decoration, underline);
 }
-div.content_wrapper a:visited {
+div.carotin_novel a:visited {
   color: rgba(var(--link-visited, 129, 0, 0), var(--link-visited-a, 1));
 }
-div.content_wrapper h2 {
+div.carotin_novel h2 {
   margin: 0;
   margin-left: 1.75rem;
   font-size: 1.25em;
   font-weight: 100;
   text-indent: 1em;
 }
-div.content_wrapper h2:first-child {
+div.carotin_novel h2:first-child {
   margin-right: 0.25rem;
 }
-div.content_wrapper ruby {
+div.carotin_novel ruby {
   text-align: start;
   ruby-align: distribute-space;
   ruby-align: space-around;
 }
-div.content_wrapper ruby rt {
+div.carotin_novel ruby rt {
   text-align: inherit;
 }
 @keyframes fadeIn {
@@ -99,7 +101,7 @@ div.content_wrapper ruby rt {
     opacity: 0;
   }
 }
-div.content_wrapper div.loader {
+div.carotin_novel div.loader {
   position: fixed;
   top: 0;
   left: 0;
@@ -113,12 +115,12 @@ div.content_wrapper div.loader {
   margin: 0;
   background-color: rgba(var(--background-base, 255, 255, 255), var(--background-base-a, 1));
 }
-div.content_wrapper div.loader > svg {
+div.carotin_novel div.loader > svg {
   width: 50px;
   height: 50px;
   stroke: rgba(var(--loader-primary, 200, 200, 200), var(--loader-primary-a, 1));
 }
-div.content_wrapper div.loader.off {
+div.carotin_novel div.loader.off {
   animation-name: fadeOut;
   animation-duration: 700ms;
   animation-play-state: running;
@@ -127,22 +129,6 @@ div.content_wrapper div.loader.off {
   animation-iteration-count: 1;
   animation-direction: normal;
   animation-fill-mode: both;
-}
-div.content_wrapper div.shadow {
-  position: fixed;
-  top: 2.5vh;
-  left: 0;
-  width: 3.5em;
-  height: 96%;
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  background: linear-gradient(90deg, rgba(var(--background-base, 255, 255, 255), var(--background-base-a, 1)), transparent);
-}
-@media screen and (min-width: 640px) {
-  div.content_wrapper div.shadow {
-    height: 96vh;
-  }
 }
 :root[data-slide-pad-size=middle] {
   --slide-pad-size: 45px;
@@ -163,7 +149,7 @@ div.content_wrapper div.shadow {
   --slide-pad-position-left: auto;
 }
 
-div.content_wrapper div.slidepad {
+div.carotin_novel div.slidepad {
   position: fixed;
   top: var(--slide-pad-position-top, auto);
   right: var(--slide-pad-position-right, 3em);
@@ -182,18 +168,18 @@ div.content_wrapper div.slidepad {
   writing-mode: horizontal-tb;
   font-feature-settings: normal;
 }
-div.content_wrapper div.slidepad.hidden {
+div.carotin_novel div.slidepad.hidden {
   opacity: 0 !important;
 }
-div.content_wrapper div.slidepad div.nipple div.back {
+div.carotin_novel div.slidepad div.nipple div.back {
   background-color: transparent !important;
 }
-div.content_wrapper div.slidepad div.nipple div.front {
+div.carotin_novel div.slidepad div.nipple div.front {
   background-color: rgba(var(--slidepad-front, 255, 255, 255), var(--slidepad-front-a, 1)) !important;
   box-shadow: 0 0 2px 0 rgba(var(--slidepad-front-shadow, 128, 128, 128), var(--slidepad-front-shadow-a, 0.75));
   opacity: 0.8 !important;
 }
-div.content_wrapper header {
+div.carotin_novel header {
   box-sizing: border-box;
   height: 100%;
   padding: 0;
@@ -201,7 +187,7 @@ div.content_wrapper header {
   margin-left: 2.5rem;
   text-align: right;
 }
-div.content_wrapper header > h1:first-child {
+div.carotin_novel header > h1:first-child {
   box-sizing: border-box;
   padding: 2em 0;
   margin: 0;
@@ -209,7 +195,7 @@ div.content_wrapper header > h1:first-child {
   font-weight: 100;
   text-align: left;
 }
-div.content_wrapper header p.author {
+div.carotin_novel header p.author {
   box-sizing: border-box;
   padding: 0;
   padding-bottom: 0.8em;
@@ -217,10 +203,10 @@ div.content_wrapper header p.author {
   margin-right: 1rem;
   font-size: 1.25em;
 }
-div.content_wrapper header p.author :first-child {
+div.carotin_novel header p.author :first-child {
   margin-right: 0;
 }
-div.content_wrapper footer {
+div.carotin_novel footer {
   box-sizing: border-box;
   height: 100%;
   padding: 0;
@@ -228,59 +214,59 @@ div.content_wrapper footer {
   margin-right: 2.5rem;
   text-align: right;
 }
-div.content_wrapper footer:first-child {
+div.carotin_novel footer:first-child {
   margin-right: 0;
 }
-div.content_wrapper section {
+div.carotin_novel section {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
-div.content_wrapper section.full {
+div.carotin_novel section.full {
   height: 100%;
 }
-div.content_wrapper section.align_right {
+div.carotin_novel section.align_right {
   height: 100%;
   text-align: right;
 }
-div.content_wrapper div.pages_wrapper {
+div.carotin_novel div.pages_wrapper {
   padding: 0;
   margin: 0;
 }
-div.content_wrapper div.pages_wrapper div.page {
+div.carotin_novel div.pages_wrapper div.page {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 100%;
+  min-width: 100vw;
   padding: 3vh 3em 4vh 3em;
   margin: 0;
 }
-div.content_wrapper p {
+div.carotin_novel p {
   margin: 0;
 }
-div.content_wrapper p.fullspace-indent {
+div.carotin_novel p.fullspace-indent {
   text-indent: 1em;
 }
-div.content_wrapper section {
+div.carotin_novel section {
   margin: 0;
   margin-left: 1.5rem;
 }
-div.content_wrapper section:last-child {
+div.carotin_novel section:last-child {
   margin-left: 0;
 }
-div.content_wrapper section + footer {
+div.carotin_novel section + footer {
   margin-right: 1rem;
 }
 
-.custom_ruby div.content_wrapper ruby rt {
+.custom_ruby div.carotin_novel ruby rt {
   display: none;
 }
-.custom_ruby div.content_wrapper ruby rb[data-ruby] {
+.custom_ruby div.carotin_novel ruby rb[data-ruby] {
   position: relative;
 }
-.custom_ruby div.content_wrapper ruby rb[data-ruby]::before {
+.custom_ruby div.carotin_novel ruby rb[data-ruby]::before {
   position: absolute;
   min-height: 100%;
   text-align: center;
