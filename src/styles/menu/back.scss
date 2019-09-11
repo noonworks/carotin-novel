@@ -15,28 +15,36 @@ div.menu-back {
   border-radius: $menu-radius 0 0 $menu-radius;
   opacity: 0.9;
 
-  &::before {
+  div.menu-slide {
     position: absolute;
     top: calc((100% - #{$menu-slider-size}) / 2);
     bottom: auto;
-    display: block;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     width: $menu-slider-size;
     height: $menu-slider-size;
     margin-left: $menu-slider-height * -1;
-    content: ' ';
     background-color: rgba(250, 250, 250, 1);
     border-radius: $menu-slider-size / 2;
+
+    i {
+      margin-left: $menu-slider-height / 2;
+      font-size: 1.5em;
+      line-height: 1em;
+      opacity: 0.25;
+    }
   }
 
   &.bottom {
-    &::before {
+    div.menu-slide {
       top: auto;
       bottom: 2em;
     }
   }
 
   &.top {
-    &::before {
+    div.menu-slide {
       top: 2em;
       bottom: auto;
     }
