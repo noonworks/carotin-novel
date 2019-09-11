@@ -44,6 +44,16 @@ body {
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
   font-feature-settings: 'pkna';
+  -webkit-mask-image: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 1) calc(100vw - 3em),
+    transparent 100vw
+  );
+  mask-image: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 1) calc(100vw - 3em),
+    transparent 100vw
+  );
   // Larger devices
   @include mq() {
     height: 100vh;
@@ -99,7 +109,6 @@ body {
   }
 
   @import './parts_in_wrapper/loader.scss';
-  @import './parts_in_wrapper/shadow.scss';
   @import './parts_in_wrapper/slidepad.scss';
   @import './parts_in_wrapper/header.scss';
   @import './parts_in_wrapper/footer.scss';

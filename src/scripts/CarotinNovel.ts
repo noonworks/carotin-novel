@@ -8,7 +8,6 @@ export class CarotinNovel {
   private bodyDom: HTMLBodyElement;
   private wrapperDom: HTMLDivElement;
   private slidepadDom: HTMLDivElement;
-  private shadowDom: HTMLDivElement;
   private loaderDom: HTMLDivElement;
   private bgDom: HTMLDivElement;
 
@@ -27,15 +26,6 @@ export class CarotinNovel {
       this.bodyDom = body;
       this.wrapperDom = wrapper as HTMLDivElement;
       this.wrapper = new ScrollableWrapper(this.wrapperDom);
-    }
-    {
-      let shadow = this.wrapperDom.querySelector('div.shadow');
-      if (!shadow) {
-        shadow = document.createElement('div');
-        shadow.classList.add('shadow');
-        this.wrapperDom.appendChild(shadow);
-      }
-      this.shadowDom = shadow as HTMLDivElement;
     }
     {
       let slidepad = this.wrapperDom.querySelector('div.slidepad');
