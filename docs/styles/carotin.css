@@ -406,39 +406,39 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-top {
   margin-bottom: 1rem;
 }
 :root[data-slide-pad-size=middle] {
-  --slide-pad-size: 45px;
+  --carotinnovel--slide-pad-size: 45px;
 }
 
 :root[data-slide-pad-size=large] {
-  --slide-pad-size: 60px;
+  --carotinnovel--slide-pad-size: 60px;
 }
 
 :root[data-slide-pad-size=small] {
-  --slide-pad-size: 30px;
+  --carotinnovel--slide-pad-size: 30px;
 }
 
 :root {
-  --slide-pad-position-top: auto;
-  --slide-pad-position-right: 3em;
-  --slide-pad-position-bottom: 2em;
-  --slide-pad-position-left: auto;
+  --carotinnovel--slide-pad-position-top: auto;
+  --carotinnovel--slide-pad-position-right: 3em;
+  --carotinnovel--slide-pad-position-bottom: 2em;
+  --carotinnovel--slide-pad-position-left: auto;
 }
 
 div.carotin_novel div.slidepad {
   position: fixed;
-  top: var(--slide-pad-position-top, auto);
-  right: var(--slide-pad-position-right, 3em);
-  bottom: var(--slide-pad-position-bottom, 2em);
-  left: var(--slide-pad-position-left, auto);
+  top: var(--carotinnovel--slide-pad-position-top, auto);
+  right: var(--carotinnovel--slide-pad-position-right, 3em);
+  bottom: var(--carotinnovel--slide-pad-position-bottom, 2em);
+  left: var(--carotinnovel--slide-pad-position-left, auto);
   z-index: 10;
   box-sizing: border-box;
-  width: var(--slide-pad-size, 45px);
-  height: calc(var(--slide-pad-size, 45px) * 3);
+  width: var(--carotinnovel--slide-pad-size, 45px);
+  height: calc(var(--carotinnovel--slide-pad-size, 45px) * 3);
   padding: 0;
   margin: 0;
   overflow: hidden;
   background-color: rgba(var(--carotinnovel--slidepad-back, 192, 192, 192), var(--carotinnovel--slidepad-back-a, 0.25));
-  border-radius: calc(var(--slide-pad-size, 45px) / 2);
+  border-radius: calc( var(--carotinnovel--slide-pad-size, 45px) / 2 );
   box-shadow: inset 0 0 2px 0 rgba(var(--carotinnovel--slidepad-back-shadow, 192, 192, 192), var(--carotinnovel--slidepad-back-shadow-a, 0.75));
   opacity: var(--carotinnovel--slidepad-opacity, 0.6);
   writing-mode: horizontal-tb;
