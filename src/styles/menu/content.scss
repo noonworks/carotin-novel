@@ -11,10 +11,22 @@ div.menu-content-wrapper {
   font-family: 'Noto Serif JP', $self-fonts, serif;
 
   div.menu-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    position: absolute;
+    max-width: 90%;
+    opacity: 0;
+    transition-timing-function: linear;
+    transition-duration: 300ms;
+
+    &.on {
+      opacity: 1;
+    }
+
+    div.menu_center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
     @import './title.scss';
     @import './list.scss';

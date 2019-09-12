@@ -31,20 +31,24 @@ export function appendCSS(): void {
   }
 }
 
+export function createMenuTitle(title: string): HTMLElement {
+  const h2 = document.createElement('h2');
+  const l1 = document.createElement('span');
+  l1.classList.add('line');
+  const ttl = document.createElement('span');
+  ttl.classList.add('title');
+  ttl.textContent = title;
+  h2.appendChild(l1);
+  h2.appendChild(ttl);
+  h2.appendChild(l1.cloneNode());
+  return h2;
+}
+
 export function createMenuContent(title?: string): HTMLDivElement {
   const t = document.createElement('div');
   t.classList.add('menu-content');
   if (title) {
-    const h2 = document.createElement('h2');
-    const l1 = document.createElement('span');
-    l1.classList.add('line');
-    const ttl = document.createElement('span');
-    ttl.classList.add('title');
-    ttl.textContent = title;
-    h2.appendChild(l1);
-    h2.appendChild(ttl);
-    h2.appendChild(l1.cloneNode());
-    t.appendChild(h2);
+    t.appendChild(createMenuTitle(title));
   }
   return t;
 }

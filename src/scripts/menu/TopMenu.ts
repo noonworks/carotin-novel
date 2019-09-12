@@ -39,6 +39,7 @@ export function createTopMenu(
   const t = createMenuContent('MENU');
   t.classList.add('menu-top');
   const ul = document.createElement('ul');
+  ul.classList.add('menu_item');
   [page ? ITEM_PAGE : null, share ? ITEM_SHARE : null, ...DEFAULT_MENU].forEach(
     i => {
       if (i) {

@@ -6,6 +6,12 @@ export interface MenuItemOption {
   title: string;
 }
 
+export const MENUITEM_BACK: MenuItemOption = {
+  id: 'back',
+  icon: 'ion-md-arrow-back',
+  title: '戻る'
+};
+
 export class MenuItem {
   private id: string;
   private icon: string;
