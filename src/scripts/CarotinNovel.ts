@@ -73,7 +73,7 @@ export class CarotinNovel {
       this.loader = new Loader(this.loaderDom);
     }
     this.scrollManager = new ScrollStateManager(this.wrapper);
-    this.menu = new Menu({ page: { enable: true }, share: { enable: true } });
+    this.menu = new Menu({ page: { enable: false }, share: { enable: false } });
     this.rootDom.appendChild(this.menu.dom);
   }
 
