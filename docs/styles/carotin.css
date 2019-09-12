@@ -16,7 +16,7 @@ div.bg_wrapper {
   height: 100%;
   padding: 0;
   margin: 0;
-  background-color: rgba(var(--background-base, 255, 255, 255), var(--background-base-a, 1));
+  background-color: rgba(var(--carotinnovel--background-base, 255, 255, 255), var(--carotinnovel--background-base-a, 1));
 }
 
 div.carotin_novel {
@@ -29,7 +29,7 @@ div.carotin_novel {
   margin: 0;
   overflow-x: scroll;
   overflow-y: hidden;
-  color: rgba(var(--text-base, 0, 0, 0), var(--text-base-a, 1));
+  color: rgba(var(--carotinnovel--text-base, 0, 0, 0), var(--carotinnovel--text-base-a, 1));
   -webkit-writing-mode: vertical-rl;
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
@@ -47,19 +47,19 @@ div.carotin_novel address {
   font-style: normal;
 }
 div.carotin_novel a {
-  color: rgba(var(--link-base, 0, 102, 203), var(--link-base-a, 1));
-  text-decoration: var(--link-base-decoration, none);
+  color: rgba(var(--carotinnovel--link-base, 0, 102, 203), var(--carotinnovel--link-base-a, 1));
+  text-decoration: var(--carotinnovel--link-base-decoration, none);
 }
 div.carotin_novel a:hover {
-  color: rgba(var(--link-hover, 0, 102, 203), var(--link-hover-a, 1));
-  text-decoration: var(--link-hover-decoration, underline);
+  color: rgba(var(--carotinnovel--link-hover, 0, 102, 203), var(--carotinnovel--link-hover-a, 1));
+  text-decoration: var(--carotinnovel--link-hover-decoration, underline);
 }
 div.carotin_novel a:active {
-  color: rgba(var(--link-active, 0, 102, 203), var(--link-active-a, 1));
-  text-decoration: var(--link-active-decoration, underline);
+  color: rgba(var(--carotinnovel--link-active, 0, 102, 203), var(--carotinnovel--link-active-a, 1));
+  text-decoration: var(--carotinnovel--link-active-decoration, underline);
 }
 div.carotin_novel a:visited {
-  color: rgba(var(--link-visited, 129, 0, 0), var(--link-visited-a, 1));
+  color: rgba(var(--carotinnovel--link-visited, 129, 0, 0), var(--carotinnovel--link-visited-a, 1));
 }
 div.carotin_novel h2 {
   margin: 0;
@@ -114,12 +114,12 @@ div.carotin_novel div.loader {
   height: 100%;
   padding: 0;
   margin: 0;
-  background-color: rgba(var(--background-base, 255, 255, 255), var(--background-base-a, 1));
+  background-color: rgba(var(--carotinnovel--background-base, 255, 255, 255), var(--carotinnovel--background-base-a, 1));
 }
 div.carotin_novel div.loader > svg {
   width: 50px;
   height: 50px;
-  stroke: rgba(var(--loader-primary, 200, 200, 200), var(--loader-primary-a, 1));
+  stroke: rgba(var(--carotinnovel--loader-primary, 200, 200, 200), var(--carotinnovel--loader-primary-a, 1));
 }
 div.carotin_novel div.loader.off {
   animation-name: fadeOut;
@@ -162,10 +162,10 @@ div.carotin_novel div.slidepad {
   padding: 0;
   margin: 0;
   overflow: hidden;
-  background-color: rgba(var(--slidepad-back, 192, 192, 192), var(--slidepad-back-a, 0.25));
+  background-color: rgba(var(--carotinnovel--slidepad-back, 192, 192, 192), var(--carotinnovel--slidepad-back-a, 0.25));
   border-radius: calc(var(--slide-pad-size, 45px) / 2);
-  box-shadow: inset 0 0 2px 0 rgba(var(--slidepad-back-shadow, 192, 192, 192), var(--slidepad-back-shadow-a, 0.75));
-  opacity: var(--slidepad-opacity, 0.6);
+  box-shadow: inset 0 0 2px 0 rgba(var(--carotinnovel--slidepad-back-shadow, 192, 192, 192), var(--carotinnovel--slidepad-back-shadow-a, 0.75));
+  opacity: var(--carotinnovel--slidepad-opacity, 0.6);
   writing-mode: horizontal-tb;
   font-feature-settings: normal;
 }
@@ -176,8 +176,8 @@ div.carotin_novel div.slidepad div.nipple div.back {
   background-color: transparent !important;
 }
 div.carotin_novel div.slidepad div.nipple div.front {
-  background-color: rgba(var(--slidepad-front, 255, 255, 255), var(--slidepad-front-a, 1)) !important;
-  box-shadow: 0 0 2px 0 rgba(var(--slidepad-front-shadow, 128, 128, 128), var(--slidepad-front-shadow-a, 0.75));
+  background-color: rgba(var(--carotinnovel--slidepad-front, 255, 255, 255), var(--carotinnovel--slidepad-front-a, 1)) !important;
+  box-shadow: 0 0 2px 0 rgba(var(--carotinnovel--slidepad-front-shadow, 128, 128, 128), var(--carotinnovel--slidepad-front-shadow-a, 0.75));
   opacity: 0.8 !important;
 }
 div.carotin_novel header {
@@ -460,59 +460,59 @@ div.menu div.menu-content-wrapper div.menu-top {
 }
 
 :root[data-style-theme=default] {
-  --background-base: 255, 255, 255;
-  --background-base-a: 1;
-  --text-base: 0, 0, 0;
-  --text-base-a: 1;
-  --link-base: 0, 102, 203;
-  --link-base-a: 1;
-  --link-base-decoration: none;
-  --link-hover: 0, 102, 203;
-  --link-hover-a: 1;
-  --link-hover-decoration: underline;
-  --link-active: 0, 102, 203;
-  --link-active-a: 1;
-  --link-active-decoration: underline;
-  --link-visited: 129, 0, 0;
-  --link-visited-a: 1;
-  --slidepad-opacity: 0.6;
-  --slidepad-back: 192, 192, 192;
-  --slidepad-back-a: 0.25;
-  --slidepad-front: 255, 255, 255;
-  --slidepad-front-a: 1;
-  --slidepad-back-shadow: 192, 192, 192;
-  --slidepad-back-shadow-a: 0.75;
-  --slidepad-front-shadow: 128, 128, 128;
-  --slidepad-front-shadow-a: 0.75;
-  --loader-primary: 200, 200, 200;
-  --loader-primary-a: 1;
+  --carotinnovel--background-base:255, 255, 255;
+  --carotinnovel--background-base-a:1;
+  --carotinnovel--text-base:0, 0, 0;
+  --carotinnovel--text-base-a:1;
+  --carotinnovel--link-base:0, 102, 203;
+  --carotinnovel--link-base-a:1;
+  --carotinnovel--link-base-decoration:none;
+  --carotinnovel--link-hover:0, 102, 203;
+  --carotinnovel--link-hover-a:1;
+  --carotinnovel--link-hover-decoration:underline;
+  --carotinnovel--link-active:0, 102, 203;
+  --carotinnovel--link-active-a:1;
+  --carotinnovel--link-active-decoration:underline;
+  --carotinnovel--link-visited:129, 0, 0;
+  --carotinnovel--link-visited-a:1;
+  --carotinnovel--slidepad-opacity:0.6;
+  --carotinnovel--slidepad-back:192, 192, 192;
+  --carotinnovel--slidepad-back-a:0.25;
+  --carotinnovel--slidepad-front:255, 255, 255;
+  --carotinnovel--slidepad-front-a:1;
+  --carotinnovel--slidepad-back-shadow:192, 192, 192;
+  --carotinnovel--slidepad-back-shadow-a:0.75;
+  --carotinnovel--slidepad-front-shadow:128, 128, 128;
+  --carotinnovel--slidepad-front-shadow-a:0.75;
+  --carotinnovel--loader-primary:200, 200, 200;
+  --carotinnovel--loader-primary-a:1;
 }
 
 :root[data-style-theme=brown] {
-  --background-base: 217, 211, 193;
-  --background-base-a: 1;
-  --text-base: 64, 42, 30;
-  --text-base-a: 1;
-  --link-base: 160, 54, 54;
-  --link-base-a: 1;
-  --link-base-decoration: none;
-  --link-hover: 160, 54, 54;
-  --link-hover-a: 1;
-  --link-hover-decoration: underline;
-  --link-active: 160, 54, 54;
-  --link-active-a: 1;
-  --link-active-decoration: underline;
-  --link-visited: 114, 39, 39;
-  --link-visited-a: 1;
-  --slidepad-opacity: 0.95;
-  --slidepad-back: 191, 176, 147;
-  --slidepad-back-a: 0.25;
-  --slidepad-front: 238, 235, 235;
-  --slidepad-front-a: 1;
-  --slidepad-back-shadow: 115, 86, 50;
-  --slidepad-back-shadow-a: 0.3;
-  --slidepad-front-shadow: 115, 86, 50;
-  --slidepad-front-shadow-a: 0.75;
-  --loader-primary: 108, 91, 91;
-  --loader-primary-a: 1;
+  --carotinnovel--background-base:217, 211, 193;
+  --carotinnovel--background-base-a:1;
+  --carotinnovel--text-base:64, 42, 30;
+  --carotinnovel--text-base-a:1;
+  --carotinnovel--link-base:160, 54, 54;
+  --carotinnovel--link-base-a:1;
+  --carotinnovel--link-base-decoration:none;
+  --carotinnovel--link-hover:160, 54, 54;
+  --carotinnovel--link-hover-a:1;
+  --carotinnovel--link-hover-decoration:underline;
+  --carotinnovel--link-active:160, 54, 54;
+  --carotinnovel--link-active-a:1;
+  --carotinnovel--link-active-decoration:underline;
+  --carotinnovel--link-visited:114, 39, 39;
+  --carotinnovel--link-visited-a:1;
+  --carotinnovel--slidepad-opacity:0.95;
+  --carotinnovel--slidepad-back:191, 176, 147;
+  --carotinnovel--slidepad-back-a:0.25;
+  --carotinnovel--slidepad-front:238, 235, 235;
+  --carotinnovel--slidepad-front-a:1;
+  --carotinnovel--slidepad-back-shadow:115, 86, 50;
+  --carotinnovel--slidepad-back-shadow-a:0.3;
+  --carotinnovel--slidepad-front-shadow:115, 86, 50;
+  --carotinnovel--slidepad-front-shadow-a:0.75;
+  --carotinnovel--loader-primary:108, 91, 91;
+  --carotinnovel--loader-primary-a:1;
 }
