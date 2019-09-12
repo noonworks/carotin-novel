@@ -235,12 +235,15 @@ div.carotin_novel div.menu {
   margin: 0;
   margin-left: 100vw;
   overflow: visible;
-  transition-timing-function: cubic-bezier(0, 0, 0.4, 1);
-  transition-duration: 700ms;
+  transition-timing-function: linear;
+  transition-duration: 300ms;
+  transform: translate3d(0, 0, 0);
 }
 @media screen and (min-width: 640px) {
   div.carotin_novel div.menu {
     height: 100vh;
+    transition-timing-function: cubic-bezier(0, 0, 0.4, 1);
+    transition-duration: 700ms;
   }
 }
 div.carotin_novel div.menu.on {
@@ -298,6 +301,16 @@ div.carotin_novel div.menu div.menu-content-wrapper {
   font-family: "Noto Serif JP", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Hiragino Mincho Pro", "HGP明朝B", serif;
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content {
+  position: absolute;
+  max-width: 90%;
+  opacity: 0;
+  transition-timing-function: linear;
+  transition-duration: 300ms;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content.on {
+  opacity: 1;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu_center {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -338,12 +351,24 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content h2 span.lin
   background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.5));
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul {
+  box-sizing: border-box;
+  padding: 0;
+  padding-left: 1.5em;
+  margin: 0;
+  margin-bottom: 1.5rem;
+  list-style-position: outside;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_item {
+  max-width: 200px;
   padding: 0;
   margin: 0;
   font-size: 1.5em;
   list-style-type: none;
 }
-div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_item.control {
+  margin-top: 2rem;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_item li {
   padding: 0;
   margin: 0;
   margin-top: 0.5em;
@@ -353,10 +378,10 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li {
   border: solid 1px rgba(0, 0, 0, 0.5);
   border-radius: 2px;
 }
-div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li:first-child {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_item li:first-child {
   margin-top: 0;
 }
-div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li a.button {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_item li a.button {
   position: relative;
   z-index: 10;
   display: flex;
@@ -368,20 +393,20 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li a.but
   user-select: none;
   transform: translate3d(0, 0, 0);
 }
-div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li a.button i {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_item li a.button i {
   padding: 0;
   margin: 0;
   margin-right: 0.75rem;
   font-size: 1.25em;
 }
-div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li a.button span {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_item li a.button span {
   display: inline-block;
   flex-grow: 1;
   padding: 0;
   margin: 0;
   text-align: center;
 }
-div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li a.button::after {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_item li a.button::after {
   position: absolute;
   top: 0;
   left: 0;
@@ -397,10 +422,79 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li a.but
   transition: transform 0.5s, opacity 1s;
   transform: scale(10, 10);
 }
-div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li a.button:active::after {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_item li a.button:active::after {
   opacity: 0.2;
   transition: 0s;
   transform: scale(0, 0);
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.slidepad_select {
+  box-sizing: border-box;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  border-radius: 2px;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.slidepad_select > div {
+  position: relative;
+  flex: 1;
+  min-width: 4rem;
+  min-height: 3rem;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-left-width: 0;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.slidepad_select > div label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.slidepad_select > div input {
+  width: 100%;
+  height: 2em;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.slidepad_select > div input:checked + label {
+  font-weight: 500;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.slidepad_select > div:first-child {
+  border-left-width: 1px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.slidepad_select > div:last-child {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content select#theme_select {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  padding: 0.6em 1.4em 0.5em 0.8em;
+  font-family: "Noto Serif JP", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Hiragino Mincho Pro", "HGP明朝B", serif;
+  font-size: 1.1em;
+  line-height: 1.3;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div#theme_sample {
+  width: 90%;
+  padding: 0.25em;
+  margin: 0.5rem 0 1rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-top {
   margin-bottom: 1rem;
