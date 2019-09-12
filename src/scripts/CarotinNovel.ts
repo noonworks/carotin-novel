@@ -3,6 +3,7 @@ import { Loader } from './loader';
 import { SlidepadManager } from './slidepad/SlidePadManager';
 import { ScrollStateManager } from './scroll/ScrollStateManager';
 import { deleteTextNodeInRuby, setCustomRuby } from './util';
+import { Menu } from './menu';
 
 export class CarotinNovel {
   private bodyDom: HTMLBodyElement;
@@ -15,6 +16,7 @@ export class CarotinNovel {
   private loader: Loader;
   private slidepad: SlidepadManager;
   private scrollManager: ScrollStateManager;
+  private menu: Menu;
 
   constructor() {
     {
@@ -58,6 +60,8 @@ export class CarotinNovel {
       this.bgDom = bg as HTMLDivElement;
     }
     this.scrollManager = new ScrollStateManager(this.wrapper);
+    this.menu = new Menu({ page: { enable: true }, share: { enable: true } });
+    document.body.appendChild(this.menu.dom);
   }
 
   public start(): void {
