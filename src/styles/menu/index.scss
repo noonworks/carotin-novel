@@ -1,0 +1,28 @@
+$menu-border-color: rgba(0, 0, 0, 0.5);
+
+div.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $Z_INDEX_MENU;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  margin-left: 100vw;
+  overflow: visible;
+  transition-timing-function: cubic-bezier(0, 0, 0.4, 1);
+  transition-duration: 700ms;
+  // Larger devices
+  @include mq() {
+    height: 100vh;
+  }
+
+  &.on {
+    margin-left: 0;
+  }
+
+  @import './back.scss';
+  @import './content.scss';
+}

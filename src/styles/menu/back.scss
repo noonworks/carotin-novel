@@ -1,0 +1,52 @@
+$menu-slider-size: 80px;
+$menu-slider-height: 25px;
+$menu-radius: 6px;
+
+div.menu-back {
+  position: absolute;
+  box-sizing: border-box;
+  display: block;
+  width: calc(100% + #{$menu-radius});
+  height: 100%;
+  margin-left: $menu-radius * -1;
+  background-color: rgba(250, 250, 250, 1);
+  filter: drop-shadow(0 0 4px rgba(150, 150, 150, 0.2))
+    drop-shadow(0 0 1px rgba(150, 150, 150, 0.8));
+  border-radius: $menu-radius 0 0 $menu-radius;
+  opacity: 0.9;
+
+  div.menu-slide {
+    position: absolute;
+    top: calc((100% - #{$menu-slider-size}) / 2);
+    bottom: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: $menu-slider-size;
+    height: $menu-slider-size;
+    margin-left: $menu-slider-height * -1;
+    background-color: rgba(250, 250, 250, 1);
+    border-radius: $menu-slider-size / 2;
+
+    i {
+      margin-left: $menu-slider-height / 2;
+      font-size: 1.5em;
+      line-height: 1em;
+      opacity: 0.25;
+    }
+  }
+
+  &.bottom {
+    div.menu-slide {
+      top: auto;
+      bottom: 2em;
+    }
+  }
+
+  &.top {
+    div.menu-slide {
+      top: 2em;
+      bottom: auto;
+    }
+  }
+}
