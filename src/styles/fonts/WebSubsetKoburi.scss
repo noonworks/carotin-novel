@@ -7,19 +7,21 @@
   src: url('./WebSubsetKoburi.ttf') format('truetype');
 }
 
-#{$main-wrapper-selector} {
-  font-family: 'WebSubsetKoburi', $self-fonts, serif;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-  // Larger devices
-  @include mq() {
-    font-size: 18px;
+#{$whole-wrapper-selector} {
+  #{$main-wrapper-selector} {
+    font-family: 'WebSubsetKoburi', $self-fonts, serif;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    // Larger devices
+    @include mq() {
+      font-size: 18px;
+    }
   }
-}
 
-// Custom Ruby
-#{$custom-ruby-selector} rb[data-ruby]::before {
-  margin-right: -0.8em;
-  font-size: 0.4em;
+  // Custom Ruby
+  &#{$custom-ruby-selector} rb[data-ruby]::before {
+    margin-right: -0.8em;
+    font-size: 0.4em;
+  }
 }

@@ -1,6 +1,7 @@
 @charset 'utf-8';
 
-$main-wrapper-selector: 'div.carotin_novel';
+$whole-wrapper-selector: 'div.carotin_novel';
+$main-wrapper-selector: 'div.content_wrapper';
 $background-wrapper-selector: 'div.bg_wrapper';
 $custom-ruby-selector: '.custom_ruby ' #{$main-wrapper-selector};
 $self-fonts: 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN',

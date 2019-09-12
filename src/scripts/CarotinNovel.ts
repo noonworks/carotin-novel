@@ -6,7 +6,7 @@ import { deleteTextNodeInRuby, setCustomRuby } from './util';
 import { Menu } from './menu';
 
 export class CarotinNovel {
-  private bodyDom: HTMLBodyElement;
+  private rootDom: HTMLDivElement;
   private wrapperDom: HTMLDivElement;
   private slidepadDom: HTMLDivElement;
   private loaderDom: HTMLDivElement;
@@ -20,12 +20,15 @@ export class CarotinNovel {
 
   constructor() {
     {
-      const body = document.querySelector('body');
-      const wrapper = document.querySelector('div.carotin_novel');
-      if (!body || !wrapper) {
+      const root = document.querySelector('div.carotin_novel');
+      if (!root) {
         throw new Error('Could not get elements.');
       }
-      this.bodyDom = body;
+      this.rootDom = root as HTMLDivElement;
+      const wrapper = root.querySelector('div.content_wrapper');
+      if (!wrapper) {
+        throw new Error('Could not get elements.');
+      }
       this.wrapperDom = wrapper as HTMLDivElement;
       this.wrapper = new ScrollableWrapper(this.wrapperDom);
     }
@@ -51,17 +54,17 @@ export class CarotinNovel {
       this.loader = new Loader(this.loaderDom);
     }
     {
-      let bg = this.bodyDom.querySelector('bg_wrapper');
+      let bg = this.rootDom.querySelector('bg_wrapper');
       if (!bg) {
         bg = document.createElement('div');
         bg.classList.add('bg_wrapper');
-        this.bodyDom.insertBefore(bg, this.wrapperDom);
+        this.rootDom.insertBefore(bg, this.wrapperDom);
       }
       this.bgDom = bg as HTMLDivElement;
     }
     this.scrollManager = new ScrollStateManager(this.wrapper);
     this.menu = new Menu({ page: { enable: true }, share: { enable: true } });
-    document.body.appendChild(this.menu.dom);
+    this.rootDom.appendChild(this.menu.dom);
   }
 
   public start(): void {
@@ -70,7 +73,7 @@ export class CarotinNovel {
     this.loader.show();
     // fix dom
     deleteTextNodeInRuby(this.wrapperDom);
-    setCustomRuby(this.bodyDom);
+    setCustomRuby(this.rootDom);
     // scroll document to bookmarks
     this.scrollManager
       .restore()
