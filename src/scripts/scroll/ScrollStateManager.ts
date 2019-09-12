@@ -95,7 +95,7 @@ export class ScrollStateManager {
 
   private save(auto: boolean): void {
     const s = this.getState();
-    if (s.page == null || s.scrolldepth == null) {
+    if (!s.page || s.scrolldepth == null) {
       return;
     }
     if (this.prevState == null) {
