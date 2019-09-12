@@ -1,25 +1,12 @@
 @charset "UTF-8";
-body {
-  padding: 0;
-  margin: 0;
+div.carotin_novel {
+  position: relative;
   overflow: hidden;
 }
-
-.align_right {
+div.carotin_novel .align_right {
   text-align: right;
 }
-
-div.bg_wrapper {
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  background-color: rgba(var(--background-base, 255, 255, 255), var(--background-base-a, 1));
-}
-
-div.carotin_novel {
+div.carotin_novel div.content_wrapper {
   position: relative;
   z-index: 2;
   box-sizing: border-box;
@@ -29,55 +16,161 @@ div.carotin_novel {
   margin: 0;
   overflow-x: scroll;
   overflow-y: hidden;
-  color: rgba(var(--text-base, 0, 0, 0), var(--text-base-a, 1));
+  color: rgba(var(--carotinnovel--text-base, 0, 0, 0), var(--carotinnovel--text-base-a, 1));
   -webkit-writing-mode: vertical-rl;
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
   font-feature-settings: "pkna";
-  -webkit-mask-image: linear-gradient(to left, black calc(100vw - 3em), transparent 100vw);
-  mask-image: linear-gradient(to left, black calc(100vw - 3em), transparent 100vw);
+  -webkit-mask-image: linear-gradient(to left, black calc(100% - 3em), transparent 100%);
+  mask-image: linear-gradient(to left, black calc(100% - 3em), transparent 100%);
 }
-@media screen and (min-width: 640px) {
-  div.carotin_novel {
-    height: 100vh;
-  }
-}
-div.carotin_novel cite,
-div.carotin_novel address {
+div.carotin_novel div.content_wrapper cite,
+div.carotin_novel div.content_wrapper address {
   font-style: normal;
 }
-div.carotin_novel a {
-  color: rgba(var(--link-base, 0, 102, 203), var(--link-base-a, 1));
-  text-decoration: var(--link-base-decoration, none);
+div.carotin_novel div.content_wrapper a {
+  color: rgba(var(--carotinnovel--link-base, 0, 102, 203), var(--carotinnovel--link-base-a, 1));
+  text-decoration: var(--carotinnovel--link-base-decoration, none);
 }
-div.carotin_novel a:hover {
-  color: rgba(var(--link-hover, 0, 102, 203), var(--link-hover-a, 1));
-  text-decoration: var(--link-hover-decoration, underline);
+div.carotin_novel div.content_wrapper a:hover {
+  color: rgba(var(--carotinnovel--link-hover, 0, 102, 203), var(--carotinnovel--link-hover-a, 1));
+  text-decoration: var(--carotinnovel--link-hover-decoration, underline);
 }
-div.carotin_novel a:active {
-  color: rgba(var(--link-active, 0, 102, 203), var(--link-active-a, 1));
-  text-decoration: var(--link-active-decoration, underline);
+div.carotin_novel div.content_wrapper a:active {
+  color: rgba(var(--carotinnovel--link-active, 0, 102, 203), var(--carotinnovel--link-active-a, 1));
+  text-decoration: var(--carotinnovel--link-active-decoration, underline);
 }
-div.carotin_novel a:visited {
-  color: rgba(var(--link-visited, 129, 0, 0), var(--link-visited-a, 1));
+div.carotin_novel div.content_wrapper a:visited {
+  color: rgba(var(--carotinnovel--link-visited, 129, 0, 0), var(--carotinnovel--link-visited-a, 1));
 }
-div.carotin_novel h2 {
+div.carotin_novel div.content_wrapper h2 {
   margin: 0;
   margin-left: 1.75rem;
   font-size: 1.25em;
   font-weight: 100;
   text-indent: 1em;
 }
-div.carotin_novel h2:first-child {
+div.carotin_novel div.content_wrapper h2:first-child {
   margin-right: 0.25rem;
 }
-div.carotin_novel ruby {
+div.carotin_novel div.content_wrapper ruby {
   text-align: start;
   ruby-align: distribute-space;
   ruby-align: space-around;
 }
-div.carotin_novel ruby rt {
+div.carotin_novel div.content_wrapper ruby rt {
   text-align: inherit;
+}
+div.carotin_novel div.content_wrapper header {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  margin-left: 2.5rem;
+  text-align: right;
+}
+div.carotin_novel div.content_wrapper header > h1:first-child {
+  box-sizing: border-box;
+  padding: 2em 0;
+  margin: 0;
+  font-size: 2em;
+  font-weight: 100;
+  text-align: left;
+}
+div.carotin_novel div.content_wrapper header p.author {
+  box-sizing: border-box;
+  padding: 0;
+  padding-bottom: 0.8em;
+  margin: 0;
+  margin-right: 1rem;
+  font-size: 1.25em;
+}
+div.carotin_novel div.content_wrapper header p.author :first-child {
+  margin-right: 0;
+}
+div.carotin_novel div.content_wrapper footer {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  margin-right: 2.5rem;
+  text-align: right;
+}
+div.carotin_novel div.content_wrapper footer:first-child {
+  margin-right: 0;
+}
+div.carotin_novel div.content_wrapper section {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+div.carotin_novel div.content_wrapper section.full {
+  height: 100%;
+}
+div.carotin_novel div.content_wrapper section.align_right {
+  height: 100%;
+  text-align: right;
+}
+div.carotin_novel div.content_wrapper div.page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 100%;
+  padding: 3vh 3em 4vh 3em;
+  margin: 0;
+}
+div.carotin_novel div.content_wrapper p {
+  margin: 0;
+}
+div.carotin_novel div.content_wrapper p.fullspace-indent {
+  text-indent: 1em;
+}
+div.carotin_novel div.content_wrapper section {
+  margin: 0;
+  margin-left: 1.5rem;
+}
+div.carotin_novel div.content_wrapper section:last-child {
+  margin-left: 0;
+}
+div.carotin_novel div.content_wrapper section + footer {
+  margin-right: 1rem;
+}
+div.carotin_novel.custom_ruby div.content_wrapper ruby rt {
+  display: none;
+}
+div.carotin_novel.custom_ruby div.content_wrapper ruby rb[data-ruby] {
+  position: relative;
+}
+div.carotin_novel.custom_ruby div.content_wrapper ruby rb[data-ruby]::before {
+  position: absolute;
+  min-height: 100%;
+  text-align: center;
+  white-space: nowrap;
+  content: attr(data-ruby);
+  font-feature-settings: normal;
+}
+div.carotin_novel div.bg_wrapper {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: rgba(var(--carotinnovel--background-base, 255, 255, 255), var(--carotinnovel--background-base-a, 1));
+}
+div.carotin_novel div.fg_wrapper {
+  position: absolute;
+  z-index: 40;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 @keyframes fadeIn {
   0% {
@@ -102,8 +195,7 @@ div.carotin_novel ruby rt {
     opacity: 0;
   }
 }
-div.carotin_novel div.loader {
-  position: fixed;
+div.carotin_novel div.fg_wrapper div.loader {
   top: 0;
   left: 0;
   box-sizing: border-box;
@@ -114,14 +206,14 @@ div.carotin_novel div.loader {
   height: 100%;
   padding: 0;
   margin: 0;
-  background-color: rgba(var(--background-base, 255, 255, 255), var(--background-base-a, 1));
+  background-color: rgba(var(--carotinnovel--background-base, 255, 255, 255), var(--carotinnovel--background-base-a, 1));
 }
-div.carotin_novel div.loader > svg {
+div.carotin_novel div.fg_wrapper div.loader > svg {
   width: 50px;
   height: 50px;
-  stroke: rgba(var(--loader-primary, 200, 200, 200), var(--loader-primary-a, 1));
+  stroke: rgba(var(--carotinnovel--loader-primary, 200, 200, 200), var(--carotinnovel--loader-primary-a, 1));
 }
-div.carotin_novel div.loader.off {
+div.carotin_novel div.fg_wrapper div.loader.off {
   animation-name: fadeOut;
   animation-duration: 700ms;
   animation-play-state: running;
@@ -131,152 +223,7 @@ div.carotin_novel div.loader.off {
   animation-direction: normal;
   animation-fill-mode: both;
 }
-:root[data-slide-pad-size=middle] {
-  --slide-pad-size: 45px;
-}
-
-:root[data-slide-pad-size=large] {
-  --slide-pad-size: 60px;
-}
-
-:root[data-slide-pad-size=small] {
-  --slide-pad-size: 30px;
-}
-
-:root {
-  --slide-pad-position-top: auto;
-  --slide-pad-position-right: 3em;
-  --slide-pad-position-bottom: 2em;
-  --slide-pad-position-left: auto;
-}
-
-div.carotin_novel div.slidepad {
-  position: fixed;
-  top: var(--slide-pad-position-top, auto);
-  right: var(--slide-pad-position-right, 3em);
-  bottom: var(--slide-pad-position-bottom, 2em);
-  left: var(--slide-pad-position-left, auto);
-  box-sizing: border-box;
-  width: var(--slide-pad-size, 45px);
-  height: calc(var(--slide-pad-size, 45px) * 3);
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  background-color: rgba(var(--slidepad-back, 192, 192, 192), var(--slidepad-back-a, 0.25));
-  border-radius: calc(var(--slide-pad-size, 45px) / 2);
-  box-shadow: inset 0 0 2px 0 rgba(var(--slidepad-back-shadow, 192, 192, 192), var(--slidepad-back-shadow-a, 0.75));
-  opacity: var(--slidepad-opacity, 0.6);
-  writing-mode: horizontal-tb;
-  font-feature-settings: normal;
-}
-div.carotin_novel div.slidepad.hidden {
-  opacity: 0 !important;
-}
-div.carotin_novel div.slidepad div.nipple div.back {
-  background-color: transparent !important;
-}
-div.carotin_novel div.slidepad div.nipple div.front {
-  background-color: rgba(var(--slidepad-front, 255, 255, 255), var(--slidepad-front-a, 1)) !important;
-  box-shadow: 0 0 2px 0 rgba(var(--slidepad-front-shadow, 128, 128, 128), var(--slidepad-front-shadow-a, 0.75));
-  opacity: 0.8 !important;
-}
-div.carotin_novel header {
-  box-sizing: border-box;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  margin-left: 2.5rem;
-  text-align: right;
-}
-div.carotin_novel header > h1:first-child {
-  box-sizing: border-box;
-  padding: 2em 0;
-  margin: 0;
-  font-size: 2em;
-  font-weight: 100;
-  text-align: left;
-}
-div.carotin_novel header p.author {
-  box-sizing: border-box;
-  padding: 0;
-  padding-bottom: 0.8em;
-  margin: 0;
-  margin-right: 1rem;
-  font-size: 1.25em;
-}
-div.carotin_novel header p.author :first-child {
-  margin-right: 0;
-}
-div.carotin_novel footer {
-  box-sizing: border-box;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  margin-right: 2.5rem;
-  text-align: right;
-}
-div.carotin_novel footer:first-child {
-  margin-right: 0;
-}
-div.carotin_novel section {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-div.carotin_novel section.full {
-  height: 100%;
-}
-div.carotin_novel section.align_right {
-  height: 100%;
-  text-align: right;
-}
-div.carotin_novel div.pages_wrapper {
-  padding: 0;
-  margin: 0;
-}
-div.carotin_novel div.pages_wrapper div.page {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-width: 100vw;
-  padding: 3vh 3em 4vh 3em;
-  margin: 0;
-}
-div.carotin_novel p {
-  margin: 0;
-}
-div.carotin_novel p.fullspace-indent {
-  text-indent: 1em;
-}
-div.carotin_novel section {
-  margin: 0;
-  margin-left: 1.5rem;
-}
-div.carotin_novel section:last-child {
-  margin-left: 0;
-}
-div.carotin_novel section + footer {
-  margin-right: 1rem;
-}
-
-.custom_ruby div.carotin_novel ruby rt {
-  display: none;
-}
-.custom_ruby div.carotin_novel ruby rb[data-ruby] {
-  position: relative;
-}
-.custom_ruby div.carotin_novel ruby rb[data-ruby]::before {
-  position: absolute;
-  min-height: 100%;
-  text-align: center;
-  white-space: nowrap;
-  content: attr(data-ruby);
-  font-feature-settings: normal;
-}
-
-div.menu {
+div.carotin_novel div.menu {
   position: fixed;
   top: 0;
   left: 0;
@@ -292,14 +239,14 @@ div.menu {
   transition-duration: 700ms;
 }
 @media screen and (min-width: 640px) {
-  div.menu {
+  div.carotin_novel div.menu {
     height: 100vh;
   }
 }
-div.menu.on {
+div.carotin_novel div.menu.on {
   margin-left: 0;
 }
-div.menu div.menu-back {
+div.carotin_novel div.menu div.menu-back {
   position: absolute;
   box-sizing: border-box;
   display: block;
@@ -311,7 +258,7 @@ div.menu div.menu-back {
   border-radius: 6px 0 0 6px;
   opacity: 0.9;
 }
-div.menu div.menu-back div.menu-slide {
+div.carotin_novel div.menu div.menu-back div.menu-slide {
   position: absolute;
   top: calc((100% - 80px) / 2);
   bottom: auto;
@@ -324,21 +271,21 @@ div.menu div.menu-back div.menu-slide {
   background-color: #fafafa;
   border-radius: 40px;
 }
-div.menu div.menu-back div.menu-slide i {
+div.carotin_novel div.menu div.menu-back div.menu-slide i {
   margin-left: 12.5px;
   font-size: 1.5em;
   line-height: 1em;
   opacity: 0.25;
 }
-div.menu div.menu-back.bottom div.menu-slide {
+div.carotin_novel div.menu div.menu-back.bottom div.menu-slide {
   top: auto;
   bottom: 2em;
 }
-div.menu div.menu-back.top div.menu-slide {
+div.carotin_novel div.menu div.menu-back.top div.menu-slide {
   top: 2em;
   bottom: auto;
 }
-div.menu div.menu-content-wrapper {
+div.carotin_novel div.menu div.menu-content-wrapper {
   position: absolute;
   box-sizing: border-box;
   display: flex;
@@ -350,13 +297,13 @@ div.menu div.menu-content-wrapper {
   overflow: auto;
   font-family: "Noto Serif JP", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Hiragino Mincho Pro", "HGP明朝B", serif;
 }
-div.menu div.menu-content-wrapper div.menu-content {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-div.menu div.menu-content-wrapper div.menu-content h2 {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content h2 {
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -371,12 +318,12 @@ div.menu div.menu-content-wrapper div.menu-content h2 {
   font-weight: 400;
   text-decoration: none;
 }
-div.menu div.menu-content-wrapper div.menu-content h2 span.title {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content h2 span.title {
   flex-grow: 0;
   padding: 0 0.3em;
   text-align: center;
 }
-div.menu div.menu-content-wrapper div.menu-content h2 span.line {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content h2 span.line {
   box-sizing: border-box;
   flex-grow: 1;
   height: 1px;
@@ -384,19 +331,19 @@ div.menu div.menu-content-wrapper div.menu-content h2 span.line {
   margin: 0;
   margin-top: 2px;
 }
-div.menu div.menu-content-wrapper div.menu-content h2 span.line:first-child {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content h2 span.line:first-child {
   background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5));
 }
-div.menu div.menu-content-wrapper div.menu-content h2 span.line:last-child {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content h2 span.line:last-child {
   background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.5));
 }
-div.menu div.menu-content-wrapper div.menu-content ul {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul {
   padding: 0;
   margin: 0;
   font-size: 1.5em;
   list-style-type: none;
 }
-div.menu div.menu-content-wrapper div.menu-content ul li {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li {
   padding: 0;
   margin: 0;
   margin-top: 0.5em;
@@ -406,10 +353,10 @@ div.menu div.menu-content-wrapper div.menu-content ul li {
   border: solid 1px rgba(0, 0, 0, 0.5);
   border-radius: 2px;
 }
-div.menu div.menu-content-wrapper div.menu-content ul li:first-child {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li:first-child {
   margin-top: 0;
 }
-div.menu div.menu-content-wrapper div.menu-content ul li a.button {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li a.button {
   position: relative;
   z-index: 10;
   display: flex;
@@ -421,20 +368,20 @@ div.menu div.menu-content-wrapper div.menu-content ul li a.button {
   user-select: none;
   transform: translate3d(0, 0, 0);
 }
-div.menu div.menu-content-wrapper div.menu-content ul li a.button i {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li a.button i {
   padding: 0;
   margin: 0;
   margin-right: 0.75rem;
   font-size: 1.25em;
 }
-div.menu div.menu-content-wrapper div.menu-content ul li a.button span {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li a.button span {
   display: inline-block;
   flex-grow: 1;
   padding: 0;
   margin: 0;
   text-align: center;
 }
-div.menu div.menu-content-wrapper div.menu-content ul li a.button::after {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li a.button::after {
   position: absolute;
   top: 0;
   left: 0;
@@ -450,69 +397,119 @@ div.menu div.menu-content-wrapper div.menu-content ul li a.button::after {
   transition: transform 0.5s, opacity 1s;
   transform: scale(10, 10);
 }
-div.menu div.menu-content-wrapper div.menu-content ul li a.button:active::after {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul li a.button:active::after {
   opacity: 0.2;
   transition: 0s;
   transform: scale(0, 0);
 }
-div.menu div.menu-content-wrapper div.menu-top {
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-top {
   margin-bottom: 1rem;
+}
+:root[data-slide-pad-size=middle] {
+  --carotinnovel--slide-pad-size: 45px;
+}
+
+:root[data-slide-pad-size=large] {
+  --carotinnovel--slide-pad-size: 60px;
+}
+
+:root[data-slide-pad-size=small] {
+  --carotinnovel--slide-pad-size: 30px;
+}
+
+:root {
+  --carotinnovel--slide-pad-position-top: auto;
+  --carotinnovel--slide-pad-position-right: 3em;
+  --carotinnovel--slide-pad-position-bottom: 2em;
+  --carotinnovel--slide-pad-position-left: auto;
+}
+
+div.carotin_novel div.slidepad {
+  position: fixed;
+  top: var(--carotinnovel--slide-pad-position-top, auto);
+  right: var(--carotinnovel--slide-pad-position-right, 3em);
+  bottom: var(--carotinnovel--slide-pad-position-bottom, 2em);
+  left: var(--carotinnovel--slide-pad-position-left, auto);
+  z-index: 10;
+  box-sizing: border-box;
+  width: var(--carotinnovel--slide-pad-size, 45px);
+  height: calc(var(--carotinnovel--slide-pad-size, 45px) * 3);
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: rgba(var(--carotinnovel--slidepad-back, 192, 192, 192), var(--carotinnovel--slidepad-back-a, 0.25));
+  border-radius: calc( var(--carotinnovel--slide-pad-size, 45px) / 2 );
+  box-shadow: inset 0 0 2px 0 rgba(var(--carotinnovel--slidepad-back-shadow, 192, 192, 192), var(--carotinnovel--slidepad-back-shadow-a, 0.75));
+  opacity: var(--carotinnovel--slidepad-opacity, 0.6);
+  writing-mode: horizontal-tb;
+  font-feature-settings: normal;
+}
+div.carotin_novel div.slidepad.hidden {
+  opacity: 0 !important;
+}
+div.carotin_novel div.slidepad div.nipple div.back {
+  background-color: transparent !important;
+}
+div.carotin_novel div.slidepad div.nipple div.front {
+  background-color: rgba(var(--carotinnovel--slidepad-front, 255, 255, 255), var(--carotinnovel--slidepad-front-a, 1)) !important;
+  box-shadow: 0 0 2px 0 rgba(var(--carotinnovel--slidepad-front-shadow, 128, 128, 128), var(--carotinnovel--slidepad-front-shadow-a, 0.75));
+  opacity: 0.8 !important;
 }
 
 :root[data-style-theme=default] {
-  --background-base: 255, 255, 255;
-  --background-base-a: 1;
-  --text-base: 0, 0, 0;
-  --text-base-a: 1;
-  --link-base: 0, 102, 203;
-  --link-base-a: 1;
-  --link-base-decoration: none;
-  --link-hover: 0, 102, 203;
-  --link-hover-a: 1;
-  --link-hover-decoration: underline;
-  --link-active: 0, 102, 203;
-  --link-active-a: 1;
-  --link-active-decoration: underline;
-  --link-visited: 129, 0, 0;
-  --link-visited-a: 1;
-  --slidepad-opacity: 0.6;
-  --slidepad-back: 192, 192, 192;
-  --slidepad-back-a: 0.25;
-  --slidepad-front: 255, 255, 255;
-  --slidepad-front-a: 1;
-  --slidepad-back-shadow: 192, 192, 192;
-  --slidepad-back-shadow-a: 0.75;
-  --slidepad-front-shadow: 128, 128, 128;
-  --slidepad-front-shadow-a: 0.75;
-  --loader-primary: 200, 200, 200;
-  --loader-primary-a: 1;
+  --carotinnovel--background-base:255, 255, 255;
+  --carotinnovel--background-base-a:1;
+  --carotinnovel--text-base:0, 0, 0;
+  --carotinnovel--text-base-a:1;
+  --carotinnovel--link-base:0, 102, 203;
+  --carotinnovel--link-base-a:1;
+  --carotinnovel--link-base-decoration:none;
+  --carotinnovel--link-hover:0, 102, 203;
+  --carotinnovel--link-hover-a:1;
+  --carotinnovel--link-hover-decoration:underline;
+  --carotinnovel--link-active:0, 102, 203;
+  --carotinnovel--link-active-a:1;
+  --carotinnovel--link-active-decoration:underline;
+  --carotinnovel--link-visited:129, 0, 0;
+  --carotinnovel--link-visited-a:1;
+  --carotinnovel--slidepad-opacity:0.6;
+  --carotinnovel--slidepad-back:192, 192, 192;
+  --carotinnovel--slidepad-back-a:0.25;
+  --carotinnovel--slidepad-front:255, 255, 255;
+  --carotinnovel--slidepad-front-a:1;
+  --carotinnovel--slidepad-back-shadow:192, 192, 192;
+  --carotinnovel--slidepad-back-shadow-a:0.75;
+  --carotinnovel--slidepad-front-shadow:128, 128, 128;
+  --carotinnovel--slidepad-front-shadow-a:0.75;
+  --carotinnovel--loader-primary:200, 200, 200;
+  --carotinnovel--loader-primary-a:1;
 }
 
 :root[data-style-theme=brown] {
-  --background-base: 217, 211, 193;
-  --background-base-a: 1;
-  --text-base: 64, 42, 30;
-  --text-base-a: 1;
-  --link-base: 160, 54, 54;
-  --link-base-a: 1;
-  --link-base-decoration: none;
-  --link-hover: 160, 54, 54;
-  --link-hover-a: 1;
-  --link-hover-decoration: underline;
-  --link-active: 160, 54, 54;
-  --link-active-a: 1;
-  --link-active-decoration: underline;
-  --link-visited: 114, 39, 39;
-  --link-visited-a: 1;
-  --slidepad-opacity: 0.95;
-  --slidepad-back: 191, 176, 147;
-  --slidepad-back-a: 0.25;
-  --slidepad-front: 238, 235, 235;
-  --slidepad-front-a: 1;
-  --slidepad-back-shadow: 115, 86, 50;
-  --slidepad-back-shadow-a: 0.3;
-  --slidepad-front-shadow: 115, 86, 50;
-  --slidepad-front-shadow-a: 0.75;
-  --loader-primary: 108, 91, 91;
-  --loader-primary-a: 1;
+  --carotinnovel--background-base:217, 211, 193;
+  --carotinnovel--background-base-a:1;
+  --carotinnovel--text-base:64, 42, 30;
+  --carotinnovel--text-base-a:1;
+  --carotinnovel--link-base:160, 54, 54;
+  --carotinnovel--link-base-a:1;
+  --carotinnovel--link-base-decoration:none;
+  --carotinnovel--link-hover:160, 54, 54;
+  --carotinnovel--link-hover-a:1;
+  --carotinnovel--link-hover-decoration:underline;
+  --carotinnovel--link-active:160, 54, 54;
+  --carotinnovel--link-active-a:1;
+  --carotinnovel--link-active-decoration:underline;
+  --carotinnovel--link-visited:114, 39, 39;
+  --carotinnovel--link-visited-a:1;
+  --carotinnovel--slidepad-opacity:0.95;
+  --carotinnovel--slidepad-back:191, 176, 147;
+  --carotinnovel--slidepad-back-a:0.25;
+  --carotinnovel--slidepad-front:238, 235, 235;
+  --carotinnovel--slidepad-front-a:1;
+  --carotinnovel--slidepad-back-shadow:115, 86, 50;
+  --carotinnovel--slidepad-back-shadow-a:0.3;
+  --carotinnovel--slidepad-front-shadow:115, 86, 50;
+  --carotinnovel--slidepad-front-shadow-a:0.75;
+  --carotinnovel--loader-primary:108, 91, 91;
+  --carotinnovel--loader-primary-a:1;
 }

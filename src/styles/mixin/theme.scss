@@ -1,26 +1,28 @@
 @charset 'utf-8';
 @import './default_theme.scss';
 
+$THEME_PREFIX: --carotinnovel;
+
 @function define-theme-color($name) {
   $ca: map-get($default-theme, $name);
   $c: map-get($ca, 'color');
   $a: map-get($ca, 'alpha');
-  @return rgba(var(--#{$name}, #{$c}), var(--#{$name}-a, #{$a}));
+  @return rgba(var(#{$THEME_PREFIX}--#{$name}, #{$c}), var(#{$THEME_PREFIX}--#{$name}-a, #{$a}));
 }
 
 @function define-theme-value($name) {
   $v: map-get($default-theme, $name);
-  @return var(--#{$name}, #{$v});
+  @return var(#{$THEME_PREFIX}--#{$name}, #{$v});
 }
 
 @mixin theme-template($theme, $schema: 'default') {
   :root[data-style-theme='#{$schema}'] {
     @each $name, $value in $theme {
       @if type-of($value) == 'map' {
-        --#{$name}: #{map-get($value, 'color')};
-        --#{$name}-a: #{map-get($value, 'alpha')};
+        #{$THEME_PREFIX}--#{$name}: #{map-get($value, 'color')};
+        #{$THEME_PREFIX}--#{$name}-a: #{map-get($value, 'alpha')};
       } @else {
-        --#{$name}: #{$value};
+        #{$THEME_PREFIX}--#{$name}: #{$value};
       }
     }
   }

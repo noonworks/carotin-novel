@@ -136,7 +136,7 @@ export class ScrollStateManager {
   }
 
   private getRightTopElement(): HTMLElement | null {
-    let page = document.elementFromPoint(window.innerWidth - 1, 0);
+    let page = document.elementFromPoint(window.innerWidth - 40, 0);
     while (page && page.parentElement) {
       if (
         page.tagName.toLowerCase() == 'div' &&

@@ -10,6 +10,8 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
   }
 });
 
+const prefix = '--carotinnovel';
+
 const requiredValues = [
   '--background-base',
   '--background-base-a',
@@ -37,7 +39,7 @@ const requiredValues = [
   '--slidepad-front-shadow-a',
   '--loader-primary',
   '--loader-primary-a'
-];
+].map(v => prefix + v);
 
 function checkTheme(rule) {
   const r = {

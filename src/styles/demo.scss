@@ -1,0 +1,18 @@
+@charset 'utf-8';
+@import './mixin/media.scss';
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+div.carotin_novel {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  // Larger devices
+  @include mq() {
+    height: 100vh;
+  }
+}

@@ -5,6 +5,7 @@ module.exports = (_, { mode }) => ({
   entry: {
     'scripts/carotin': './src/scripts/index.ts',
     'styles/carotin': './src/styles/base.scss',
+    'styles/demo': './src/styles/demo.scss',
     'styles/fonts/WebSubsetKoburi': './src/styles/fonts/WebSubsetKoburi.scss'
   },
 
