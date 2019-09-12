@@ -11,6 +11,7 @@ export class CarotinNovel {
   private slidepadDom: HTMLDivElement;
   private loaderDom: HTMLDivElement;
   private bgDom: HTMLDivElement;
+  private fgDom: HTMLDivElement;
 
   private wrapper: ScrollableWrapper;
   private loader: Loader;
@@ -33,34 +34,43 @@ export class CarotinNovel {
       this.wrapper = new ScrollableWrapper(this.wrapperDom);
     }
     {
-      let slidepad = this.wrapperDom.querySelector('div.slidepad');
-      if (!slidepad) {
-        slidepad = document.createElement('div');
-        slidepad.classList.add('slidepad');
-        this.wrapperDom.appendChild(slidepad);
-      }
-      this.slidepadDom = slidepad as HTMLDivElement;
-      this.slidepad = new SlidepadManager(this.slidepadDom, this.wrapper);
-      this.slidepad.show();
-    }
-    {
-      let loader = this.wrapperDom.querySelector('div.loader');
-      if (!loader) {
-        loader = document.createElement('div');
-        loader.classList.add('loader');
-        this.wrapperDom.appendChild(loader);
-      }
-      this.loaderDom = loader as HTMLDivElement;
-      this.loader = new Loader(this.loaderDom);
-    }
-    {
-      let bg = this.rootDom.querySelector('bg_wrapper');
+      let bg = this.rootDom.querySelector('div.bg_wrapper');
       if (!bg) {
         bg = document.createElement('div');
         bg.classList.add('bg_wrapper');
         this.rootDom.insertBefore(bg, this.wrapperDom);
       }
       this.bgDom = bg as HTMLDivElement;
+    }
+    {
+      let fg = this.rootDom.querySelector('div.fg_wrapper');
+      if (!fg) {
+        fg = document.createElement('div');
+        fg.classList.add('fg_wrapper');
+        this.rootDom.insertBefore(fg, this.wrapperDom);
+      }
+      this.fgDom = fg as HTMLDivElement;
+    }
+    {
+      let slidepad = this.rootDom.querySelector('div.slidepad');
+      if (!slidepad) {
+        slidepad = document.createElement('div');
+        slidepad.classList.add('slidepad');
+        this.rootDom.appendChild(slidepad);
+      }
+      this.slidepadDom = slidepad as HTMLDivElement;
+      this.slidepad = new SlidepadManager(this.slidepadDom, this.wrapper);
+      this.slidepad.show();
+    }
+    {
+      let loader = this.fgDom.querySelector('div.loader');
+      if (!loader) {
+        loader = document.createElement('div');
+        loader.classList.add('loader');
+        this.fgDom.appendChild(loader);
+      }
+      this.loaderDom = loader as HTMLDivElement;
+      this.loader = new Loader(this.loaderDom);
     }
     this.scrollManager = new ScrollStateManager(this.wrapper);
     this.menu = new Menu({ page: { enable: true }, share: { enable: true } });

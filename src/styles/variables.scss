@@ -3,13 +3,16 @@
 $whole-wrapper-selector: 'div.carotin_novel';
 $main-wrapper-selector: 'div.content_wrapper';
 $background-wrapper-selector: 'div.bg_wrapper';
+$foreground-wrapper-selector: 'div.fg_wrapper';
 $custom-ruby-selector: '.custom_ruby ' #{$main-wrapper-selector};
 $self-fonts: 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN',
   'Hiragino Mincho Pro', 'HGP明朝B';
 
 $Z_INDEX_BACKGROUND_WRAPPER: 1;
 $Z_INDEX_MAIN_WRAPPER: 2;
+$Z_INDEX_SLIDEPAD: 10;
 $Z_INDEX_MENU: 20;
+$Z_INDEX_FOREGROUND_WRAPPER: 40;
 
 //
 // Colors

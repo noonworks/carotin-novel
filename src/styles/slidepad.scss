@@ -31,6 +31,7 @@ div.slidepad {
   right: var(--slide-pad-position-right, 3em);
   bottom: var(--slide-pad-position-bottom, 2em);
   left: var(--slide-pad-position-left, auto);
+  z-index: $Z_INDEX_SLIDEPAD;
   box-sizing: border-box;
   width: var(--slide-pad-size, #{$slidepad_size});
   height: calc(var(--slide-pad-size, #{$slidepad_size}) * 3);
