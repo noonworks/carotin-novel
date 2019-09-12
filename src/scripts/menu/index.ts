@@ -1,6 +1,7 @@
 import { appendCSS, createMenuBack } from './util';
 import { createTopMenu } from './TopMenu';
 import { createHelpMenu } from './Help';
+import { createSettingsMenu } from './Settings';
 
 interface MenuOption {
   enable: boolean;
@@ -18,6 +19,7 @@ export class Menu {
 
   private topMenuDom: HTMLDivElement;
   private helpMenuDom: HTMLDivElement;
+  private settingsMenuDom: HTMLDivElement;
   private pages: HTMLDivElement[];
 
   public get dom(): HTMLDivElement {
@@ -34,15 +36,21 @@ export class Menu {
 
   public onClickItem(id: string): void {
     switch (id) {
-      case 'close':
+      case 'settings':
         this.doAfterRipple(() => {
-          this.close();
+          this.hideAll();
+          this.settingsMenuDom.classList.add('on');
         });
         break;
       case 'help':
         this.doAfterRipple(() => {
           this.hideAll();
           this.helpMenuDom.classList.add('on');
+        });
+        break;
+      case 'close':
+        this.doAfterRipple(() => {
+          this.close();
         });
         break;
       case 'back':
@@ -84,9 +92,11 @@ export class Menu {
       cb
     );
     this.helpMenuDom = createHelpMenu(cb);
+    this.settingsMenuDom = createSettingsMenu(cb);
     this.menuContentWrapperDom.appendChild(this.topMenuDom);
     this.menuContentWrapperDom.appendChild(this.helpMenuDom);
-    this.pages = [this.topMenuDom, this.helpMenuDom];
+    this.menuContentWrapperDom.appendChild(this.settingsMenuDom);
+    this.pages = [this.topMenuDom, this.helpMenuDom, this.settingsMenuDom];
     this.topMenuDom.classList.add('on');
   }
 }
