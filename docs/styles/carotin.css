@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   padding: 0;
   margin: 0;
@@ -273,6 +274,189 @@ div.carotin_novel section + footer {
   white-space: nowrap;
   content: attr(data-ruby);
   font-feature-settings: normal;
+}
+
+div.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  margin-left: 100vw;
+  overflow: visible;
+  transition-timing-function: cubic-bezier(0, 0, 0.4, 1);
+  transition-duration: 700ms;
+}
+@media screen and (min-width: 640px) {
+  div.menu {
+    height: 100vh;
+  }
+}
+div.menu.on {
+  margin-left: 0;
+}
+div.menu div.menu-back {
+  position: absolute;
+  box-sizing: border-box;
+  display: block;
+  width: calc(100% + 6px);
+  height: 100%;
+  margin-left: -6px;
+  background-color: #fafafa;
+  filter: drop-shadow(0 0 4px rgba(150, 150, 150, 0.2)) drop-shadow(0 0 1px rgba(150, 150, 150, 0.8));
+  border-radius: 6px 0 0 6px;
+  opacity: 0.9;
+}
+div.menu div.menu-back div.menu-slide {
+  position: absolute;
+  top: calc((100% - 80px) / 2);
+  bottom: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  margin-left: -25px;
+  background-color: #fafafa;
+  border-radius: 40px;
+}
+div.menu div.menu-back div.menu-slide i {
+  margin-left: 12.5px;
+  font-size: 1.5em;
+  line-height: 1em;
+  opacity: 0.25;
+}
+div.menu div.menu-back.bottom div.menu-slide {
+  top: auto;
+  bottom: 2em;
+}
+div.menu div.menu-back.top div.menu-slide {
+  top: 2em;
+  bottom: auto;
+}
+div.menu div.menu-content-wrapper {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  overflow: auto;
+  font-family: "Noto Serif JP", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Hiragino Mincho Pro", "HGP明朝B", serif;
+}
+div.menu div.menu-content-wrapper div.menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+div.menu div.menu-content-wrapper div.menu-content h2 {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  text-decoration: none;
+}
+div.menu div.menu-content-wrapper div.menu-content h2 span.title {
+  flex-grow: 0;
+  padding: 0 0.3em;
+  text-align: center;
+}
+div.menu div.menu-content-wrapper div.menu-content h2 span.line {
+  box-sizing: border-box;
+  flex-grow: 1;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  margin-top: 2px;
+}
+div.menu div.menu-content-wrapper div.menu-content h2 span.line:first-child {
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5));
+}
+div.menu div.menu-content-wrapper div.menu-content h2 span.line:last-child {
+  background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.5));
+}
+div.menu div.menu-content-wrapper div.menu-content ul {
+  padding: 0;
+  margin: 0;
+  font-size: 1.5em;
+  list-style-type: none;
+}
+div.menu div.menu-content-wrapper div.menu-content ul li {
+  padding: 0;
+  margin: 0;
+  margin-top: 0.5em;
+  overflow: hidden;
+  touch-action: manipulation;
+  cursor: pointer;
+  border: solid 1px rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+}
+div.menu div.menu-content-wrapper div.menu-content ul li:first-child {
+  margin-top: 0;
+}
+div.menu div.menu-content-wrapper div.menu-content ul li a.button {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  overflow: hidden;
+  user-select: none;
+  transform: translate3d(0, 0, 0);
+}
+div.menu div.menu-content-wrapper div.menu-content ul li a.button i {
+  padding: 0;
+  margin: 0;
+  margin-right: 0.75rem;
+  font-size: 1.25em;
+}
+div.menu div.menu-content-wrapper div.menu-content ul li a.button span {
+  display: inline-block;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+div.menu div.menu-content-wrapper div.menu-content ul li a.button::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  content: "";
+  background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  opacity: 0;
+  transition: transform 0.5s, opacity 1s;
+  transform: scale(10, 10);
+}
+div.menu div.menu-content-wrapper div.menu-content ul li a.button:active::after {
+  opacity: 0.2;
+  transition: 0s;
+  transform: scale(0, 0);
+}
+div.menu div.menu-content-wrapper div.menu-top {
+  margin-bottom: 1rem;
 }
 
 :root[data-style-theme=default] {
