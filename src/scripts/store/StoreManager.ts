@@ -1,9 +1,16 @@
-import { Store, DeepPartial, StoreData, WorkStore } from './IStore';
+import {
+  Store,
+  DeepPartial,
+  StoreData,
+  WorkStore,
+  ConfigStore
+} from './IStore';
 import { APP_ID } from '../define';
 import deepEqual from 'deep-equal';
 import deepmerge from 'deepmerge';
 import store from 'store/dist/store.modern';
 import defaults from 'store/plugins/defaults';
+import { DEFAULT_THEME_NAMESPACE } from '../theme/ThemeManager';
 
 store.addPlugin(defaults);
 
@@ -15,13 +22,25 @@ const emptyStore: Store = {
   [APP_ID]: {
     version: '0.0.1',
     config: {
-      update: new Date().getTime()
+      update: new Date().getTime(),
+      slidepad: {
+        position: 'right'
+      },
+      theme: {
+        id: 'default',
+        namespace: DEFAULT_THEME_NAMESPACE
+      }
     },
     works: {}
   }
 };
 
 const SAVE_INTERVAL = 100;
+
+function migrate(obj: {}): StoreData {
+  const merged = deepmerge(emptyStore[APP_ID], obj);
+  return merged;
+}
 
 export class StoreManager {
   private emptyInStorage = false;
@@ -30,6 +49,10 @@ export class StoreManager {
 
   constructor() {
     this.cache = this.load();
+  }
+
+  public get config(): ConfigStore {
+    return this.cache.config;
   }
 
   public getWork(id: string): WorkStore | null {
@@ -44,6 +67,11 @@ export class StoreManager {
     if (deepEqual(this.cache, d)) {
       return;
     }
+    this.save(d as StoreData);
+  }
+
+  public updateConfig(obj: ConfigStore): void {
+    const d = deepmerge(this.cache, { config: obj });
     this.save(d as StoreData);
   }
 
@@ -62,7 +90,11 @@ export class StoreManager {
       (store as DefaultPluginAdded).defaults(emptyStore);
       d = store.get(APP_ID);
     }
-    return d;
+    const migrated = migrate(d);
+    if (!deepEqual(d, migrated)) {
+      this.save(migrated);
+    }
+    return migrated;
   }
 }
 

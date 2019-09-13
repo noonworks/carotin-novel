@@ -13,7 +13,7 @@ interface Position {
   left: string;
 }
 type Positions = 'top' | 'right' | 'bottom' | 'left';
-const POSITION_PREFIX = '--slide-pad-position-';
+const POSITION_PREFIX = '--carotinnovel--slide-pad-position-';
 
 function getMovePosition(pos: Partial<Position>): CSSCustomProperty[] {
   const change: { key: string; val: string }[] = [];
@@ -38,6 +38,24 @@ export class SlidepadManager {
   constructor(slidepadArea: HTMLElement, contentArea: ScrollableWrapper) {
     this.slidePadArea = slidepadArea;
     this.scrollManager = new SlideScrollManager(contentArea);
+  }
+
+  public movePosition(pos: 'right' | 'left'): void {
+    if (pos == 'left') {
+      this.move({
+        top: 'auto',
+        right: 'auto',
+        bottom: '2em',
+        left: '3em'
+      });
+      return;
+    }
+    this.move({
+      top: 'auto',
+      right: '3em',
+      bottom: '2em',
+      left: 'auto'
+    });
   }
 
   public move(pos: Partial<Position>): void {

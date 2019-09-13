@@ -4,7 +4,13 @@ import { SlidepadManager } from './slidepad/SlidePadManager';
 import { ScrollStateManager } from './scroll/ScrollStateManager';
 import { deleteTextNodeInRuby, setCustomRuby } from './util';
 import { Menu } from './menu';
-import { ThemeManagerInstance } from './theme/ThemeManager';
+import {
+  ThemeManagerInstance,
+  DEFAULT_THEME_NAMESPACE
+} from './theme/ThemeManager';
+import { StoreManagerInstance } from './store/StoreManager';
+
+const DATA_THEME = 'data-style-theme';
 
 export class CarotinNovel {
   private rootDom: HTMLDivElement;
@@ -19,6 +25,30 @@ export class CarotinNovel {
   private slidepad: SlidepadManager;
   private scrollManager: ScrollStateManager;
   private menu: Menu;
+
+  public applyConfig(): void {
+    const config = StoreManagerInstance.config;
+    {
+      // theme
+      let id = config.theme.id;
+      if (config.theme.namespace != DEFAULT_THEME_NAMESPACE) {
+        id = config.theme.namespace + '-' + id;
+      }
+      document.documentElement.setAttribute(DATA_THEME, id);
+    }
+    {
+      // slidepad
+      const pos = config.slidepad.position;
+      this.slidepad.hide();
+      switch (pos) {
+        case 'left':
+        case 'right':
+          this.slidepad.movePosition(pos);
+          this.slidepad.show();
+          break;
+      }
+    }
+  }
 
   constructor() {
     {
@@ -76,11 +106,13 @@ export class CarotinNovel {
     ThemeManagerInstance.load();
     this.scrollManager = new ScrollStateManager(this.wrapper);
     this.menu = new Menu({
+      app: this,
       enable: true,
       page: { enable: false },
       share: { enable: false }
     });
     this.rootDom.appendChild(this.menu.dom);
+    this.applyConfig();
   }
 
   public start(): void {
