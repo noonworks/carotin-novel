@@ -5,6 +5,7 @@ import {
   DEFAULT_THEME_NAMESPACE
 } from '../theme/ThemeManager';
 import { Theme } from '../theme/Theme';
+import { StoreManagerInstance } from '../store/StoreManager';
 
 const MENUITEM_CANCEL: MenuItemOption = {
   id: 'back',
@@ -52,48 +53,45 @@ function setSample(sample: HTMLDivElement, theme: Theme): void {
   sample.style.color = colors.tc;
 }
 
-export function createSettingsMenu(
-  callback: OnMenuItemCallback
-): HTMLDivElement {
-  const t = createMenuContent();
-  t.classList.add('menu-settings');
-  {
-    const h2 = createMenuTitle('スライドパッド');
-    t.appendChild(h2);
-  }
-  {
-    const div = document.createElement('div');
-    div.classList.add('slidepad_select');
-    [
-      { id: 'left', label: '左' },
-      { id: 'none', label: 'なし' },
-      { id: 'right', label: '右' }
-    ].forEach(i => {
-      const d = document.createElement('div');
-      const input = document.createElement('input');
-      input.type = 'radio';
-      input.name = 'slidepad_radio';
-      input.value = i.id;
-      input.id = 'slidepad_radio_' + i.id;
-      d.appendChild(input);
-      const l = document.createElement('label');
-      l.textContent = i.label;
-      l.setAttribute('for', 'slidepad_radio_' + i.id);
-      d.appendChild(l);
-      div.appendChild(d);
-    });
-    t.appendChild(div);
-  }
-  {
-    const h2 = createMenuTitle('テーマ');
-    t.appendChild(h2);
-  }
+function createSlidepadDiv(): HTMLDivElement {
+  const cur = StoreManagerInstance.config.slidepad.position;
+  const div = document.createElement('div');
+  div.classList.add('slidepad_select');
+  [
+    { id: 'left', label: '左' },
+    { id: 'none', label: 'なし' },
+    { id: 'right', label: '右' }
+  ].forEach(i => {
+    const d = document.createElement('div');
+    const input = document.createElement('input');
+    input.type = 'radio';
+    input.name = 'slidepad_radio';
+    input.value = i.id;
+    input.id = 'slidepad_radio_' + i.id;
+    if (i.id == cur) {
+      input.checked = true;
+    }
+    d.appendChild(input);
+    const l = document.createElement('label');
+    l.textContent = i.label;
+    l.setAttribute('for', 'slidepad_radio_' + i.id);
+    d.appendChild(l);
+    div.appendChild(d);
+  });
+  return div;
+}
+
+function createThemeDiv(): HTMLDivElement {
+  const theme = ThemeManagerInstance.getTheme(
+    StoreManagerInstance.config.theme.namespace,
+    StoreManagerInstance.config.theme.id
+  );
   const div = document.createElement('div');
   div.classList.add('menu_center');
   {
     const sample = document.createElement('div');
     sample.id = 'theme_sample';
-    setSample(sample, ThemeManagerInstance.themes[0]);
+    setSample(sample, theme.theme);
     const sel = document.createElement('select');
     sel.id = 'theme_select';
     sel.addEventListener('change', (ev: Event) => {
@@ -113,16 +111,39 @@ export function createSettingsMenu(
     div.appendChild(sel);
     div.appendChild(sample);
   }
+  return div;
+}
+
+function createControls(cb: OnMenuItemCallback): HTMLDivElement {
+  const div = document.createElement('div');
+  div.classList.add('menu_center');
+  const ul = document.createElement('ul');
+  ul.classList.add('menu_item');
+  ul.classList.add('control');
+  const mCancel = new MenuItem(MENUITEM_CANCEL);
+  const mSave = new MenuItem(MENUITEM_SAVE);
+  ul.appendChild(mSave.toElement(cb));
+  ul.appendChild(mCancel.toElement(cb));
+  div.appendChild(ul);
+  return div;
+}
+
+export function createSettingsMenu(cb: OnMenuItemCallback): HTMLDivElement {
+  const t = createMenuContent();
+  t.classList.add('menu-settings');
   {
-    const ul = document.createElement('ul');
-    ul.classList.add('menu_item');
-    ul.classList.add('control');
-    const mCancel = new MenuItem(MENUITEM_CANCEL);
-    const mSave = new MenuItem(MENUITEM_SAVE);
-    ul.appendChild(mSave.toElement(callback));
-    ul.appendChild(mCancel.toElement(callback));
-    div.appendChild(ul);
+    const h2 = createMenuTitle('スライドパッド');
+    t.appendChild(h2);
+    t.appendChild(createSlidepadDiv());
   }
-  t.appendChild(div);
+  {
+    const h2 = createMenuTitle('テーマ');
+    t.appendChild(h2);
+    t.appendChild(createThemeDiv());
+  }
+  {
+    const div = createControls(cb);
+    t.appendChild(div);
+  }
   return t;
 }
