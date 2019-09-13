@@ -16,6 +16,13 @@ export interface StoreData {
 
 export interface ConfigStore {
   update: number;
+  slidepad: {
+    position: 'right' | 'left' | 'none';
+  };
+  theme: {
+    id: string;
+    namespace: string;
+  };
 }
 
 export interface WorksStore {
