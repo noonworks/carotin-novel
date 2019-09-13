@@ -226,15 +226,16 @@ div.carotin_novel div.fg_wrapper div.loader.off {
 div.carotin_novel div.menu {
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   z-index: 20;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
-  margin-left: 100vw;
+  margin-right: 100vw;
   overflow: visible;
+  color: rgba(var(--carotinnovel--menu-text, 0, 0, 0), var(--carotinnovel--menu-text-a, 1));
   transition-timing-function: linear;
   transition-duration: 300ms;
   transform: translate3d(0, 0, 0);
@@ -247,35 +248,36 @@ div.carotin_novel div.menu {
   }
 }
 div.carotin_novel div.menu.on {
-  margin-left: 0;
+  margin-right: 0;
 }
 div.carotin_novel div.menu div.menu-back {
   position: absolute;
   box-sizing: border-box;
   display: block;
-  width: calc(100% + 6px);
+  width: calc(100% + 4px);
   height: 100%;
-  margin-left: -6px;
-  background-color: #fafafa;
-  filter: drop-shadow(0 0 4px rgba(150, 150, 150, 0.2)) drop-shadow(0 0 1px rgba(150, 150, 150, 0.8));
-  border-radius: 6px 0 0 6px;
+  margin-right: -4px;
+  background-color: rgba(var(--carotinnovel--menu-base, 250, 250, 250), var(--carotinnovel--menu-base-a, 1));
+  filter: drop-shadow(0 0 4px rgba(var(--carotinnovel--menu-shadow-base, 150, 150, 150), var(--carotinnovel--menu-shadow-base-a, 0.2))) drop-shadow(0 0 1px rgba(var(--carotinnovel--menu-shadow-line, 150, 150, 150), var(--carotinnovel--menu-shadow-line-a, 0.8)));
+  border-radius: 0 4px 4px 0;
   opacity: 0.9;
 }
 div.carotin_novel div.menu div.menu-back div.menu-slide {
   position: absolute;
   top: calc((100% - 80px) / 2);
+  right: 0;
   bottom: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items: center;
   width: 80px;
   height: 80px;
-  margin-left: -25px;
-  background-color: #fafafa;
+  margin-right: -14px;
+  background-color: rgba(var(--carotinnovel--menu-base, 250, 250, 250), var(--carotinnovel--menu-base-a, 1));
   border-radius: 40px;
 }
 div.carotin_novel div.menu div.menu-back div.menu-slide i {
-  margin-left: 12.5px;
+  margin-right: 4px;
   font-size: 1.5em;
   line-height: 1em;
   opacity: 0.25;
@@ -303,11 +305,13 @@ div.carotin_novel div.menu div.menu-content-wrapper {
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content {
   position: absolute;
   max-width: 90%;
+  visibility: hidden;
   opacity: 0;
   transition-timing-function: linear;
   transition-duration: 300ms;
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content.on {
+  visibility: visible;
   opacity: 1;
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu_center {
@@ -345,10 +349,10 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content h2 span.lin
   margin-top: 2px;
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content h2 span.line:first-child {
-  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5));
+  background: linear-gradient(to right, transparent, rgba(var(--carotinnovel--menu-border, 0, 0, 0), var(--carotinnovel--menu-border-a, 0.5)));
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content h2 span.line:last-child {
-  background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.5));
+  background: linear-gradient(to left, transparent, rgba(var(--carotinnovel--menu-border, 0, 0, 0), var(--carotinnovel--menu-border-a, 0.5)));
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul {
   box-sizing: border-box;
@@ -374,8 +378,10 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_ite
   margin-top: 0.5em;
   overflow: hidden;
   touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   cursor: pointer;
-  border: solid 1px rgba(0, 0, 0, 0.5);
+  border: solid 1px rgba(var(--carotinnovel--menu-border, 0, 0, 0), var(--carotinnovel--menu-border-a, 0.5));
   border-radius: 2px;
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_item li:first-child {
@@ -392,6 +398,8 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_ite
   overflow: hidden;
   user-select: none;
   transform: translate3d(0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_item li a.button i {
   padding: 0;
@@ -415,11 +423,11 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_ite
   height: 100%;
   pointer-events: none;
   content: "";
-  background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+  background-image: radial-gradient(circle, rgba(var(--carotinnovel--menu-ripple, 0, 0, 0), var(--carotinnovel--menu-ripple-a, 1)) 10%, transparent 10.01%);
   background-repeat: no-repeat;
   background-position: 50%;
   opacity: 0;
-  transition: transform 0.5s, opacity 1s;
+  transition: transform 0.5s, opacity 700ms;
   transform: scale(10, 10);
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content ul.menu_item li a.button:active::after {
@@ -441,7 +449,7 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.slidepa
   flex: 1;
   min-width: 4rem;
   min-height: 3rem;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(var(--carotinnovel--menu-border, 0, 0, 0), var(--carotinnovel--menu-border-a, 0.5));
   border-left-width: 0;
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.slidepad_select > div label {
@@ -465,8 +473,8 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.slidepa
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.slidepad_select > div input:checked + label {
   font-weight: 500;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.5);
+  color: rgba(var(--carotinnovel--menu-base, 250, 250, 250), var(--carotinnovel--menu-base-a, 1));
+  background: rgba(var(--carotinnovel--menu-border, 0, 0, 0), var(--carotinnovel--menu-border-a, 0.5));
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.slidepad_select > div:first-child {
   border-left-width: 1px;
@@ -485,16 +493,22 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content select#them
   font-family: "Noto Serif JP", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Hiragino Mincho Pro", "HGP明朝B", serif;
   font-size: 1.1em;
   line-height: 1.3;
+  color: rgba(var(--carotinnovel--menu-text, 0, 0, 0), var(--carotinnovel--menu-text-a, 1));
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(var(--carotinnovel--menu-border, 0, 0, 0), var(--carotinnovel--menu-border-a, 0.5));
   border-radius: 2px;
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div#theme_sample {
   width: 90%;
-  padding: 0.25em;
+  padding: 0.5em;
   margin: 0.5rem 0 1rem 0;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(var(--carotinnovel--menu-border, 0, 0, 0), var(--carotinnovel--menu-border-a, 0.5));
   border-radius: 2px;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div#theme_sample span.author {
+  display: block;
+  font-size: 0.8em;
+  text-align: right;
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-top {
   margin-bottom: 1rem;
@@ -551,6 +565,14 @@ div.carotin_novel div.slidepad div.nipple div.front {
 }
 
 :root[data-style-theme=default] {
+  --carotinnovel--meta-theme-version:"0.0.1-beta";
+  --carotinnovel--meta-theme-namespace:"carotin_novel";
+  --carotinnovel--meta-theme-id:"default";
+  --carotinnovel--meta-theme-name:"デフォルト";
+  --carotinnovel--meta-theme-description:"標準の白黒テーマ";
+  --carotinnovel--meta-theme-author:"@noonworks";
+  --carotinnovel--meta-theme-href:"https://noonworks.github.io/carotin-novel/";
+  --carotinnovel--meta-theme-license:"MIT";
   --carotinnovel--background-base:255, 255, 255;
   --carotinnovel--background-base-a:1;
   --carotinnovel--text-base:0, 0, 0;
@@ -577,9 +599,29 @@ div.carotin_novel div.slidepad div.nipple div.front {
   --carotinnovel--slidepad-front-shadow-a:0.75;
   --carotinnovel--loader-primary:200, 200, 200;
   --carotinnovel--loader-primary-a:1;
+  --carotinnovel--menu-base:250, 250, 250;
+  --carotinnovel--menu-base-a:1;
+  --carotinnovel--menu-text:0, 0, 0;
+  --carotinnovel--menu-text-a:1;
+  --carotinnovel--menu-shadow-base:150, 150, 150;
+  --carotinnovel--menu-shadow-base-a:0.2;
+  --carotinnovel--menu-shadow-line:150, 150, 150;
+  --carotinnovel--menu-shadow-line-a:0.8;
+  --carotinnovel--menu-border:0, 0, 0;
+  --carotinnovel--menu-border-a:0.5;
+  --carotinnovel--menu-ripple:0, 0, 0;
+  --carotinnovel--menu-ripple-a:1;
 }
 
 :root[data-style-theme=brown] {
+  --carotinnovel--meta-theme-version:"0.0.1-beta";
+  --carotinnovel--meta-theme-namespace:"carotin_novel";
+  --carotinnovel--meta-theme-id:"brown";
+  --carotinnovel--meta-theme-name:"ブラウン";
+  --carotinnovel--meta-theme-description:"茶色っぽいテーマ";
+  --carotinnovel--meta-theme-author:"@noonworks";
+  --carotinnovel--meta-theme-href:"https://noonworks.github.io/carotin-novel/";
+  --carotinnovel--meta-theme-license:"MIT";
   --carotinnovel--background-base:217, 211, 193;
   --carotinnovel--background-base-a:1;
   --carotinnovel--text-base:64, 42, 30;
@@ -606,4 +648,16 @@ div.carotin_novel div.slidepad div.nipple div.front {
   --carotinnovel--slidepad-front-shadow-a:0.75;
   --carotinnovel--loader-primary:108, 91, 91;
   --carotinnovel--loader-primary-a:1;
+  --carotinnovel--menu-base:250, 250, 250;
+  --carotinnovel--menu-base-a:1;
+  --carotinnovel--menu-text:0, 0, 0;
+  --carotinnovel--menu-text-a:1;
+  --carotinnovel--menu-shadow-base:150, 150, 150;
+  --carotinnovel--menu-shadow-base-a:0.2;
+  --carotinnovel--menu-shadow-line:150, 150, 150;
+  --carotinnovel--menu-shadow-line-a:0.8;
+  --carotinnovel--menu-border:0, 0, 0;
+  --carotinnovel--menu-border-a:0.5;
+  --carotinnovel--menu-ripple:0, 0, 0;
+  --carotinnovel--menu-ripple-a:1;
 }

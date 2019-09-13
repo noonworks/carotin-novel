@@ -60,7 +60,7 @@ export function createMenuBack(callback: () => void): HTMLDivElement {
   ms.classList.add('menu-slide');
   const i = document.createElement('i');
   i.classList.add('icon');
-  i.classList.add('ion-ios-arrow-back');
+  i.classList.add('ion-ios-arrow-forward');
   ms.appendChild(i);
   back.appendChild(ms);
   ms.addEventListener('click', callback);

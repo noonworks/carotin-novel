@@ -13,6 +13,14 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 const prefix = '--carotinnovel';
 
 const requiredValues = [
+  '--meta-theme-version',
+  '--meta-theme-namespace',
+  '--meta-theme-id',
+  '--meta-theme-name',
+  '--meta-theme-description',
+  '--meta-theme-author',
+  '--meta-theme-href',
+  '--meta-theme-license',
   '--background-base',
   '--background-base-a',
   '--text-base',
@@ -38,7 +46,19 @@ const requiredValues = [
   '--slidepad-front-shadow',
   '--slidepad-front-shadow-a',
   '--loader-primary',
-  '--loader-primary-a'
+  '--loader-primary-a',
+  '--menu-base',
+  '--menu-base-a',
+  '--menu-text',
+  '--menu-text-a',
+  '--menu-shadow-base',
+  '--menu-shadow-base-a',
+  '--menu-shadow-line',
+  '--menu-shadow-line-a',
+  '--menu-border',
+  '--menu-border-a',
+  '--menu-ripple',
+  '--menu-ripple-a'
 ].map(v => prefix + v);
 
 function checkTheme(rule) {

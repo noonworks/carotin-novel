@@ -4,6 +4,7 @@ import { SlidepadManager } from './slidepad/SlidePadManager';
 import { ScrollStateManager } from './scroll/ScrollStateManager';
 import { deleteTextNodeInRuby, setCustomRuby } from './util';
 import { Menu } from './menu';
+import { ThemeManagerInstance } from './theme/ThemeManager';
 
 export class CarotinNovel {
   private rootDom: HTMLDivElement;
@@ -72,6 +73,7 @@ export class CarotinNovel {
       this.loaderDom = loader as HTMLDivElement;
       this.loader = new Loader(this.loaderDom);
     }
+    ThemeManagerInstance.load();
     this.scrollManager = new ScrollStateManager(this.wrapper);
     this.menu = new Menu({
       enable: true,

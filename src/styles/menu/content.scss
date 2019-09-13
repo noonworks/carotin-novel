@@ -13,11 +13,13 @@ div.menu-content-wrapper {
   div.menu-content {
     position: absolute;
     max-width: 90%;
+    visibility: hidden;
     opacity: 0;
     transition-timing-function: linear;
     transition-duration: 300ms;
 
     &.on {
+      visibility: visible;
       opacity: 1;
     }
 
