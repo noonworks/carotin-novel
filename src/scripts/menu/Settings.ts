@@ -110,12 +110,16 @@ function createThemeDiv(): HTMLDivElement {
       const idx = target.selectedIndex;
       setSample(sample, ThemeManagerInstance.themes[idx]);
     });
+    const curTheme = StoreManagerInstance.config.theme;
     ThemeManagerInstance.themes.forEach(theme => {
       const opt = document.createElement('option');
       opt.value = theme.id;
       opt.textContent = theme.name;
       opt.setAttribute(DATA_NAMESPACE, theme.namespace);
       opt.setAttribute(DATA_ID, theme.id);
+      if (theme.id === curTheme.id && theme.namespace === curTheme.namespace) {
+        opt.selected = true;
+      }
       sel.appendChild(opt);
     });
     div.appendChild(sel);
