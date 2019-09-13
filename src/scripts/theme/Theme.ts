@@ -1,3 +1,5 @@
+import { ThemeManagerInstance } from './ThemeManager';
+
 interface ThemeOptions {
   version: string;
   namespace: string;
@@ -31,5 +33,9 @@ export class Theme {
     this.href = opt.href;
     this.license = opt.license;
     this.data = opt.data;
+  }
+
+  public getValue(name: string): string {
+    return this.data[name] || ThemeManagerInstance.default.data[name];
   }
 }

@@ -1,5 +1,10 @@
 import { OnMenuItemCallback, MenuItem, MenuItemOption } from './MenuItem';
 import { createMenuContent, createMenuTitle } from './util';
+import {
+  ThemeManagerInstance,
+  DEFAULT_THEME_NAMESPACE
+} from '../theme/ThemeManager';
+import { Theme } from '../theme/Theme';
 
 const MENUITEM_CANCEL: MenuItemOption = {
   id: 'back',
@@ -13,18 +18,39 @@ const MENUITEM_SAVE: MenuItemOption = {
   title: '保存'
 };
 
-const themes = [
-  {
-    id: 'default',
-    name: 'デフォルト',
-    description: '標準の白黒テーマ'
-  },
-  {
-    id: 'brown',
-    name: 'ブラウン',
-    description: '茶色っぽいテーマ'
+function getColor(theme: Theme): { bc: string; tc: string } {
+  const b1 = theme.getValue('background-base');
+  const b2 = theme.getValue('background-base-a');
+  const bc = 'rgba(' + b1 + ', ' + b2 + ')';
+  const t1 = theme.getValue('text-base');
+  const t2 = theme.getValue('text-base-a');
+  const tc = 'rgba(' + t1 + ', ' + t2 + ')';
+  return { bc, tc };
+}
+
+function setSample(sample: HTMLDivElement, theme: Theme): void {
+  sample.innerHTML = '';
+  sample.textContent += theme.description;
+  if (theme.namespace != DEFAULT_THEME_NAMESPACE) {
+    // sample.appendChild(document.createElement('br'));
+    const span = document.createElement('span');
+    span.classList.add('author');
+    span.textContent += '作者：';
+    if (theme.href.length > 0) {
+      const a = document.createElement('a');
+      a.target = '_blank';
+      a.href = theme.href;
+      a.textContent = theme.author;
+      span.appendChild(a);
+    } else {
+      span.textContent += theme.author;
+    }
+    sample.appendChild(span);
   }
-];
+  const colors = getColor(theme);
+  sample.style.backgroundColor = colors.bc;
+  sample.style.color = colors.tc;
+}
 
 export function createSettingsMenu(
   callback: OnMenuItemCallback
@@ -67,7 +93,7 @@ export function createSettingsMenu(
   {
     const sample = document.createElement('div');
     sample.id = 'theme_sample';
-    sample.textContent = themes[0].description;
+    setSample(sample, ThemeManagerInstance.themes[0]);
     const sel = document.createElement('select');
     sel.id = 'theme_select';
     sel.addEventListener('change', (ev: Event) => {
@@ -76,9 +102,9 @@ export function createSettingsMenu(
       }
       const target = ev.target as HTMLSelectElement;
       const idx = target.selectedIndex;
-      sample.textContent = themes[idx].description;
+      setSample(sample, ThemeManagerInstance.themes[idx]);
     });
-    themes.forEach(theme => {
+    ThemeManagerInstance.themes.forEach(theme => {
       const opt = document.createElement('option');
       opt.value = theme.id;
       opt.textContent = theme.name;

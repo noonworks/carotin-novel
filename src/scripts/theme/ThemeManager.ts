@@ -23,8 +23,8 @@ function getThemeRules(): CSSStyleRule[] {
   return stylerules;
 }
 
-const doublequoted = /^"(.+)"$/;
-const singlequoted = /^'(.+)'$/;
+const doublequoted = /^"(.*)"$/;
+const singlequoted = /^'(.*)'$/;
 function fixVal(val: string): string {
   return val.replace(doublequoted, '$1').replace(singlequoted, '$1');
 }
@@ -57,16 +57,29 @@ function createTheme(map: { [key: string]: string }): Theme {
   });
 }
 
+export const DEFAULT_THEME_NAMESPACE = 'carotin_novel';
+
 class ThemeManager {
   private _themes: Theme[];
+  private _default: Theme;
 
   public get themes(): Theme[] {
     return this._themes;
   }
 
+  public get default(): Theme {
+    return this._default;
+  }
+
   constructor() {
     this._themes = [];
     this.load();
+    this._default = this.themes[0];
+    this._themes.forEach(t => {
+      if (t.namespace == DEFAULT_THEME_NAMESPACE && t.id == 'default') {
+        this._default = t;
+      }
+    });
   }
 
   public load(): void {
