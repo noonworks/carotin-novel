@@ -51,6 +51,7 @@ function createTheme(map: { [key: string]: string }): Theme {
     name: map['meta-theme-name'] || '',
     description: map['meta-theme-description'] || '',
     author: map['meta-theme-author'] || '',
+    href: map['meta-theme-href'] || '',
     license: map['meta-theme-license'] || '',
     data: map
   });

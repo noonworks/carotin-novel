@@ -5,6 +5,7 @@ interface ThemeOptions {
   name: string;
   description: string;
   author: string;
+  href: string;
   license: string;
   data: { [key: string]: string };
 }
@@ -16,6 +17,7 @@ export class Theme {
   public name: string;
   public description: string;
   public author: string;
+  public href: string;
   public license: string;
   public data: { [key: string]: string };
 
@@ -26,6 +28,7 @@ export class Theme {
     this.name = opt.name;
     this.description = opt.description;
     this.author = opt.author;
+    this.href = opt.href;
     this.license = opt.license;
     this.data = opt.data;
   }

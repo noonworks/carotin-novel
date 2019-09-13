@@ -19,6 +19,7 @@ const requiredValues = [
   '--meta-theme-name',
   '--meta-theme-description',
   '--meta-theme-author',
+  '--meta-theme-href',
   '--meta-theme-license',
   '--background-base',
   '--background-base-a',
