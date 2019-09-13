@@ -1,6 +1,13 @@
 @charset 'utf-8';
 
 $default-theme: (
+  meta-theme-version: '"0.0.1-beta"',
+  meta-theme-namespace: '"carotin_novel"',
+  meta-theme-id: '"default"',
+  meta-theme-name: '"デフォルト"',
+  meta-theme-description: '"標準の白黒テーマ"',
+  meta-theme-author: '"@noonworks"',
+  meta-theme-license: '"MIT"',
   background-base: (
     color: '255, 255, 255',
     alpha: 1

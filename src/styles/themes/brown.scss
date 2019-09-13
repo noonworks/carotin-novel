@@ -2,6 +2,13 @@
 @import '../mixin/theme.scss';
 
 $theme-brown: (
+  meta-theme-version: '"0.0.1-beta"',
+  meta-theme-namespace: '"carotin_novel"',
+  meta-theme-id: '"brown"',
+  meta-theme-name: '"ブラウン"',
+  meta-theme-description: '"茶色っぽいテーマ"',
+  meta-theme-author: '"@noonworks"',
+  meta-theme-license: '"MIT"',
   background-base: (
     color: '217, 211, 193',
     alpha: 1

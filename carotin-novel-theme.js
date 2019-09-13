@@ -13,6 +13,13 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 const prefix = '--carotinnovel';
 
 const requiredValues = [
+  '--meta-theme-version',
+  '--meta-theme-namespace',
+  '--meta-theme-id',
+  '--meta-theme-name',
+  '--meta-theme-description',
+  '--meta-theme-author',
+  '--meta-theme-license',
   '--background-base',
   '--background-base-a',
   '--text-base',
