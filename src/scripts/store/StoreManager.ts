@@ -70,6 +70,11 @@ export class StoreManager {
     this.save(d as StoreData);
   }
 
+  public updateConfig(obj: ConfigStore): void {
+    const d = deepmerge(this.cache, { config: obj });
+    this.save(d as StoreData);
+  }
+
   private save(data: StoreData): void {
     this.cache = data;
     window.clearTimeout(this.saveQueueId);

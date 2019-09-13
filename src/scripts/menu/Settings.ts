@@ -6,6 +6,11 @@ import {
 } from '../theme/ThemeManager';
 import { Theme } from '../theme/Theme';
 import { StoreManagerInstance } from '../store/StoreManager';
+import {
+  SlidepadPosition,
+  isSlidepadPosition,
+  ConfigStore
+} from '../store/IStore';
 
 const MENUITEM_CANCEL: MenuItemOption = {
   id: 'back',
@@ -81,6 +86,9 @@ function createSlidepadDiv(): HTMLDivElement {
   return div;
 }
 
+const DATA_NAMESPACE = 'data-theme-namespace';
+const DATA_ID = 'data-theme-id';
+
 function createThemeDiv(): HTMLDivElement {
   const theme = ThemeManagerInstance.getTheme(
     StoreManagerInstance.config.theme.namespace,
@@ -106,6 +114,8 @@ function createThemeDiv(): HTMLDivElement {
       const opt = document.createElement('option');
       opt.value = theme.id;
       opt.textContent = theme.name;
+      opt.setAttribute(DATA_NAMESPACE, theme.namespace);
+      opt.setAttribute(DATA_ID, theme.id);
       sel.appendChild(opt);
     });
     div.appendChild(sel);
@@ -128,22 +138,81 @@ function createControls(cb: OnMenuItemCallback): HTMLDivElement {
   return div;
 }
 
-export function createSettingsMenu(cb: OnMenuItemCallback): HTMLDivElement {
-  const t = createMenuContent();
-  t.classList.add('menu-settings');
-  {
-    const h2 = createMenuTitle('スライドパッド');
-    t.appendChild(h2);
-    t.appendChild(createSlidepadDiv());
+export class SettingsMenu {
+  private configRootDom: HTMLDivElement;
+  private slidepadDom: HTMLDivElement;
+  private themeDom: HTMLDivElement;
+  private controlsDom: HTMLDivElement;
+
+  public get dom(): HTMLDivElement {
+    return this.configRootDom;
   }
-  {
-    const h2 = createMenuTitle('テーマ');
-    t.appendChild(h2);
-    t.appendChild(createThemeDiv());
+
+  private getSlidepadPosition(): SlidepadPosition {
+    const radios = this.slidepadDom.querySelectorAll('input[type=radio]');
+    let checked: SlidepadPosition = 'right';
+    radios.forEach(r => {
+      const radio = r as HTMLInputElement;
+      if (radio.checked && isSlidepadPosition(radio.value)) {
+        checked = radio.value;
+      }
+    });
+    return checked;
   }
-  {
-    const div = createControls(cb);
-    t.appendChild(div);
+
+  private getSelectedTheme(): {
+    id: string;
+    namespace: string;
+  } {
+    const r = {
+      id: ThemeManagerInstance.default.id,
+      namespace: ThemeManagerInstance.default.namespace
+    };
+    const select = this.themeDom.querySelector('select');
+    if (!select) {
+      return r;
+    }
+    const opts = (select as HTMLSelectElement).selectedOptions;
+    if (opts.length < 1) {
+      return r;
+    }
+    const opt = opts[0];
+    const id = opt.getAttribute(DATA_ID);
+    const namespace = opt.getAttribute(DATA_NAMESPACE);
+    if (!id || !namespace) {
+      return r;
+    }
+    return { id, namespace };
   }
-  return t;
+
+  private save(): void {
+    const sp = this.getSlidepadPosition();
+    const theme = this.getSelectedTheme();
+    const d: ConfigStore = {
+      update: new Date().getTime(),
+      slidepad: {
+        position: sp
+      },
+      theme: theme
+    };
+    StoreManagerInstance.updateConfig(d);
+  }
+
+  constructor(callback: OnMenuItemCallback) {
+    this.configRootDom = createMenuContent();
+    this.configRootDom.classList.add('menu-settings');
+    this.configRootDom.appendChild(createMenuTitle('スライドパッド'));
+    this.slidepadDom = createSlidepadDiv();
+    this.configRootDom.appendChild(this.slidepadDom);
+    this.configRootDom.appendChild(createMenuTitle('テーマ'));
+    this.themeDom = createThemeDiv();
+    this.configRootDom.appendChild(this.themeDom);
+    this.controlsDom = createControls((id: string) => {
+      if (id == 'save') {
+        this.save();
+      }
+      callback(id);
+    });
+    this.configRootDom.appendChild(this.controlsDom);
+  }
 }
