@@ -2,8 +2,10 @@ import { appendCSS, createMenuBack } from './util';
 import { createTopMenu } from './TopMenu';
 import { createHelpMenu } from './Help';
 import { SettingsMenu } from './Settings';
+import { CarotinNovel } from '../CarotinNovel';
 
 interface MenuOption {
+  app: CarotinNovel;
   enable: boolean;
   page: {
     enable: boolean;
@@ -22,6 +24,7 @@ export class Menu {
   private settingsMenuDom: HTMLDivElement;
   private settings: SettingsMenu;
   private pages: HTMLDivElement[];
+  private app: CarotinNovel;
 
   public get dom(): HTMLDivElement {
     return this.menuRootDom;
@@ -55,6 +58,12 @@ export class Menu {
         });
         break;
       case 'save':
+        this.app.applyConfig();
+        this.doAfterRipple(() => {
+          this.hideAll();
+          this.topMenuDom.classList.add('on');
+        });
+        break;
       case 'back':
         this.doAfterRipple(() => {
           this.hideAll();
@@ -73,6 +82,7 @@ export class Menu {
   }
 
   constructor(option: MenuOption) {
+    this.app = option.app;
     this.pages = [];
     appendCSS();
     this.menuRootDom = document.createElement('div');
