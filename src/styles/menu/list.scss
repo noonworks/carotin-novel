@@ -72,7 +72,11 @@ ul.menu_item {
         height: 100%;
         pointer-events: none;
         content: '';
-        background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+        background-image: radial-gradient(
+          circle,
+          $menu-ripple-color 10%,
+          transparent 10.01%
+        );
         background-repeat: no-repeat;
         background-position: 50%;
         opacity: 0;

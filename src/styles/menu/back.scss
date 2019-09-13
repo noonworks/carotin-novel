@@ -9,9 +9,9 @@ div.menu-back {
   width: calc(100% + #{$menu-radius});
   height: 100%;
   margin-right: $menu-radius * -1;
-  background-color: rgba(250, 250, 250, 1);
-  filter: drop-shadow(0 0 4px rgba(150, 150, 150, 0.2))
-    drop-shadow(0 0 1px rgba(150, 150, 150, 0.8));
+  background-color: $menu-base-color;
+  filter: drop-shadow(0 0 4px $menu-shadow-base-color)
+    drop-shadow(0 0 1px $menu-shadow-line-color);
   border-radius: 0 $menu-radius $menu-radius 0;
   opacity: 0.9;
 
@@ -26,7 +26,7 @@ div.menu-back {
     width: $menu-slider-size;
     height: $menu-slider-size;
     margin-right: $menu-slider-height * -1;
-    background-color: rgba(250, 250, 250, 1);
+    background-color: $menu-base-color;
     border-radius: $menu-slider-size / 2;
 
     i {
