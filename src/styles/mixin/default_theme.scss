@@ -5,16 +5,16 @@ $default-theme: (
   meta-theme-namespace: '"carotin_novel"',
   meta-theme-id: '"default"',
   meta-theme-name: '"デフォルト"',
-  meta-theme-description: '"標準の白黒テーマ"',
+  meta-theme-description: '"白背景・黒文字のテーマ"',
   meta-theme-author: '"@noonworks"',
   meta-theme-href: '"https://noonworks.github.io/carotin-novel/"',
   meta-theme-license: '"MIT"',
   background-base: (
-    color: '255, 255, 255',
+    color: '252, 252, 252',
     alpha: 1
   ),
   text-base: (
-    color: '0, 0, 0',
+    color: '42, 42, 42',
     alpha: 1
   ),
   link-base: (
@@ -36,13 +36,13 @@ $default-theme: (
     color: '129, 0, 0',
     alpha: 1
   ),
-  slidepad-opacity: 0.6,
+  slidepad-opacity: 0.65,
   slidepad-back: (
     color: '192, 192, 192',
     alpha: 0.25
   ),
   slidepad-front: (
-    color: '255, 255, 255',
+    color: '252, 252, 252',
     alpha: 1
   ),
   slidepad-back-shadow: (
@@ -62,7 +62,7 @@ $default-theme: (
     alpha: 1
   ),
   menu-text: (
-    color: '0, 0, 0',
+    color: '42, 42, 42',
     alpha: 1
   ),
   menu-shadow-base: (
@@ -74,11 +74,11 @@ $default-theme: (
     alpha: 0.8
   ),
   menu-border: (
-    color: '0, 0, 0',
+    color: '42, 42, 42',
     alpha: 0.5
   ),
   menu-ripple: (
-    color: '0, 0, 0',
+    color: '42, 42, 42',
     alpha: 1
   )
 );
