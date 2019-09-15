@@ -1,4 +1,6 @@
 @charset 'utf-8';
 
 @import './default.scss';
+@include theme-template($default-theme, 'default');
 @import './dark.scss';
+@include theme-template($theme-dark, 'dark');

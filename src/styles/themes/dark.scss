@@ -1,5 +1,4 @@
 @charset 'utf-8';
-@import '../mixin/theme.scss';
 
 $theme-dark: (
   meta-theme-version: '"0.0.1-beta"',
@@ -102,5 +101,3 @@ $theme-dark: (
     alpha: 1
   )
 );
-
-@include theme-template($theme-dark, 'dark');
