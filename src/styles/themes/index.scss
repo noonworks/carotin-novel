@@ -4,3 +4,5 @@
 @include theme-template($default-theme, 'default');
 @import './dark.scss';
 @include theme-template($theme-dark, 'dark');
+@import './bunko.scss';
+@include theme-template($theme-bunko, 'bunko');

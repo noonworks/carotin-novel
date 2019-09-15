@@ -1,0 +1,103 @@
+@charset 'utf-8';
+
+$theme-bunko: (
+  meta-theme-version: '"0.0.1-beta"',
+  meta-theme-namespace: '"carotin_novel"',
+  meta-theme-id: '"bunko"',
+  meta-theme-name: '"文庫本"',
+  meta-theme-description: '"文庫本のような淡いクリーム色の背景・黒文字のテーマ"',
+  meta-theme-author: '"@noonworks"',
+  meta-theme-href: '"https://noonworks.github.io/carotin-novel/"',
+  meta-theme-license: '"MIT"',
+  background-base: (
+    color: '252, 250, 242',
+    alpha: 1
+  ),
+  text-base: (
+    color: '24, 24, 24',
+    alpha: 1
+  ),
+  link-base: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  link-base-decoration: 'none',
+  link-hover: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  link-hover-decoration: 'underline',
+  link-active: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  link-active-decoration: 'underline',
+  link-visited: (
+    color: '129, 0, 0',
+    alpha: 1
+  ),
+  slidepad-opacity: 0.65,
+  slidepad-back: (
+    color: '192, 190, 182',
+    alpha: 0.25
+  ),
+  slidepad-front: (
+    color: '252, 250, 242',
+    alpha: 1
+  ),
+  slidepad-back-shadow: (
+    color: '192, 192, 192',
+    alpha: 0.75
+  ),
+  slidepad-front-shadow: (
+    color: '128, 128, 128',
+    alpha: 0.75
+  ),
+  loader-primary: (
+    color: '200, 200, 200',
+    alpha: 1
+  ),
+  menu-base: (
+    color: '252, 250, 242',
+    alpha: 1
+  ),
+  menu-text: (
+    color: '24, 24, 24',
+    alpha: 1
+  ),
+  menu-shadow-base: (
+    color: '150, 150, 150',
+    alpha: 0.2
+  ),
+  menu-shadow-line: (
+    color: '150, 150, 150',
+    alpha: 0.8
+  ),
+  menu-border: (
+    color: '24, 24, 24',
+    alpha: 0.5
+  ),
+  menu-ripple: (
+    color: '24, 24, 24',
+    alpha: 1
+  ),
+  menu-link-base: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  menu-link-base-decoration: 'none',
+  menu-link-hover: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  menu-link-hover-decoration: 'underline',
+  menu-link-active: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  menu-link-active-decoration: 'underline',
+  menu-link-visited: (
+    color: '129, 0, 0',
+    alpha: 1
+  )
+);
