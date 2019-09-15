@@ -69,10 +69,15 @@ select#theme_select {
   background: transparent;
   border: 1px solid $menu-border-color;
   border-radius: $radius;
+
+  option {
+    color: $menu-text-color;
+    background-color: $menu-base-color;
+  }
 }
 
 div#theme_sample {
-  width: 90%;
+  width: 200px;
   padding: 0.5em;
   margin: 0.5rem 0 1rem 0;
   border: 1px solid $menu-border-color;

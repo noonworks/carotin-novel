@@ -1,69 +1,68 @@
 @charset 'utf-8';
-@import '../mixin/theme.scss';
 
-$theme-brown: (
+$theme-bunko: (
   meta-theme-version: '"0.0.1-beta"',
   meta-theme-namespace: '"carotin_novel"',
-  meta-theme-id: '"brown"',
-  meta-theme-name: '"ブラウン"',
-  meta-theme-description: '"茶色っぽいテーマ"',
+  meta-theme-id: '"bunko"',
+  meta-theme-name: '"文庫本"',
+  meta-theme-description: '"文庫本のような淡いクリーム色の背景・黒文字のテーマ"',
   meta-theme-author: '"@noonworks"',
   meta-theme-href: '"https://noonworks.github.io/carotin-novel/"',
   meta-theme-license: '"MIT"',
   background-base: (
-    color: '217, 211, 193',
+    color: '252, 250, 242',
     alpha: 1
   ),
   text-base: (
-    color: '64, 42, 30',
+    color: '24, 24, 24',
     alpha: 1
   ),
   link-base: (
-    color: '160, 54, 54',
+    color: '0, 102, 203',
     alpha: 1
   ),
   link-base-decoration: 'none',
   link-hover: (
-    color: '160, 54, 54',
+    color: '0, 102, 203',
     alpha: 1
   ),
   link-hover-decoration: 'underline',
   link-active: (
-    color: '160, 54, 54',
+    color: '0, 102, 203',
     alpha: 1
   ),
   link-active-decoration: 'underline',
   link-visited: (
-    color: '114, 39, 39',
+    color: '129, 0, 0',
     alpha: 1
   ),
-  slidepad-opacity: 0.95,
+  slidepad-opacity: 0.65,
   slidepad-back: (
-    color: '191, 176, 147',
+    color: '192, 190, 182',
     alpha: 0.25
   ),
   slidepad-front: (
-    color: '238, 235, 235',
+    color: '252, 250, 242',
     alpha: 1
   ),
   slidepad-back-shadow: (
-    color: '115, 86, 50',
-    alpha: 0.3
+    color: '192, 192, 192',
+    alpha: 0.75
   ),
   slidepad-front-shadow: (
-    color: '115, 86, 50',
+    color: '128, 128, 128',
     alpha: 0.75
   ),
   loader-primary: (
-    color: '108, 91, 91',
+    color: '200, 200, 200',
     alpha: 1
   ),
   menu-base: (
-    color: '250, 250, 250',
+    color: '252, 250, 242',
     alpha: 1
   ),
   menu-text: (
-    color: '0, 0, 0',
+    color: '24, 24, 24',
     alpha: 1
   ),
   menu-shadow-base: (
@@ -75,13 +74,30 @@ $theme-brown: (
     alpha: 0.8
   ),
   menu-border: (
-    color: '0, 0, 0',
+    color: '24, 24, 24',
     alpha: 0.5
   ),
   menu-ripple: (
-    color: '0, 0, 0',
+    color: '24, 24, 24',
+    alpha: 1
+  ),
+  menu-link-base: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  menu-link-base-decoration: 'none',
+  menu-link-hover: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  menu-link-hover-decoration: 'underline',
+  menu-link-active: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  menu-link-active-decoration: 'underline',
+  menu-link-visited: (
+    color: '129, 0, 0',
     alpha: 1
   )
 );
-
-@include theme-template($theme-brown, 'brown');

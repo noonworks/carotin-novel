@@ -38,6 +38,13 @@ $menu-shadow-base-color: define-theme-color('menu-shadow-base');
 $menu-shadow-line-color: define-theme-color('menu-shadow-line');
 $menu-border-color: define-theme-color('menu-border');
 $menu-ripple-color: define-theme-color('menu-ripple');
+$menu-link-base-color: define-theme-color('menu-link-base');
+$menu-link-base-decoration: define-theme-value('menu-link-base-decoration');
+$menu-link-hover-color: define-theme-color('menu-link-hover');
+$menu-link-hover-decoration: define-theme-value('menu-link-hover-decoration');
+$menu-link-active-color: define-theme-color('menu-link-active');
+$menu-link-active-decoration: define-theme-value('menu-link-active-decoration');
+$menu-link-visited-color: define-theme-color('menu-link-visited');
 
 //
 // margines

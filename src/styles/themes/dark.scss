@@ -1,103 +1,103 @@
 @charset 'utf-8';
 
-$default-theme: (
+$theme-dark: (
   meta-theme-version: '"0.0.1-beta"',
   meta-theme-namespace: '"carotin_novel"',
-  meta-theme-id: '"default"',
-  meta-theme-name: '"デフォルト"',
-  meta-theme-description: '"白背景・黒文字のテーマ"',
+  meta-theme-id: '"dark"',
+  meta-theme-name: '"ダーク"',
+  meta-theme-description: '"黒背景・白文字のテーマ"',
   meta-theme-author: '"@noonworks"',
   meta-theme-href: '"https://noonworks.github.io/carotin-novel/"',
   meta-theme-license: '"MIT"',
   background-base: (
-    color: '252, 252, 252',
-    alpha: 1
-  ),
-  text-base: (
     color: '42, 42, 42',
     alpha: 1
   ),
+  text-base: (
+    color: '252, 252, 252',
+    alpha: 1
+  ),
   link-base: (
-    color: '0, 102, 203',
+    color: '56, 168, 255',
     alpha: 1
   ),
   link-base-decoration: 'none',
   link-hover: (
-    color: '0, 102, 203',
+    color: '106, 190, 255',
     alpha: 1
   ),
   link-hover-decoration: 'underline',
   link-active: (
-    color: '0, 102, 203',
+    color: '106, 190, 255',
     alpha: 1
   ),
   link-active-decoration: 'underline',
   link-visited: (
-    color: '129, 0, 0',
+    color: '255, 97, 97',
     alpha: 1
   ),
-  slidepad-opacity: 0.65,
+  slidepad-opacity: 0.95,
   slidepad-back: (
-    color: '192, 192, 192',
+    color: '252, 252, 252',
     alpha: 0.25
   ),
   slidepad-front: (
-    color: '252, 252, 252',
+    color: '42, 42, 42',
     alpha: 1
   ),
   slidepad-back-shadow: (
-    color: '192, 192, 192',
-    alpha: 0.75
+    color: '42, 42, 42',
+    alpha: 0.7
   ),
   slidepad-front-shadow: (
-    color: '128, 128, 128',
-    alpha: 0.75
+    color: '42, 42, 42',
+    alpha: 1
   ),
   loader-primary: (
-    color: '200, 200, 200',
+    color: '252, 252, 252',
     alpha: 1
   ),
   menu-base: (
-    color: '250, 250, 250',
+    color: '42, 42, 42',
     alpha: 1
   ),
   menu-text: (
-    color: '42, 42, 42',
+    color: '252, 252, 252',
     alpha: 1
   ),
   menu-shadow-base: (
-    color: '150, 150, 150',
+    color: '252, 252, 252',
     alpha: 0.2
   ),
   menu-shadow-line: (
-    color: '150, 150, 150',
+    color: '252, 252, 252',
     alpha: 0.8
   ),
   menu-border: (
-    color: '42, 42, 42',
+    color: '252, 252, 252',
     alpha: 0.5
   ),
   menu-ripple: (
-    color: '42, 42, 42',
+    color: '252, 252, 252',
     alpha: 1
   ),
   menu-link-base: (
-    color: '0, 102, 203',
+    color: '56, 168, 255',
     alpha: 1
   ),
   menu-link-base-decoration: 'none',
   menu-link-hover: (
-    color: '0, 102, 203',
+    color: '106, 190, 255',
     alpha: 1
   ),
   menu-link-hover-decoration: 'underline',
   menu-link-active: (
-    color: '0, 102, 203',
+    color: '106, 190, 255',
     alpha: 1
   ),
   menu-link-active-decoration: 'underline',
   menu-link-visited: (
-    color: '129, 0, 0',
+    color: '255, 97, 97',
     alpha: 1
   )
 );
