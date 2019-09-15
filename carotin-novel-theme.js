@@ -58,7 +58,18 @@ const requiredValues = [
   '--menu-border',
   '--menu-border-a',
   '--menu-ripple',
-  '--menu-ripple-a'
+  '--menu-ripple-a',
+  '--menu-link-base',
+  '--menu-link-base-a',
+  '--menu-link-base-decoration',
+  '--menu-link-hover',
+  '--menu-link-hover-a',
+  '--menu-link-hover-decoration',
+  '--menu-link-active',
+  '--menu-link-active-a',
+  '--menu-link-active-decoration',
+  '--menu-link-visited',
+  '--menu-link-visited-a'
 ].map(v => prefix + v);
 
 function checkTheme(rule) {

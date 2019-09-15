@@ -23,6 +23,25 @@ div.menu-content-wrapper {
       opacity: 1;
     }
 
+    a {
+      color: $menu-link-base-color;
+      text-decoration: $menu-link-base-decoration;
+
+      &:hover {
+        color: $menu-link-hover-color;
+        text-decoration: $menu-link-hover-decoration;
+      }
+
+      &:active {
+        color: $menu-link-active-color;
+        text-decoration: $menu-link-active-decoration;
+      }
+
+      &:visited {
+        color: $menu-link-visited-color;
+      }
+    }
+
     div.menu_center {
       display: flex;
       flex-direction: column;

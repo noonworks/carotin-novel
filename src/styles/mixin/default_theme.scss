@@ -80,5 +80,24 @@ $default-theme: (
   menu-ripple: (
     color: '42, 42, 42',
     alpha: 1
+  ),
+  menu-link-base: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  menu-link-base-decoration: 'none',
+  menu-link-hover: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  menu-link-hover-decoration: 'underline',
+  menu-link-active: (
+    color: '0, 102, 203',
+    alpha: 1
+  ),
+  menu-link-active-decoration: 'underline',
+  menu-link-visited: (
+    color: '129, 0, 0',
+    alpha: 1
   )
 );

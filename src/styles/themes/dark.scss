@@ -81,6 +81,25 @@ $theme-dark: (
   menu-ripple: (
     color: '252, 252, 252',
     alpha: 1
+  ),
+  menu-link-base: (
+    color: '56, 168, 255',
+    alpha: 1
+  ),
+  menu-link-base-decoration: 'none',
+  menu-link-hover: (
+    color: '106, 190, 255',
+    alpha: 1
+  ),
+  menu-link-hover-decoration: 'underline',
+  menu-link-active: (
+    color: '106, 190, 255',
+    alpha: 1
+  ),
+  menu-link-active-decoration: 'underline',
+  menu-link-visited: (
+    color: '255, 97, 97',
+    alpha: 1
   )
 );
 
