@@ -69,6 +69,11 @@ select#theme_select {
   background: transparent;
   border: 1px solid $menu-border-color;
   border-radius: $radius;
+
+  option {
+    color: $menu-text-color;
+    background-color: $menu-base-color;
+  }
 }
 
 div#theme_sample {
