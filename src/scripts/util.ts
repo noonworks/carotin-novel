@@ -56,3 +56,67 @@ export function setCustomRuby(body: HTMLElement): void {
     body.classList.add('custom_ruby');
   }
 }
+
+const CSS_CUSTOM_VARIABLE_PREFIX = /^--carotinnovel--/;
+export function removeCSSCustomVariablePrefix(str: string): string {
+  return str.replace(CSS_CUSTOM_VARIABLE_PREFIX, '');
+}
+
+const DOUBLE_QUOTED = /^"(.*)"$/;
+const SINGLE_QUOTED = /^'(.*)'$/;
+export function removeQuotes(str: string): string {
+  return str.replace(DOUBLE_QUOTED, '$1').replace(SINGLE_QUOTED, '$1');
+}
+
+type DataTagRules = { dataValue: string; rules: CSSStyleRule[] };
+const RULE_SUFFIX = /([^\]]*)\].*/;
+export function getCSSStyleRules(dataTagName: string): DataTagRules[] {
+  const RulePrefix = ':root[' + dataTagName + '=';
+  const r: { [key: string]: CSSStyleRule[] } = {};
+  for (let i = 0; i < document.styleSheets.length; i++) {
+    if (document.styleSheets[i].type.indexOf('css') < 0) {
+      break;
+    }
+    const css = document.styleSheets[i] as CSSStyleSheet;
+    try {
+      const rules = css.rules;
+      for (let j = 0; j < rules.length; j++) {
+        const rule = rules[j] as CSSStyleRule;
+        if (!rule.selectorText || rule.selectorText.indexOf(RulePrefix) != 0) {
+          continue;
+        }
+        const val = removeQuotes(
+          rule.selectorText
+            .substring(RulePrefix.length)
+            .replace(RULE_SUFFIX, '$1')
+        );
+        if (r[val] && r[val].length > 0) {
+          r[val].push(rule);
+        } else {
+          r[val] = [rule];
+        }
+      }
+    } catch (e) {
+      break;
+    }
+  }
+  const keys = Object.keys(r);
+  return keys.map(k => {
+    return { dataValue: k, rules: r[k] };
+  });
+}
+
+type KV = { [key: string]: string };
+export function getCSSRuleKeyValue(styles: CSSStyleRule[]): KV {
+  const r: { [key: string]: string } = {};
+  for (let i = 0; i < styles.length; i++) {
+    const s = styles[i].style;
+    for (let j = 0; j < s.length; j++) {
+      const key = s[j];
+      r[removeCSSCustomVariablePrefix(key)] = removeQuotes(
+        s.getPropertyValue(key)
+      );
+    }
+  }
+  return r;
+}

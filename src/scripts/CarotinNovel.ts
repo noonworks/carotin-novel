@@ -4,13 +4,8 @@ import { SlidepadManager } from './slidepad/SlidePadManager';
 import { ScrollStateManager } from './scroll/ScrollStateManager';
 import { deleteTextNodeInRuby, setCustomRuby } from './util';
 import { Menu } from './menu';
-import {
-  ThemeManagerInstance,
-  DEFAULT_THEME_NAMESPACE
-} from './theme/ThemeManager';
+import { ThemeManagerInstance } from './theme/ThemeManager';
 import { StoreManagerInstance } from './store/StoreManager';
-
-const DATA_THEME = 'data-style-theme';
 
 export class CarotinNovel {
   private rootDom: HTMLDivElement;
@@ -28,16 +23,8 @@ export class CarotinNovel {
 
   public applyConfig(): void {
     const config = StoreManagerInstance.config;
+    ThemeManagerInstance.apply(config.theme);
     {
-      // theme
-      let id = config.theme.id;
-      if (config.theme.namespace != DEFAULT_THEME_NAMESPACE) {
-        id = config.theme.namespace + '-' + id;
-      }
-      document.documentElement.setAttribute(DATA_THEME, id);
-    }
-    {
-      // slidepad
       const pos = config.slidepad.position;
       this.slidepad.hide();
       switch (pos) {
