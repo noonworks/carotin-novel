@@ -1,6 +1,5 @@
 @charset 'utf-8';
-@import '../variables.scss';
-@import '../mixin/media.scss';
+@import '../mixin/font.scss';
 
 /*
 # GenEiKoburiMin6-R-sub.woffについて
@@ -17,21 +16,20 @@
   src: url('./GenEiKoburiMin6-R-sub.woff2') format('woff2');
 }
 
-#{$whole-wrapper-selector} {
-  #{$main-wrapper-selector} {
-    font-family: 'GenEiKoburiMin6-R-sub', $self-fonts, serif;
-    font-size: 16px;
-    line-height: 1.5;
-    letter-spacing: 0.02em;
-    // Larger devices
-    @include mq() {
-      font-size: 18px;
-    }
-  }
+$font-GenEiKoburiMin6-R-sub: (
+  id: 'GenEiKoburiMin6Rsub',
+  name: 'サブセットこぶり明朝',
+  description: '源暎こぶり明朝のサブセット',
+  family: 'GenEiKoburiMin6-R-sub',
+  type: 'serif',
+  small: 16px,
+  large: 18px,
+  height: 1.5,
+  spacing: 0.02em,
+  custom-ruby: (
+    size: 0.4em,
+    margin-right: -0.8em
+  )
+);
 
-  // Custom Ruby
-  &#{$custom-ruby-selector} rb[data-ruby]::before {
-    margin-right: -0.8em;
-    font-size: 0.4em;
-  }
-}
+@include font-template($font-GenEiKoburiMin6-R-sub);
