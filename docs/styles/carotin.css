@@ -1,4 +1,13 @@
 @charset "UTF-8";
+@font-face {
+  font-family: "Yu Gothic M";
+  src: local("Yu Gothic Medium");
+}
+@font-face {
+  font-family: "Yu Gothic M";
+  src: local("Yu Gothic Bold");
+  font-weight: bold;
+}
 div.carotin_novel {
   position: relative;
   overflow: hidden;
@@ -16,13 +25,22 @@ div.carotin_novel div.content_wrapper {
   margin: 0;
   overflow-x: scroll;
   overflow-y: hidden;
+  font-family: var(--carotinnovel--font-family, serif);
+  font-size: var(--carotinnovel--font-size-small-device, 16px);
+  line-height: var(--carotinnovel--font-line-height, 1.5);
   color: rgba(var(--carotinnovel--text-base, 42, 42, 42), var(--carotinnovel--text-base-a, 1));
+  letter-spacing: var(--carotinnovel--font-letter-spacing, 0.02em);
   -webkit-writing-mode: vertical-rl;
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
   font-feature-settings: "pkna";
   -webkit-mask-image: linear-gradient(to left, black calc(100% - 3em), transparent 100%);
   mask-image: linear-gradient(to left, black calc(100% - 3em), transparent 100%);
+}
+@media screen and (min-width: 640px) {
+  div.carotin_novel div.content_wrapper {
+    font-size: var(--carotinnovel--font-size-large-device, 18px);
+  }
 }
 div.carotin_novel div.content_wrapper cite,
 div.carotin_novel div.content_wrapper address {
@@ -146,6 +164,8 @@ div.carotin_novel.custom_ruby div.content_wrapper ruby rb[data-ruby] {
 div.carotin_novel.custom_ruby div.content_wrapper ruby rb[data-ruby]::before {
   position: absolute;
   min-height: 100%;
+  margin-right: var(--carotinnovel--custom-ruby-margin-right, -0.8em);
+  font-size: var(--carotinnovel--custom-ruby-size, 0.4em);
   text-align: center;
   white-space: nowrap;
   content: attr(data-ruby);
@@ -300,7 +320,7 @@ div.carotin_novel div.menu div.menu-content-wrapper {
   height: 100%;
   padding: 1em;
   overflow: auto;
-  font-family: "Noto Serif JP", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Hiragino Mincho Pro", "HGP明朝B", serif;
+  font-family: "Noto Serif JP", "游明朝体", YuMincho, "游明朝", "Yu Mincho", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN W3", HiraMinProN-W3, "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "HGS明朝E", "ＭＳ Ｐ明朝", "MS PMincho", Georgia, Times, "Times New Roman", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content {
   position: absolute;
@@ -511,7 +531,7 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content select#them
   width: 100%;
   max-width: 100%;
   padding: 0.6em 1.4em 0.5em 0.8em;
-  font-family: "Noto Serif JP", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Hiragino Mincho Pro", "HGP明朝B", serif;
+  font-family: "Noto Serif JP", "游明朝体", YuMincho, "游明朝", "Yu Mincho", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN W3", HiraMinProN-W3, "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "HGS明朝E", "ＭＳ Ｐ明朝", "MS PMincho", Georgia, Times, "Times New Roman", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1.1em;
   line-height: 1.3;
   color: rgba(var(--carotinnovel--menu-text, 42, 42, 42), var(--carotinnovel--menu-text-a, 1));
@@ -767,4 +787,28 @@ div.carotin_novel div.slidepad div.nipple div.front {
   --carotinnovel--menu-link-active-decoration:underline;
   --carotinnovel--menu-link-visited:129, 0, 0;
   --carotinnovel--menu-link-visited-a:1;
+}
+
+:root[data-style-font=serif] {
+  --carotinnovel--font-family: "游明朝体", YuMincho, "游明朝", "Yu Mincho", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN W3", HiraMinProN-W3, "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "HGS明朝E", "ＭＳ Ｐ明朝", "MS PMincho", Georgia, Times, "Times New Roman", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --carotinnovel--font-name: "システム明朝";
+  --carotinnovel--font-description: "システム標準の明朝体";
+  --carotinnovel--font-size-small-device:16px;
+  --carotinnovel--font-size-large-device:18px;
+  --carotinnovel--font-line-height:1.5;
+  --carotinnovel--font-letter-spacing:0.02em;
+  --carotinnovel--font-custom-ruby-size:0.4em;
+  --carotinnovel--font-custom-ruby-margin-right:-0.8em;
+}
+
+:root[data-style-font=sansserif] {
+  --carotinnovel--font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Helvetica, "游ゴシック体", YuGothic, "Yu Gothic M", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --carotinnovel--font-name: "システムゴシック";
+  --carotinnovel--font-description: "システム標準のゴシック体";
+  --carotinnovel--font-size-small-device:16px;
+  --carotinnovel--font-size-large-device:18px;
+  --carotinnovel--font-line-height:1.5;
+  --carotinnovel--font-letter-spacing:0.02em;
+  --carotinnovel--font-custom-ruby-size:0.4em;
+  --carotinnovel--font-custom-ruby-margin-right:-0.8em;
 }
