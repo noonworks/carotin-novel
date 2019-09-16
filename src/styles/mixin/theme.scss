@@ -1,31 +1,30 @@
 @charset 'utf-8';
+@import '../variables.scss';
 @import '../themes/default.scss';
-
-$THEME_PREFIX: --carotinnovel;
 
 @function define-theme-color($name) {
   $ca: map-get($default-theme, $name);
   $c: map-get($ca, 'color');
   $a: map-get($ca, 'alpha');
   @return rgba(
-    var(#{$THEME_PREFIX}--#{$name}, #{$c}),
-    var(#{$THEME_PREFIX}--#{$name}-a, #{$a})
+    var(#{$APP_VARIABLE_PREFIX}--#{$name}, #{$c}),
+    var(#{$APP_VARIABLE_PREFIX}--#{$name}-a, #{$a})
   );
 }
 
 @function define-theme-value($name) {
   $v: map-get($default-theme, $name);
-  @return var(#{$THEME_PREFIX}--#{$name}, #{$v});
+  @return var(#{$APP_VARIABLE_PREFIX}--#{$name}, #{$v});
 }
 
 @mixin theme-template($theme, $schema: 'default') {
   :root[data-style-theme='#{$schema}'] {
     @each $name, $value in $theme {
       @if type-of($value) == 'map' {
-        #{$THEME_PREFIX}--#{$name}: #{map-get($value, 'color')};
-        #{$THEME_PREFIX}--#{$name}-a: #{map-get($value, 'alpha')};
+        #{$APP_VARIABLE_PREFIX}--#{$name}: #{map-get($value, 'color')};
+        #{$APP_VARIABLE_PREFIX}--#{$name}-a: #{map-get($value, 'alpha')};
       } @else {
-        #{$THEME_PREFIX}--#{$name}: #{$value};
+        #{$APP_VARIABLE_PREFIX}--#{$name}: #{$value};
       }
     }
   }
