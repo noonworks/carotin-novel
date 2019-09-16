@@ -90,7 +90,6 @@ export class CarotinNovel {
       this.loaderDom = loader as HTMLDivElement;
       this.loader = new Loader(this.loaderDom);
     }
-    ThemeManagerInstance.load();
     this.scrollManager = new ScrollStateManager(this.wrapper);
     this.menu = new Menu({
       app: this,
@@ -99,13 +98,14 @@ export class CarotinNovel {
       share: { enable: false }
     });
     this.rootDom.appendChild(this.menu.dom);
-    this.applyConfig();
   }
 
   public start(): void {
     // start loading
     this.loader.set('circle');
     this.loader.show();
+    // apply config
+    this.applyConfig();
     // fix dom
     deleteTextNodeInRuby(this.wrapperDom);
     setCustomRuby(this.rootDom);
