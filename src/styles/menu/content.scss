@@ -8,7 +8,7 @@ div.menu-content-wrapper {
   height: 100%;
   padding: 1em;
   overflow: auto;
-  font-family: 'Noto Serif JP', $self-fonts, serif;
+  font-family: $Noto-serif;
 
   div.menu-content {
     position: absolute;

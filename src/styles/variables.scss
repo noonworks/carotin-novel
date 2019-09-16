@@ -7,9 +7,17 @@ $main-wrapper-selector: 'div.content_wrapper';
 $background-wrapper-selector: 'div.bg_wrapper';
 $foreground-wrapper-selector: 'div.fg_wrapper';
 $custom-ruby-selector: '.custom_ruby ' #{$main-wrapper-selector};
-$self-fonts: 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN',
-  'Hiragino Mincho Pro', 'HGP明朝B';
-
+$serif-fonts: '游明朝体', YuMincho, '游明朝', 'Yu Mincho',
+  'ヒラギノ明朝 ProN W3', 'Hiragino Mincho ProN W3', HiraMinProN-W3,
+  'ヒラギノ明朝 ProN', 'Hiragino Mincho ProN', 'ヒラギノ明朝 Pro',
+  'Hiragino Mincho Pro', 'HGS明朝E', 'ＭＳ Ｐ明朝', 'MS PMincho', Georgia, Times,
+  'Times New Roman', serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+  'Segoe UI Symbol', 'Noto Color Emoji';
+$sans-serif-fonts: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+  'Segoe UI', Helvetica, '游ゴシック体', YuGothic, 'Yu Gothic M',
+  '游ゴシック Medium', 'Yu Gothic Medium', 'メイリオ', Meiryo, sans-serif,
+  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+$Noto-serif: 'Noto Serif JP', $serif-fonts;
 $Z_INDEX_BACKGROUND_WRAPPER: 1;
 $Z_INDEX_MAIN_WRAPPER: 2;
 $Z_INDEX_SLIDEPAD: 10;

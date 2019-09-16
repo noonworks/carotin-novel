@@ -3,6 +3,17 @@
 @import './mixin/media.scss';
 @import './variables.scss';
 
+// default setting for Yu Gothic weight
+@font-face {
+  font-family: 'Yu Gothic M';
+  src: local('Yu Gothic Medium');
+}
+@font-face {
+  font-family: 'Yu Gothic M';
+  src: local('Yu Gothic Bold');
+  font-weight: bold;
+}
+
 #{$whole-wrapper-selector} {
   position: relative;
   overflow: hidden;
