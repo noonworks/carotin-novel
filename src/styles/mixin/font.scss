@@ -1,0 +1,53 @@
+@charset 'utf-8';
+@import '../variables.scss';
+@import '../fonts/serif.scss';
+
+@function define-font-value($val-name, $map-val-name) {
+  $v: map-get($font-serif, $map-val-name);
+  @return var(#{$APP_VARIABLE_PREFIX}--#{$val-name}, #{$v});
+}
+
+@function define-custom-ruby-value($val-name, $map-val-name) {
+  $cr: map-get($font-serif, 'custom-ruby');
+  $v: map-get($cr, $map-val-name);
+  @return var(#{$APP_VARIABLE_PREFIX}--#{$val-name}, #{$v});
+}
+
+@function define-font-family-value() {
+  @return var(#{$APP_VARIABLE_PREFIX}--font-family, serif);
+}
+
+@mixin font-template($fonts) {
+  :root[data-style-font='#{map-get($fonts, "id")}'] {
+    $custom-ruby: map-get($fonts, 'custom-ruby');
+    $family: '#{map-get($fonts, 'family')}';
+    @if map-get($fonts, 'type') == 'serif' {
+      @if $family == '' {
+        #{$APP_VARIABLE_PREFIX}--font-family: $serif-fonts;
+      } @else {
+        #{$APP_VARIABLE_PREFIX}--font-family: $family, $serif-fonts;
+      }
+    } @else {
+      @if $family == '' {
+        #{$APP_VARIABLE_PREFIX}--font-family: $sans-serif-fonts;
+      } @else {
+        #{$APP_VARIABLE_PREFIX}--font-family: $family, $sans-serif-fonts;
+      }
+    }
+
+    #{$APP_VARIABLE_PREFIX}--font-name: "#{map-get($fonts, 'name')}";
+    #{$APP_VARIABLE_PREFIX}--font-description: "#{map-get($fonts, 'description')}";
+    #{$APP_VARIABLE_PREFIX}--font-size-small-device: #{map-get($fonts, 'small')};
+    #{$APP_VARIABLE_PREFIX}--font-size-large-device: #{map-get($fonts, 'large')};
+    #{$APP_VARIABLE_PREFIX}--font-line-height: #{map-get($fonts, 'height')};
+    #{$APP_VARIABLE_PREFIX}--font-letter-spacing: #{map-get($fonts, 'spacing')};
+    #{$APP_VARIABLE_PREFIX}--font-custom-ruby-size: #{map-get(
+      $custom-ruby,
+      'size'
+    )};
+    #{$APP_VARIABLE_PREFIX}--font-custom-ruby-margin-right: #{map-get(
+      $custom-ruby,
+      'margin-right'
+    )};
+  }
+}

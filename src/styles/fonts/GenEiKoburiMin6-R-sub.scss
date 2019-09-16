@@ -1,0 +1,35 @@
+@charset 'utf-8';
+@import '../mixin/font.scss';
+
+/*
+# GenEiKoburiMin6-R-sub.woffについて
+
+[「源暎こぶり明朝」](http://okoneya.jp/font/)のサブセットです。
+
+[SIL Open Font License 1.1](http://osdn.jp/projects/opensource/wiki/SIL_Open_Font_License_1.1)に基づき、改変（文字数の削減）しています。
+
+改変内容： JIS第一水準漢字と一部の漢字、ひらがな、カタカナ、数字や記号等、よく使用される文字以外を削除しています。
+*/
+
+@font-face {
+  font-family: 'GenEiKoburiMin6-R-sub';
+  src: url('./GenEiKoburiMin6-R-sub.woff2') format('woff2');
+}
+
+$font-GenEiKoburiMin6-R-sub: (
+  id: 'GenEiKoburiMin6Rsub',
+  name: 'サブセットこぶり明朝',
+  description: '源暎こぶり明朝のサブセット',
+  family: 'GenEiKoburiMin6-R-sub',
+  type: 'serif',
+  small: 16px,
+  large: 18px,
+  height: 1.5,
+  spacing: 0.02em,
+  custom-ruby: (
+    size: 0.4em,
+    margin-right: -0.8em
+  )
+);
+
+@include font-template($font-GenEiKoburiMin6-R-sub);
