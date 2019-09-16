@@ -3,3 +3,6 @@
 
 @import './serif.scss';
 @include font-template($font-serif);
+
+@import './sans-serif.scss';
+@include font-template($font-sans-serif);
