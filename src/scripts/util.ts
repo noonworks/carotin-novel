@@ -28,6 +28,21 @@ declare class UAParser {
   };
 }
 
+export function addDummyForEdge(wrapper: HTMLDivElement): void {
+  const result = new UAParser().getResult();
+  if (
+    !result ||
+    !result.browser ||
+    !result.browser.name ||
+    result.browser.name.toLowerCase() == 'edge'
+  ) {
+    const span = document.createElement('span');
+    span.style.opacity = '0';
+    span.style.position = 'fixed';
+    wrapper.appendChild(span);
+  }
+}
+
 export function deleteTextNodeInRuby(wrapper: HTMLElement): void {
   const emptyVal = /^\s*$/;
   const rubies = wrapper.querySelectorAll('ruby');

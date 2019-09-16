@@ -2,7 +2,7 @@ import { ScrollableWrapper } from './scroll/ScrollableWrapper';
 import { Loader } from './loader';
 import { SlidepadManager } from './slidepad/SlidePadManager';
 import { ScrollStateManager } from './scroll/ScrollStateManager';
-import { deleteTextNodeInRuby, setCustomRuby } from './util';
+import { deleteTextNodeInRuby, setCustomRuby, addDummyForEdge } from './util';
 import { Menu } from './menu';
 import { ThemeManagerInstance } from './theme/ThemeManager';
 import { StoreManagerInstance } from './store/StoreManager';
@@ -109,6 +109,7 @@ export class CarotinNovel {
     // fix dom
     deleteTextNodeInRuby(this.wrapperDom);
     setCustomRuby(this.rootDom);
+    addDummyForEdge(this.wrapperDom);
     // scroll document to bookmarks
     this.scrollManager
       .restore()
