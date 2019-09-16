@@ -1,5 +1,21 @@
 @charset 'utf-8';
 @import '../variables.scss';
+@import '../fonts/serif.scss';
+
+@function define-font-value($val-name, $map-val-name) {
+  $v: map-get($font-serif, $map-val-name);
+  @return var(#{$APP_VARIABLE_PREFIX}--#{$val-name}, #{$v});
+}
+
+@function define-custom-ruby-value($val-name, $map-val-name) {
+  $cr: map-get($font-serif, 'custom-ruby');
+  $v: map-get($cr, $map-val-name);
+  @return var(#{$APP_VARIABLE_PREFIX}--#{$val-name}, #{$v});
+}
+
+@function define-font-family-value() {
+  @return var(#{$APP_VARIABLE_PREFIX}--font-family, serif);
+}
 
 @mixin font-template($fonts) {
   :root[data-style-font='#{map-get($fonts, "id")}'] {

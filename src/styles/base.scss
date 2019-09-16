@@ -1,5 +1,6 @@
 @charset 'utf-8';
 @import './mixin/theme.scss';
+@import './mixin/font.scss';
 @import './mixin/media.scss';
 @import './variables.scss';
 
@@ -35,7 +36,11 @@
     margin: 0;
     overflow-x: scroll;
     overflow-y: hidden;
+    font-family: $font-font-family;
+    font-size: $font-size-small-device;
+    line-height: $font-line-height;
     color: $text-base-color;
+    letter-spacing: $font-letter-spacing;
     -webkit-writing-mode: vertical-rl;
     -ms-writing-mode: tb-rl;
     writing-mode: vertical-rl;
@@ -50,6 +55,10 @@
       rgba(0, 0, 0, 1) calc(100% - 3em),
       transparent 100%
     );
+    // Larger devices
+    @include mq() {
+      font-size: $font-size-large-device;
+    }
 
     //
     // Elements in Vertical area

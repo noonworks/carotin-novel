@@ -11,6 +11,8 @@ ruby {
     &::before {
       position: absolute;
       min-height: 100%;
+      margin-right: $font-custom-ruby-margin-right;
+      font-size: $font-custom-ruby-size;
       text-align: center;
       white-space: nowrap;
       content: attr(data-ruby);
