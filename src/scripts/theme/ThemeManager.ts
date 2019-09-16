@@ -1,5 +1,6 @@
 import { Theme } from './Theme';
 import { getCSSStyleRules, getCSSRuleKeyValue } from '../util';
+import { DATA_TAG_THEME } from '../define';
 
 function createTheme(map: { [key: string]: string }): Theme {
   return new Theme({
@@ -59,7 +60,7 @@ class ThemeManager {
 
   public load(): void {
     this._themes = [];
-    const rules = getCSSStyleRules('data-style-theme');
+    const rules = getCSSStyleRules(DATA_TAG_THEME);
     for (let i = 0; i < rules.length; i++) {
       const map = getCSSRuleKeyValue(rules[i].rules);
       this._themes.push(createTheme(map));

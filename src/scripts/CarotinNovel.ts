@@ -9,8 +9,7 @@ import {
   DEFAULT_THEME_NAMESPACE
 } from './theme/ThemeManager';
 import { StoreManagerInstance } from './store/StoreManager';
-
-const DATA_THEME = 'data-style-theme';
+import { DATA_TAG_THEME } from './define';
 
 export class CarotinNovel {
   private rootDom: HTMLDivElement;
@@ -34,7 +33,7 @@ export class CarotinNovel {
       if (config.theme.namespace != DEFAULT_THEME_NAMESPACE) {
         id = config.theme.namespace + '-' + id;
       }
-      document.documentElement.setAttribute(DATA_THEME, id);
+      document.documentElement.setAttribute(DATA_TAG_THEME, id);
     }
     {
       // slidepad
