@@ -51,6 +51,14 @@ class ThemeManager {
     return r;
   }
 
+  public apply(theme: { id: string; namespace: string }): void {
+    let id = theme.id;
+    if (theme.namespace != DEFAULT_THEME_NAMESPACE) {
+      id = theme.namespace + '-' + id;
+    }
+    document.documentElement.setAttribute(DATA_TAG_THEME, id);
+  }
+
   constructor() {
     this._themes = [];
     this._default = this.themes[0];
