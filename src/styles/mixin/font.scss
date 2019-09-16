@@ -4,12 +4,19 @@
 @mixin font-template($fonts) {
   :root[data-style-font='#{map-get($fonts, "id")}'] {
     $custom-ruby: map-get($fonts, 'custom-ruby');
+    $family: '#{map-get($fonts, 'family')}';
     @if map-get($fonts, 'type') == 'serif' {
-      #{$APP_VARIABLE_PREFIX}--font-family: '#{map-get($fonts, 'family')}',
-        $serif-fonts;
+      @if $family == '' {
+        #{$APP_VARIABLE_PREFIX}--font-family: $serif-fonts;
+      } @else {
+        #{$APP_VARIABLE_PREFIX}--font-family: $family, $serif-fonts;
+      }
     } @else {
-      #{$APP_VARIABLE_PREFIX}--font-family: '#{map-get($fonts, 'family')}',
-        $sans-serif-fonts;
+      @if $family == '' {
+        #{$APP_VARIABLE_PREFIX}--font-family: $sans-serif-fonts;
+      } @else {
+        #{$APP_VARIABLE_PREFIX}--font-family: $family, $sans-serif-fonts;
+      }
     }
 
     #{$APP_VARIABLE_PREFIX}--font-name: "#{map-get($fonts, 'name')}";

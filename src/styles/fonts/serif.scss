@@ -1,0 +1,17 @@
+@charset 'utf-8';
+
+$font-serif: (
+  id: 'serif',
+  name: 'システム明朝',
+  description: 'システム標準の明朝体',
+  family: '',
+  type: 'serif',
+  small: 16px,
+  large: 18px,
+  height: 1.5,
+  spacing: 0.02em,
+  custom-ruby: (
+    size: 0.4em,
+    margin-right: -0.8em
+  )
+);

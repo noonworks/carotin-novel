@@ -1,0 +1,5 @@
+@charset 'utf-8';
+@import '../mixin/font.scss';
+
+@import './serif.scss';
+@include font-template($font-serif);
