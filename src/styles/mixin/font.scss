@@ -1,0 +1,30 @@
+@charset 'utf-8';
+@import '../variables.scss';
+
+@mixin font-template($fonts) {
+  :root[data-style-font='#{map-get($fonts, "id")}'] {
+    $custom-ruby: map-get($fonts, 'custom-ruby');
+    @if map-get($fonts, 'type') == 'serif' {
+      #{$APP_VARIABLE_PREFIX}--font-family: '#{map-get($fonts, 'family')}',
+        $serif-fonts;
+    } @else {
+      #{$APP_VARIABLE_PREFIX}--font-family: '#{map-get($fonts, 'family')}',
+        $sans-serif-fonts;
+    }
+
+    #{$APP_VARIABLE_PREFIX}--font-name: "#{map-get($fonts, 'name')}";
+    #{$APP_VARIABLE_PREFIX}--font-description: "#{map-get($fonts, 'description')}";
+    #{$APP_VARIABLE_PREFIX}--font-size-small-device: #{map-get($fonts, 'small')};
+    #{$APP_VARIABLE_PREFIX}--font-size-large-device: #{map-get($fonts, 'large')};
+    #{$APP_VARIABLE_PREFIX}--font-line-height: #{map-get($fonts, 'height')};
+    #{$APP_VARIABLE_PREFIX}--font-letter-spacing: #{map-get($fonts, 'spacing')};
+    #{$APP_VARIABLE_PREFIX}--font-custom-ruby-size: #{map-get(
+      $custom-ruby,
+      'size'
+    )};
+    #{$APP_VARIABLE_PREFIX}--font-custom-ruby-margin-right: #{map-get(
+      $custom-ruby,
+      'margin-right'
+    )};
+  }
+}
