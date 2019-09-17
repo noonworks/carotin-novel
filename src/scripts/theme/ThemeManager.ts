@@ -1,5 +1,10 @@
 import { Theme } from './Theme';
-import { getCSSStyleRules, getCSSRuleKeyValue } from '../util';
+import {
+  getCSSStyleRules,
+  getCSSRuleKeyValue,
+  setRootDataValue,
+  getRootDataValue
+} from '../util';
 import { DATA_TAG_THEME } from '../define';
 
 function createTheme(map: { [key: string]: string }): Theme {
@@ -20,49 +25,52 @@ export const DEFAULT_THEME_NAMESPACE = 'carotin_novel';
 
 class ThemeManager {
   private _themes: Theme[];
-  private _default: Theme;
   private _defaultIndex: number;
+  private _authorDefaultIndex: number;
+  private _authorDefault: string;
 
   public get themes(): Theme[] {
     return this._themes;
   }
 
-  public get default(): Theme {
-    return this._default;
+  public get default(): { index: number; theme: Theme } {
+    return {
+      index: this._defaultIndex,
+      theme: this._themes[this._defaultIndex]
+    };
   }
 
-  public get defaultIndex(): number {
-    return this._defaultIndex;
+  public get authorDefault(): { index: number; theme: Theme | null } {
+    return {
+      index: this._authorDefaultIndex,
+      theme:
+        this._authorDefaultIndex >= 0
+          ? this._themes[this._authorDefaultIndex]
+          : null
+    };
   }
 
   public getTheme(
     namespace: string,
     id: string
-  ): { index: number; theme: Theme } {
-    const r = { index: this._defaultIndex, theme: this._default };
+  ): { index: number; theme: Theme | null } {
     for (let i = 0; i < this._themes.length; i++) {
-      const t = this._themes[i];
-      if (t.namespace == namespace && t.id == id) {
-        r.index = i;
-        r.theme = t;
-        return r;
+      if (this._themes[i].namespace == namespace && this._themes[i].id == id) {
+        return { index: i, theme: this._themes[i] };
       }
     }
-    return r;
+    return { index: -1, theme: null };
   }
 
-  public apply(theme: { id: string; namespace: string }): void {
-    let id = theme.id;
-    if (theme.namespace != DEFAULT_THEME_NAMESPACE) {
-      id = theme.namespace + '-' + id;
-    }
-    document.documentElement.setAttribute(DATA_TAG_THEME, id);
+  public apply(theme: { identifer: string }): void {
+    setRootDataValue(DATA_TAG_THEME, theme.identifer);
   }
 
   constructor() {
+    this._authorDefault = getRootDataValue(DATA_TAG_THEME) || '';
     this._themes = [];
-    this._default = this.themes[0];
-    this._defaultIndex = 0;
+    this._defaultIndex = -1;
+    this._authorDefaultIndex = -1;
     this.load();
   }
 
@@ -73,12 +81,15 @@ class ThemeManager {
       const map = getCSSRuleKeyValue(rules[i].rules);
       this._themes.push(createTheme(map));
     }
+    this._defaultIndex = 0;
+    this._authorDefaultIndex = -1;
     for (let i = 0; i < this._themes.length; i++) {
       const t = this._themes[i];
+      if (t.identifier === this._authorDefault) {
+        this._authorDefaultIndex = i;
+      }
       if (t.namespace == DEFAULT_THEME_NAMESPACE && t.id == 'default') {
-        this._default = t;
         this._defaultIndex = i;
-        break;
       }
     }
   }

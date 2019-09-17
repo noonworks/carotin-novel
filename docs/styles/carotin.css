@@ -565,6 +565,55 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div#theme_s
   font-size: 0.8em;
   text-align: right;
 }
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0.25em 0;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu-checkbox input[type=checkbox] {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu-caution {
+  box-sizing: border-box;
+  max-width: 220px;
+  padding: 0.25em 0.5em;
+  overflow: hidden;
+  font-weight: bold;
+  text-align: center;
+  visibility: visible;
+  border: 1px solid rgba(var(--carotinnovel--menu-border, 42, 42, 42), var(--carotinnovel--menu-border-a, 0.5));
+  border-radius: 2px;
+  opacity: 1;
+  max-height: 100px;
+  opacity: 1;
+  transition-timing-function: linear;
+  transition-duration: 300ms;
+  transform: translate3d(0, 0, 0);
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu-caution.off {
+  max-height: 0;
+  padding: 0;
+  opacity: 0;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu-change {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  max-height: 140px;
+  opacity: 1;
+  transition-timing-function: linear;
+  transition-duration: 300ms;
+  transform: translate3d(0, 0, 0);
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu-change.off {
+  max-height: 0;
+  padding: 0;
+  opacity: 0;
+}
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-top {
   margin-bottom: 1rem;
 }

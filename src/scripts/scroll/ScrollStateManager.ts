@@ -9,9 +9,9 @@ export class ScrollStateManager {
   private prevState: PageStore | null = null;
   private wrapper: ScrollableWrapper;
 
-  constructor(wrapper: ScrollableWrapper) {
+  constructor(wrapper: ScrollableWrapper, articleId: string) {
     this.wrapper = wrapper;
-    this.articleId = this.getArticleId(wrapper.dom);
+    this.articleId = articleId;
   }
 
   public start(): void {
@@ -24,11 +24,7 @@ export class ScrollStateManager {
   }
 
   private autoSave(): void {
-    this.save(true);
-  }
-
-  public bookmark(): void {
-    this.save(false);
+    this.save();
   }
 
   public restore(): Promise<void> {
@@ -44,7 +40,7 @@ export class ScrollStateManager {
   private doRestore(bm: WorkStore): Promise<void> {
     return new Promise(
       (resolve: () => void, reject: (reason?: Error) => void): void => {
-        const ps = bm.autosave || bm.bookmark;
+        const ps = bm.autosave;
         // console.log(ps);
         if (!ps) {
           resolve();
@@ -85,15 +81,7 @@ export class ScrollStateManager {
     });
   }
 
-  private getArticleId(contentElement: HTMLElement): string {
-    const data = contentElement.getAttribute('data-article-id');
-    if (data) {
-      return data;
-    }
-    return location.pathname;
-  }
-
-  private save(auto: boolean): void {
+  private save(): void {
     const s = this.getState();
     if (!s.page || s.scrolldepth == null) {
       return;
@@ -106,22 +94,10 @@ export class ScrollStateManager {
       return;
     }
     this.prevState = s;
-    const upd = {
-      works: {
-        [this.articleId]: {
-          autosave: {},
-          bookmark: {}
-        }
-      }
-    };
-    if (auto) {
-      upd.works[this.articleId].autosave = s;
-    } else {
-      upd.works[this.articleId].bookmark = s;
-    }
+    const upd = { autosave: s };
     window.clearTimeout(this.saveQueueId);
     this.saveQueueId = window.setTimeout(() => {
-      StoreManagerInstance.update(upd);
+      StoreManagerInstance.updateWork(this.articleId, upd);
     }, 500);
   }
 

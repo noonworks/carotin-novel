@@ -5,8 +5,9 @@ import { ScrollStateManager } from './scroll/ScrollStateManager';
 import { deleteTextNodeInRuby, setCustomRuby, addDummyForEdge } from './util';
 import { Menu } from './menu';
 import { ThemeManagerInstance } from './theme/ThemeManager';
-import { StoreManagerInstance } from './store/StoreManager';
 import { FontManagerInstance } from './font/FontManager';
+import { makeIdentifier as makeThemeIdentifier } from './theme/Theme';
+import { WorkConfigInstance } from './WorkConfig';
 
 export class CarotinNovel {
   private rootDom: HTMLDivElement;
@@ -21,13 +22,19 @@ export class CarotinNovel {
   private slidepad: SlidepadManager;
   private scrollManager: ScrollStateManager;
   private menu: Menu;
+  private _articleId: string;
+
+  public get articleId(): string {
+    return this._articleId;
+  }
 
   public applyConfig(): void {
-    const config = StoreManagerInstance.config;
-    ThemeManagerInstance.apply(config.theme);
-    FontManagerInstance.apply(config.font.id);
+    ThemeManagerInstance.apply({
+      identifer: makeThemeIdentifier(WorkConfigInstance.theme)
+    });
+    FontManagerInstance.apply(WorkConfigInstance.font.id);
     {
-      const pos = config.slidepad.position;
+      const pos = WorkConfigInstance.slidepad.position;
       this.slidepad.hide();
       switch (pos) {
         case 'left':
@@ -51,6 +58,9 @@ export class CarotinNovel {
         throw new Error('Could not get elements.');
       }
       this.wrapperDom = wrapper as HTMLDivElement;
+      this._articleId =
+        this.wrapperDom.getAttribute('data-article-id') || location.pathname;
+      WorkConfigInstance.setArticleId(this._articleId);
       this.wrapper = new ScrollableWrapper(this.wrapperDom);
     }
     {
@@ -92,7 +102,7 @@ export class CarotinNovel {
       this.loaderDom = loader as HTMLDivElement;
       this.loader = new Loader(this.loaderDom);
     }
-    this.scrollManager = new ScrollStateManager(this.wrapper);
+    this.scrollManager = new ScrollStateManager(this.wrapper, this._articleId);
     this.menu = new Menu({
       app: this,
       enable: true,

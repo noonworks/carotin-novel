@@ -135,3 +135,11 @@ export function getCSSRuleKeyValue(styles: CSSStyleRule[]): KV {
   }
   return r;
 }
+
+export function getRootDataValue(dataTagName: string): string | null {
+  return document.documentElement.getAttribute(dataTagName);
+}
+
+export function setRootDataValue(dataTagName: string, value: string): void {
+  document.documentElement.setAttribute(dataTagName, value);
+}
