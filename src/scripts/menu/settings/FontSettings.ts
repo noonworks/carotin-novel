@@ -1,17 +1,9 @@
-import { constructSelect, createCautionBox, createCheckBox } from './util';
 import { StoreManagerInstance } from '../../store/StoreManager';
 import { FontManagerInstance } from '../../font/FontManager';
+import { OverwritableSettings } from './OverwritableSettings';
 
-export class FontSettings {
-  private wrapper: HTMLDivElement;
-  private changeDiv: HTMLDivElement;
-  private cautionDiv: HTMLDivElement;
-  private overwriteCheck: HTMLInputElement;
+export class FontSettings extends OverwritableSettings {
   private select: HTMLSelectElement;
-
-  public get dom(): HTMLDivElement {
-    return this.wrapper;
-  }
 
   public get selected(): { id: string } {
     const df = FontManagerInstance.default.font;
@@ -25,26 +17,13 @@ export class FontSettings {
   }
 
   constructor() {
-    this.wrapper = document.createElement('div');
-    this.wrapper.classList.add('menu_center');
-    {
-      this.cautionDiv = createCautionBox({
-        id: 'font-caution',
-        title: 'フォント'
-      });
-      const chk = createCheckBox({
-        id: 'overwrite-font',
-        label: '作品の設定を上書きする'
-      });
-      this.overwriteCheck = chk.check;
-      this.wrapper.appendChild(this.cautionDiv);
-      this.wrapper.appendChild(chk.div);
-    }
+    super({
+      cautionLabel: 'フォント',
+      checkboxId: 'overwrite-font'
+    });
     {
       this.select = document.createElement('select');
-      this.changeDiv = document.createElement('div');
       this.constructChangeDiv();
-      this.wrapper.appendChild(this.changeDiv);
     }
   }
 
@@ -64,7 +43,7 @@ export class FontSettings {
         callback: font.id === curFont.id ? fChecked : fNotChecked
       };
     });
-    constructSelect({
+    this.constructSelect({
       select: this.select,
       id: 'font_select',
       onchange: target => {

@@ -1,13 +1,9 @@
 import { StoreManagerInstance } from '../../store/StoreManager';
 import { SlidepadPosition, isSlidepadPosition } from '../../store/IStore';
+import { SettingsBase } from './SettingsBase';
 
-export class SlidepadSettings {
-  private wrapper: HTMLDivElement;
+export class SlidepadSettings extends SettingsBase {
   private radios: HTMLInputElement[];
-
-  public get dom(): HTMLDivElement {
-    return this.wrapper;
-  }
 
   public get selected(): SlidepadPosition {
     for (let i = 0; i < this.radios.length; i++) {
@@ -20,7 +16,7 @@ export class SlidepadSettings {
   }
 
   constructor() {
-    this.wrapper = document.createElement('div');
+    super();
     this.wrapper.classList.add('slidepad_select');
     this.radios = [];
     const cur = StoreManagerInstance.config.slidepad.position;

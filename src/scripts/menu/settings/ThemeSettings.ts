@@ -4,22 +4,14 @@ import {
 } from '../../theme/ThemeManager';
 import { StoreManagerInstance } from '../../store/StoreManager';
 import { Theme } from '../../theme/Theme';
-import { createCautionBox, createCheckBox, constructSelect } from './util';
+import { OverwritableSettings } from './OverwritableSettings';
 
 const DATA_NAMESPACE = 'data-theme-namespace';
 const DATA_ID = 'data-theme-id';
 
-export class ThemeSettings {
-  private wrapper: HTMLDivElement;
-  private changeDiv: HTMLDivElement;
+export class ThemeSettings extends OverwritableSettings {
   private sampleDiv: HTMLDivElement;
-  private cautionDiv: HTMLDivElement;
-  private overwriteCheck: HTMLInputElement;
   private select: HTMLSelectElement;
-
-  public get dom(): HTMLDivElement {
-    return this.wrapper;
-  }
 
   public get selected(): {
     id: string;
@@ -66,32 +58,18 @@ export class ThemeSettings {
   }
 
   constructor(theme: Theme | null) {
-    this.wrapper = document.createElement('div');
-    this.wrapper.classList.add('menu_center');
-    {
-      this.cautionDiv = createCautionBox({
-        id: 'theme-caution',
-        title: 'テーマ'
-      });
-      const chk = createCheckBox({
-        id: 'overwrite-theme',
-        label: '作品の設定を上書きする'
-      });
-      this.overwriteCheck = chk.check;
-      this.wrapper.appendChild(this.cautionDiv);
-      this.wrapper.appendChild(chk.div);
-    }
+    super({
+      cautionLabel: 'テーマ',
+      checkboxId: 'overwrite-theme'
+    });
     {
       this.select = document.createElement('select');
-      this.changeDiv = document.createElement('div');
       this.sampleDiv = document.createElement('div');
       this.constructChangeDiv(theme);
-      this.wrapper.appendChild(this.changeDiv);
     }
   }
 
   private constructChangeDiv(theme: Theme | null): void {
-    this.changeDiv.classList.add('menu-change');
     this.sampleDiv.id = 'theme_sample';
     if (theme) {
       this.setSample(theme);
@@ -111,7 +89,7 @@ export class ThemeSettings {
         callback: (): void => {}
       };
     });
-    constructSelect({
+    this.constructSelect({
       select: this.select,
       id: 'theme_select',
       onchange: target => {
