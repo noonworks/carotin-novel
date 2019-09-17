@@ -11,6 +11,7 @@ import {
   isSlidepadPosition,
   ConfigStore
 } from '../store/IStore';
+import { FontManagerInstance } from '../font/FontManager';
 
 const MENUITEM_CANCEL: MenuItemOption = {
   id: 'back',
@@ -128,6 +129,37 @@ function createThemeDiv(): HTMLDivElement {
   return div;
 }
 
+function createFontDiv(): HTMLDivElement {
+  const div = document.createElement('div');
+  div.classList.add('menu_center');
+  {
+    const sel = document.createElement('select');
+    sel.id = 'font_select';
+    sel.addEventListener('change', (ev: Event) => {
+      if (!ev.target) {
+        return;
+      }
+      const target = ev.target as HTMLSelectElement;
+      const opt = target.selectedOptions[0];
+      sel.style.fontFamily = opt.style.fontFamily;
+    });
+    const curFont = StoreManagerInstance.config.font;
+    FontManagerInstance.fonts.forEach(font => {
+      const opt = document.createElement('option');
+      opt.value = font.id;
+      opt.textContent = font.name;
+      opt.style.fontFamily = font.family;
+      if (font.id === curFont.id) {
+        opt.selected = true;
+        sel.style.fontFamily = font.family;
+      }
+      sel.appendChild(opt);
+    });
+    div.appendChild(sel);
+  }
+  return div;
+}
+
 function createControls(cb: OnMenuItemCallback): HTMLDivElement {
   const div = document.createElement('div');
   div.classList.add('menu_center');
@@ -146,6 +178,7 @@ export class SettingsMenu {
   private configRootDom: HTMLDivElement;
   private slidepadDom: HTMLDivElement;
   private themeDom: HTMLDivElement;
+  private fontDom: HTMLDivElement;
   private controlsDom: HTMLDivElement;
 
   public get dom(): HTMLDivElement {
@@ -189,15 +222,32 @@ export class SettingsMenu {
     return { id, namespace };
   }
 
+  private getSelectedFont(): { id: string } {
+    const r = { id: FontManagerInstance.default.id };
+    const select = this.fontDom.querySelector('select');
+    if (!select) {
+      return r;
+    }
+    const opts = (select as HTMLSelectElement).selectedOptions;
+    if (opts.length < 1) {
+      return r;
+    }
+    const opt = opts[0];
+    r.id = opt.value;
+    return r;
+  }
+
   private save(): void {
     const sp = this.getSlidepadPosition();
     const theme = this.getSelectedTheme();
+    const font = this.getSelectedFont();
     const d: ConfigStore = {
       update: new Date().getTime(),
       slidepad: {
         position: sp
       },
-      theme: theme
+      theme: theme,
+      font: font
     };
     StoreManagerInstance.updateConfig(d);
   }
@@ -205,18 +255,29 @@ export class SettingsMenu {
   constructor(callback: OnMenuItemCallback) {
     this.configRootDom = createMenuContent();
     this.configRootDom.classList.add('menu-settings');
-    this.configRootDom.appendChild(createMenuTitle('スライドパッド'));
-    this.slidepadDom = createSlidepadDiv();
-    this.configRootDom.appendChild(this.slidepadDom);
-    this.configRootDom.appendChild(createMenuTitle('テーマ'));
-    this.themeDom = createThemeDiv();
-    this.configRootDom.appendChild(this.themeDom);
-    this.controlsDom = createControls((id: string) => {
-      if (id == 'save') {
-        this.save();
-      }
-      callback(id);
-    });
-    this.configRootDom.appendChild(this.controlsDom);
+    {
+      this.configRootDom.appendChild(createMenuTitle('スライドパッド'));
+      this.slidepadDom = createSlidepadDiv();
+      this.configRootDom.appendChild(this.slidepadDom);
+    }
+    {
+      this.configRootDom.appendChild(createMenuTitle('テーマ'));
+      this.themeDom = createThemeDiv();
+      this.configRootDom.appendChild(this.themeDom);
+    }
+    {
+      this.configRootDom.appendChild(createMenuTitle('フォント'));
+      this.fontDom = createFontDiv();
+      this.configRootDom.appendChild(this.fontDom);
+    }
+    {
+      this.controlsDom = createControls((id: string) => {
+        if (id == 'save') {
+          this.save();
+        }
+        callback(id);
+      });
+      this.configRootDom.appendChild(this.controlsDom);
+    }
   }
 }
