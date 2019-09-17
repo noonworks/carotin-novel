@@ -24,11 +24,7 @@ export class ScrollStateManager {
   }
 
   private autoSave(): void {
-    this.save(true);
-  }
-
-  public bookmark(): void {
-    this.save(false);
+    this.save();
   }
 
   public restore(): Promise<void> {
@@ -85,7 +81,7 @@ export class ScrollStateManager {
     });
   }
 
-  private save(auto: boolean): void {
+  private save(): void {
     const s = this.getState();
     if (!s.page || s.scrolldepth == null) {
       return;
@@ -98,19 +94,10 @@ export class ScrollStateManager {
       return;
     }
     this.prevState = s;
-    const upd = {
-      works: {
-        [this.articleId]: {
-          autosave: {}
-        }
-      }
-    };
-    if (auto) {
-      upd.works[this.articleId].autosave = s;
-    }
+    const upd = { autosave: s };
     window.clearTimeout(this.saveQueueId);
     this.saveQueueId = window.setTimeout(() => {
-      StoreManagerInstance.update(upd);
+      StoreManagerInstance.updateWork(this.articleId, upd);
     }, 500);
   }
 
