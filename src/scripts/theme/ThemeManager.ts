@@ -55,12 +55,8 @@ class ThemeManager {
     return r;
   }
 
-  public apply(theme: { id: string; namespace: string }): void {
-    let id = theme.id;
-    if (theme.namespace != DEFAULT_THEME_NAMESPACE) {
-      id = theme.namespace + '-' + id;
-    }
-    setRootDataValue(DATA_TAG_THEME, id);
+  public apply(theme: { identifer: string }): void {
+    setRootDataValue(DATA_TAG_THEME, theme.identifer);
   }
 
   constructor() {

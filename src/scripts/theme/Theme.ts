@@ -1,4 +1,4 @@
-import { ThemeManagerInstance } from './ThemeManager';
+import { ThemeManagerInstance, DEFAULT_THEME_NAMESPACE } from './ThemeManager';
 
 interface ThemeOptions {
   version: string;
@@ -12,6 +12,16 @@ interface ThemeOptions {
   data: { [key: string]: string };
 }
 
+export function makeIdentifier(theme: {
+  id: string;
+  namespace: string;
+}): string {
+  if (theme.namespace == DEFAULT_THEME_NAMESPACE) {
+    return theme.id;
+  }
+  return theme.namespace + '-' + theme.id;
+}
+
 export class Theme {
   public version: string;
   public namespace: string;
@@ -22,6 +32,10 @@ export class Theme {
   public href: string;
   public license: string;
   public data: { [key: string]: string };
+
+  public get identifier(): string {
+    return makeIdentifier(this);
+  }
 
   constructor(opt: ThemeOptions) {
     this.version = opt.version;
