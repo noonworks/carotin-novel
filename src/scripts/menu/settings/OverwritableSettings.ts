@@ -31,8 +31,11 @@ export abstract class OverwritableSettings extends SettingsBase {
     this.changeOverwriteView(overwrite);
   }
 
-  private onChangeOverwriteCheck(): void {
+  protected abstract onChangeOverwriteCheck(overwrite: boolean): void;
+
+  private _onChangeOverwriteCheck(): void {
     this.changeOverwriteView(this.overwrited);
+    this.onChangeOverwriteCheck(this.overwrited);
   }
 
   private changeOverwriteView(overwrite: boolean): void {
@@ -58,7 +61,7 @@ export abstract class OverwritableSettings extends SettingsBase {
       this.overwriteCheck = chk.check;
     }
     this.overwriteCheck.addEventListener('change', () => {
-      this.onChangeOverwriteCheck();
+      this._onChangeOverwriteCheck();
     });
     this.wrapper.appendChild(this.cautionDiv);
     this.wrapper.appendChild(this.checkDiv);

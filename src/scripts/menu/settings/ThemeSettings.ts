@@ -34,6 +34,10 @@ export class ThemeSettings extends OverwritableSettings {
     return { id, namespace };
   }
 
+  protected onChangeOverwriteCheck(): void {
+    // dummy
+  }
+
   public setSample(theme: Theme): void {
     this.sampleDiv.innerHTML = '';
     this.sampleDiv.textContent += theme.description;

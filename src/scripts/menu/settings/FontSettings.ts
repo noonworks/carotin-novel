@@ -16,6 +16,10 @@ export class FontSettings extends OverwritableSettings {
     return r;
   }
 
+  protected onChangeOverwriteCheck(): void {
+    // dummy
+  }
+
   constructor() {
     super({
       cautionLabel: 'フォント',
