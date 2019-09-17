@@ -145,11 +145,6 @@ div.menu-caution {
   border-radius: $radius;
   opacity: 1;
   @include hideableBox(100px);
-
-  span {
-    font-size: 0.9em;
-    font-weight: 400;
-  }
 }
 
 div.menu-change {

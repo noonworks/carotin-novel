@@ -6,10 +6,6 @@ function createCautionBox(label: string): HTMLDivElement {
   c.appendChild(document.createTextNode('この作品には' + label + 'が'));
   c.appendChild(document.createElement('br'));
   c.appendChild(document.createTextNode('設定されています。'));
-  c.appendChild(document.createElement('br'));
-  const span = document.createElement('span');
-  span.textContent = '（設定は上書きできます）';
-  c.appendChild(span);
   return c;
 }
 
