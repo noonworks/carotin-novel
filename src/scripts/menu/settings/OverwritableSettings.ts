@@ -19,6 +19,29 @@ export abstract class OverwritableSettings extends SettingsBase {
   protected overwriteCheck: HTMLInputElement;
   protected changeDiv: HTMLDivElement;
 
+  public get overwrited(): boolean {
+    return this.overwriteCheck.checked;
+  }
+
+  protected set overwrite(overwrite: boolean) {
+    this.overwriteCheck.checked = overwrite;
+    this.changeOverwriteView(overwrite);
+  }
+
+  private onChangeOverwriteCheck(): void {
+    this.changeOverwriteView(this.overwrited);
+  }
+
+  private changeOverwriteView(overwrite: boolean): void {
+    if (overwrite) {
+      this.cautionDiv.classList.add('off');
+      this.changeDiv.classList.remove('off');
+    } else {
+      this.cautionDiv.classList.remove('off');
+      this.changeDiv.classList.add('off');
+    }
+  }
+
   constructor(param: OverwritableSettingsParam) {
     super();
     this.wrapper.classList.add('menu_center');
@@ -28,6 +51,9 @@ export abstract class OverwritableSettings extends SettingsBase {
       label: '作品の設定を上書きする'
     });
     this.overwriteCheck = chk.check;
+    this.overwriteCheck.addEventListener('change', () => {
+      this.onChangeOverwriteCheck();
+    });
     this.wrapper.appendChild(this.cautionDiv);
     this.wrapper.appendChild(chk.div);
     this.changeDiv = document.createElement('div');
