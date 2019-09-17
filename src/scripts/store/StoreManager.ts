@@ -73,6 +73,11 @@ export class StoreManager {
     this.save(d as StoreData);
   }
 
+  public updateWork(id: string, obj: WorkStore): void {
+    const d = deepmerge(this.cache, { works: { [id]: obj } });
+    this.save(d as StoreData);
+  }
+
   public updateConfig(obj: ConfigStore): void {
     const d = deepmerge(this.cache, { config: obj });
     this.save(d as StoreData);

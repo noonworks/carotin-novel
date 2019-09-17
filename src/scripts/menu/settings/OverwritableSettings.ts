@@ -27,7 +27,7 @@ export abstract class OverwritableSettings extends SettingsBase {
   }
 
   public get overwrited(): boolean {
-    return this.overwriteCheck.checked;
+    return this._overwritable && this.overwriteCheck.checked;
   }
 
   public set overwrite(overwrite: boolean) {

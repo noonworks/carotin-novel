@@ -51,6 +51,7 @@ type SettingsMenuOptions = {
 export class SettingsMenu {
   private configRootDom: HTMLDivElement;
   private controlsDom: HTMLDivElement;
+  private articleId: string;
 
   private slidepadSettings: SlidepadSettings;
   private themeSettings: ThemeSettings;
@@ -61,6 +62,7 @@ export class SettingsMenu {
   }
 
   private save(): void {
+    // whole config
     const d: ConfigStore = {
       update: new Date().getTime(),
       slidepad: {
@@ -70,10 +72,19 @@ export class SettingsMenu {
       font: this.fontSettings.selected
     };
     StoreManagerInstance.updateConfig(d);
+    // page config
+    const styles = {
+      styles: {
+        overwriteTheme: this.themeSettings.overwrited,
+        overwriteFont: this.fontSettings.overwrited
+      }
+    };
+    StoreManagerInstance.updateWork(this.articleId, styles);
   }
 
   constructor(opt: SettingsMenuOptions) {
-    const overwrite = getOverwriteConfig(opt.articleId);
+    this.articleId = opt.articleId;
+    const overwrite = getOverwriteConfig(this.articleId);
     this.configRootDom = createMenuContent();
     this.configRootDom.classList.add('menu-settings');
     {
