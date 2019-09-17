@@ -1,5 +1,9 @@
 import { Theme } from './Theme';
-import { getCSSStyleRules, getCSSRuleKeyValue } from '../util';
+import {
+  getCSSStyleRules,
+  getCSSRuleKeyValue,
+  setRootDataValue
+} from '../util';
 import { DATA_TAG_THEME } from '../define';
 
 function createTheme(map: { [key: string]: string }): Theme {
@@ -56,7 +60,7 @@ class ThemeManager {
     if (theme.namespace != DEFAULT_THEME_NAMESPACE) {
       id = theme.namespace + '-' + id;
     }
-    document.documentElement.setAttribute(DATA_TAG_THEME, id);
+    setRootDataValue(DATA_TAG_THEME, id);
   }
 
   constructor() {

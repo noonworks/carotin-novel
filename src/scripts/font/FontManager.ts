@@ -1,5 +1,9 @@
 import { Font } from './Font';
-import { getCSSStyleRules, getCSSRuleKeyValue } from '../util';
+import {
+  getCSSStyleRules,
+  getCSSRuleKeyValue,
+  setRootDataValue
+} from '../util';
 import { DATA_TAG_FONT } from '../define';
 
 function createFont(map: { [key: string]: string }, dataVal: string): Font {
@@ -29,7 +33,7 @@ class FontManager {
   }
 
   public apply(fontId: string): void {
-    document.documentElement.setAttribute(DATA_TAG_FONT, fontId);
+    setRootDataValue(DATA_TAG_FONT, fontId);
   }
 
   constructor() {
