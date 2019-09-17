@@ -3,6 +3,7 @@ import { ThemeManagerInstance } from './theme/ThemeManager';
 import { FontManagerInstance } from './font/FontManager';
 import { Theme } from './theme/Theme';
 import { Font } from './font/Font';
+import { ConfigStore, SlidepadPosition } from './store/IStore';
 
 function getOverwriteConfig(
   articleId: string
@@ -27,6 +28,13 @@ export class WorkConfig {
     font: boolean;
   };
   private userSetting: StyleSettings;
+  private config: ConfigStore;
+
+  public get slidepad(): {
+    position: SlidepadPosition;
+  } {
+    return this.config.slidepad;
+  }
 
   public get authorDefault(): StyleSettings {
     return this.authorSetting;
@@ -72,13 +80,13 @@ export class WorkConfig {
       theme: ThemeManagerInstance.authorDefault
     };
     this.overwrite = { theme: false, font: false };
-    const config = StoreManagerInstance.config;
+    this.config = StoreManagerInstance.config;
     this.userSetting = {
       theme: ThemeManagerInstance.getTheme(
-        config.theme.namespace,
-        config.theme.id
+        this.config.theme.namespace,
+        this.config.theme.id
       ),
-      font: FontManagerInstance.getFont(config.font.id)
+      font: FontManagerInstance.getFont(this.config.font.id)
     };
   }
 
@@ -88,13 +96,13 @@ export class WorkConfig {
 
   public reload(): void {
     this.overwrite = getOverwriteConfig(this.articleId);
-    const config = StoreManagerInstance.config;
+    this.config = StoreManagerInstance.config;
     this.userSetting = {
       theme: ThemeManagerInstance.getTheme(
-        config.theme.namespace,
-        config.theme.id
+        this.config.theme.namespace,
+        this.config.theme.id
       ),
-      font: FontManagerInstance.getFont(config.font.id)
+      font: FontManagerInstance.getFont(this.config.font.id)
     };
   }
 }

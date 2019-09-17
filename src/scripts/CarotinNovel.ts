@@ -5,9 +5,9 @@ import { ScrollStateManager } from './scroll/ScrollStateManager';
 import { deleteTextNodeInRuby, setCustomRuby, addDummyForEdge } from './util';
 import { Menu } from './menu';
 import { ThemeManagerInstance } from './theme/ThemeManager';
-import { StoreManagerInstance } from './store/StoreManager';
 import { FontManagerInstance } from './font/FontManager';
 import { makeIdentifier as makeThemeIdentifier } from './theme/Theme';
+import { WorkConfigInstance } from './WorkConfig';
 
 export class CarotinNovel {
   private rootDom: HTMLDivElement;
@@ -29,13 +29,12 @@ export class CarotinNovel {
   }
 
   public applyConfig(): void {
-    const config = StoreManagerInstance.config;
     ThemeManagerInstance.apply({
-      identifer: makeThemeIdentifier(config.theme)
+      identifer: makeThemeIdentifier(WorkConfigInstance.theme)
     });
-    FontManagerInstance.apply(config.font.id);
+    FontManagerInstance.apply(WorkConfigInstance.font.id);
     {
-      const pos = config.slidepad.position;
+      const pos = WorkConfigInstance.slidepad.position;
       this.slidepad.hide();
       switch (pos) {
         case 'left':
@@ -61,6 +60,7 @@ export class CarotinNovel {
       this.wrapperDom = wrapper as HTMLDivElement;
       this._articleId =
         this.wrapperDom.getAttribute('data-article-id') || location.pathname;
+      WorkConfigInstance.setArticleId(this._articleId);
       this.wrapper = new ScrollableWrapper(this.wrapperDom);
     }
     {
