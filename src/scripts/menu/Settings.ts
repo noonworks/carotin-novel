@@ -33,6 +33,16 @@ function createControls(cb: OnMenuItemCallback): HTMLDivElement {
   return div;
 }
 
+function getOverwriteConfig(
+  articleId: string
+): { theme: boolean; font: boolean } {
+  const w = StoreManagerInstance.getWork(articleId);
+  if (!w || !w.styles) {
+    return { theme: false, font: false };
+  }
+  return { theme: w.styles.overwriteTheme, font: w.styles.overwriteFont };
+}
+
 type SettingsMenuOptions = {
   callback: OnMenuItemCallback;
   articleId: string;
@@ -63,6 +73,7 @@ export class SettingsMenu {
   }
 
   constructor(opt: SettingsMenuOptions) {
+    const overwrite = getOverwriteConfig(opt.articleId);
     this.configRootDom = createMenuContent();
     this.configRootDom.classList.add('menu-settings');
     {
@@ -77,11 +88,17 @@ export class SettingsMenu {
       );
       this.configRootDom.appendChild(createMenuTitle('テーマ'));
       this.themeSettings = new ThemeSettings(theme.theme);
+      if (this.themeSettings.overwritable) {
+        this.themeSettings.overwrite = overwrite.theme;
+      }
       this.configRootDom.appendChild(this.themeSettings.dom);
     }
     {
       this.configRootDom.appendChild(createMenuTitle('フォント'));
       this.fontSettings = new FontSettings();
+      if (this.fontSettings.overwritable) {
+        this.fontSettings.overwrite = overwrite.font;
+      }
       this.configRootDom.appendChild(this.fontSettings.dom);
     }
     {

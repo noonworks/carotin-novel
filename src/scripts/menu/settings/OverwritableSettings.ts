@@ -20,13 +20,17 @@ export abstract class OverwritableSettings extends SettingsBase {
   protected checkDiv: HTMLDivElement;
   protected overwriteCheck: HTMLInputElement;
   protected changeDiv: HTMLDivElement;
-  protected overwritable: boolean;
+  protected _overwritable: boolean;
+
+  public get overwritable(): boolean {
+    return this._overwritable;
+  }
 
   public get overwrited(): boolean {
     return this.overwriteCheck.checked;
   }
 
-  protected set overwrite(overwrite: boolean) {
+  public set overwrite(overwrite: boolean) {
     this.overwriteCheck.checked = overwrite;
     this.changeOverwriteView(overwrite);
   }
@@ -68,8 +72,8 @@ export abstract class OverwritableSettings extends SettingsBase {
     this.changeDiv = document.createElement('div');
     this.changeDiv.classList.add('menu-change');
     this.wrapper.appendChild(this.changeDiv);
-    this.overwritable = param.overwritable;
-    if (!this.overwritable) {
+    this._overwritable = param.overwritable;
+    if (!this._overwritable) {
       this.cautionDiv.style.display = 'none';
       this.checkDiv.style.display = 'none';
     }
