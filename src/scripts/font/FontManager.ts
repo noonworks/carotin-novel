@@ -26,10 +26,10 @@ class FontManager {
     return this._fonts;
   }
 
-  public get default(): { index: number; font: Font | null } {
+  public get default(): { index: number; font: Font } {
     return {
       index: this._defaultIndex,
-      font: this._defaultIndex >= 0 ? this._fonts[this._defaultIndex] : null
+      font: this._fonts[this._defaultIndex]
     };
   }
 
@@ -41,6 +41,15 @@ class FontManager {
           ? this._fonts[this._authorDefaultIndex]
           : null
     };
+  }
+
+  public getFont(id: string): { index: number; font: Font | null } {
+    for (let i = 0; i < this._fonts.length; i++) {
+      if (this._fonts[i].id == id) {
+        return { index: i, font: this._fonts[i] };
+      }
+    }
+    return { index: -1, font: null };
   }
 
   public apply(fontId: string): void {
@@ -62,6 +71,7 @@ class FontManager {
       const map = getCSSRuleKeyValue(rules[i].rules);
       this._fonts.push(createFont(map, rules[i].dataValue));
     }
+    this._defaultIndex = 0;
     this._authorDefaultIndex = -1;
     for (let i = 0; i < this._fonts.length; i++) {
       const t = this._fonts[i];

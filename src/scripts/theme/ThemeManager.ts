@@ -33,10 +33,10 @@ class ThemeManager {
     return this._themes;
   }
 
-  public get default(): { index: number; theme: Theme | null } {
+  public get default(): { index: number; theme: Theme } {
     return {
       index: this._defaultIndex,
-      theme: this._defaultIndex >= 0 ? this._themes[this._defaultIndex] : null
+      theme: this._themes[this._defaultIndex]
     };
   }
 
@@ -59,7 +59,7 @@ class ThemeManager {
         return { index: i, theme: this._themes[i] };
       }
     }
-    return this.default;
+    return { index: -1, theme: null };
   }
 
   public apply(theme: { identifer: string }): void {
@@ -81,6 +81,7 @@ class ThemeManager {
       const map = getCSSRuleKeyValue(rules[i].rules);
       this._themes.push(createTheme(map));
     }
+    this._defaultIndex = 0;
     this._authorDefaultIndex = -1;
     for (let i = 0; i < this._themes.length; i++) {
       const t = this._themes[i];
