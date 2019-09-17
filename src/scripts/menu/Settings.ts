@@ -33,6 +33,11 @@ function createControls(cb: OnMenuItemCallback): HTMLDivElement {
   return div;
 }
 
+type SettingsMenuOptions = {
+  callback: OnMenuItemCallback;
+  articleId: string;
+};
+
 export class SettingsMenu {
   private configRootDom: HTMLDivElement;
   private controlsDom: HTMLDivElement;
@@ -57,7 +62,7 @@ export class SettingsMenu {
     StoreManagerInstance.updateConfig(d);
   }
 
-  constructor(callback: OnMenuItemCallback) {
+  constructor(opt: SettingsMenuOptions) {
     this.configRootDom = createMenuContent();
     this.configRootDom.classList.add('menu-settings');
     {
@@ -84,7 +89,7 @@ export class SettingsMenu {
         if (id == 'save') {
           this.save();
         }
-        callback(id);
+        opt.callback(id);
       });
       this.configRootDom.appendChild(this.controlsDom);
     }

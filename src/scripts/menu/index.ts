@@ -104,7 +104,10 @@ export class Menu {
       cb
     );
     this.helpMenuDom = createHelpMenu(cb);
-    this.settings = new SettingsMenu(cb);
+    this.settings = new SettingsMenu({
+      callback: cb,
+      articleId: this.app.articleId
+    });
     this.settingsMenuDom = this.settings.dom;
     this.menuContentWrapperDom.appendChild(this.topMenuDom);
     this.menuContentWrapperDom.appendChild(this.helpMenuDom);
