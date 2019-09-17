@@ -6,6 +6,7 @@ function createFont(map: { [key: string]: string }, dataVal: string): Font {
   return new Font({
     id: dataVal || '',
     name: map['font-name'] || '',
+    family: map['font-family'] || '',
     description: map['font-description'] || ''
   });
 }
