@@ -19,7 +19,8 @@ export class FontSettings extends OverwritableSettings {
   constructor() {
     super({
       cautionLabel: 'フォント',
-      checkboxId: 'overwrite-font'
+      checkboxId: 'overwrite-font',
+      overwritable: FontManagerInstance.authorDefault.index >= 0
     });
     {
       this.select = document.createElement('select');

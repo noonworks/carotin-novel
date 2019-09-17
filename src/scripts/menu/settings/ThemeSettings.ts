@@ -60,7 +60,8 @@ export class ThemeSettings extends OverwritableSettings {
   constructor(theme: Theme | null) {
     super({
       cautionLabel: 'テーマ',
-      checkboxId: 'overwrite-theme'
+      checkboxId: 'overwrite-theme',
+      overwritable: ThemeManagerInstance.authorDefault.index >= 0
     });
     {
       this.select = document.createElement('select');

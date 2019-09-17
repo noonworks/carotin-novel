@@ -12,12 +12,15 @@ function createCautionBox(label: string): HTMLDivElement {
 type OverwritableSettingsParam = {
   cautionLabel: string;
   checkboxId: string;
+  overwritable: boolean;
 };
 
 export abstract class OverwritableSettings extends SettingsBase {
   protected cautionDiv: HTMLDivElement;
+  protected checkDiv: HTMLDivElement;
   protected overwriteCheck: HTMLInputElement;
   protected changeDiv: HTMLDivElement;
+  protected overwritable: boolean;
 
   public get overwrited(): boolean {
     return this.overwriteCheck.checked;
@@ -46,18 +49,26 @@ export abstract class OverwritableSettings extends SettingsBase {
     super();
     this.wrapper.classList.add('menu_center');
     this.cautionDiv = createCautionBox(param.cautionLabel);
-    const chk = SettingsBase.createCheckBox({
-      id: param.checkboxId,
-      label: '作品の設定を上書きする'
-    });
-    this.overwriteCheck = chk.check;
+    {
+      const chk = SettingsBase.createCheckBox({
+        id: param.checkboxId,
+        label: '作品の設定を上書きする'
+      });
+      this.checkDiv = chk.div;
+      this.overwriteCheck = chk.check;
+    }
     this.overwriteCheck.addEventListener('change', () => {
       this.onChangeOverwriteCheck();
     });
     this.wrapper.appendChild(this.cautionDiv);
-    this.wrapper.appendChild(chk.div);
+    this.wrapper.appendChild(this.checkDiv);
     this.changeDiv = document.createElement('div');
     this.changeDiv.classList.add('menu-change');
     this.wrapper.appendChild(this.changeDiv);
+    this.overwritable = param.overwritable;
+    if (!this.overwritable) {
+      this.cautionDiv.style.display = 'none';
+      this.checkDiv.style.display = 'none';
+    }
   }
 }
