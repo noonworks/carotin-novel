@@ -2,13 +2,10 @@ import { OnMenuItemCallback, MenuItem, MenuItemOption } from './MenuItem';
 import { createMenuContent, createMenuTitle } from './util';
 import { ThemeManagerInstance } from '../theme/ThemeManager';
 import { StoreManagerInstance } from '../store/StoreManager';
-import {
-  SlidepadPosition,
-  isSlidepadPosition,
-  ConfigStore
-} from '../store/IStore';
+import { ConfigStore } from '../store/IStore';
 import { ThemeSettings } from './settings/ThemeSettings';
 import { FontSettings } from './settings/FontSettings';
+import { SlidepadSettings } from './settings/SlidepadSettings';
 
 const MENUITEM_CANCEL: MenuItemOption = {
   id: 'back',
@@ -21,34 +18,6 @@ const MENUITEM_SAVE: MenuItemOption = {
   icon: 'ion-md-checkmark-circle-outline',
   title: '保存'
 };
-
-function createSlidepadDiv(): HTMLDivElement {
-  const cur = StoreManagerInstance.config.slidepad.position;
-  const div = document.createElement('div');
-  div.classList.add('slidepad_select');
-  [
-    { id: 'left', label: '左' },
-    { id: 'none', label: 'なし' },
-    { id: 'right', label: '右' }
-  ].forEach(i => {
-    const d = document.createElement('div');
-    const input = document.createElement('input');
-    input.type = 'radio';
-    input.name = 'slidepad_radio';
-    input.value = i.id;
-    input.id = 'slidepad_radio_' + i.id;
-    if (i.id == cur) {
-      input.checked = true;
-    }
-    d.appendChild(input);
-    const l = document.createElement('label');
-    l.textContent = i.label;
-    l.setAttribute('for', 'slidepad_radio_' + i.id);
-    d.appendChild(l);
-    div.appendChild(d);
-  });
-  return div;
-}
 
 function createControls(cb: OnMenuItemCallback): HTMLDivElement {
   const div = document.createElement('div');
@@ -66,9 +35,9 @@ function createControls(cb: OnMenuItemCallback): HTMLDivElement {
 
 export class SettingsMenu {
   private configRootDom: HTMLDivElement;
-  private slidepadDom: HTMLDivElement;
   private controlsDom: HTMLDivElement;
 
+  private slidepadSettings: SlidepadSettings;
   private themeSettings: ThemeSettings;
   private fontSettings: FontSettings;
 
@@ -76,29 +45,14 @@ export class SettingsMenu {
     return this.configRootDom;
   }
 
-  private getSlidepadPosition(): SlidepadPosition {
-    const radios = this.slidepadDom.querySelectorAll('input[type=radio]');
-    let checked: SlidepadPosition = 'right';
-    radios.forEach(r => {
-      const radio = r as HTMLInputElement;
-      if (radio.checked && isSlidepadPosition(radio.value)) {
-        checked = radio.value;
-      }
-    });
-    return checked;
-  }
-
   private save(): void {
-    const sp = this.getSlidepadPosition();
-    const theme = this.themeSettings.selected;
-    const font = this.fontSettings.selected;
     const d: ConfigStore = {
       update: new Date().getTime(),
       slidepad: {
-        position: sp
+        position: this.slidepadSettings.selected
       },
-      theme: theme,
-      font: font
+      theme: this.themeSettings.selected,
+      font: this.fontSettings.selected
     };
     StoreManagerInstance.updateConfig(d);
   }
@@ -108,8 +62,8 @@ export class SettingsMenu {
     this.configRootDom.classList.add('menu-settings');
     {
       this.configRootDom.appendChild(createMenuTitle('スライドパッド'));
-      this.slidepadDom = createSlidepadDiv();
-      this.configRootDom.appendChild(this.slidepadDom);
+      this.slidepadSettings = new SlidepadSettings();
+      this.configRootDom.appendChild(this.slidepadSettings.dom);
     }
     {
       const theme = ThemeManagerInstance.getTheme(
