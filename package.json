@@ -33,7 +33,7 @@
     "docs:copy": "run-p cp:fonts cp:html",
     "del:dist": "run-p del:mincss del:devjs",
     "del:mincss": "rimraf docs/styles/**/*.min.css",
-    "del:devjs": "rimraf docs/scripts/carotin.js",
+    "del:devjs": "rimraf docs/scripts/carotin.js docs/scripts/carotin_mini.js",
     "dist:copy": "run-p dist:css dist:js",
     "dist:css": "cpx \"docs/**/*.css\" dist",
     "dist:js": "cpx \"docs/**/*.min.js\" dist",
