@@ -22,6 +22,11 @@ export class CarotinNovel {
   private slidepad: SlidepadManager;
   private scrollManager: ScrollStateManager;
   private menu: Menu;
+  private _articleId: string;
+
+  public get articleId(): string {
+    return this._articleId;
+  }
 
   public applyConfig(): void {
     const config = StoreManagerInstance.config;
@@ -54,6 +59,8 @@ export class CarotinNovel {
         throw new Error('Could not get elements.');
       }
       this.wrapperDom = wrapper as HTMLDivElement;
+      this._articleId =
+        this.wrapperDom.getAttribute('data-article-id') || location.pathname;
       this.wrapper = new ScrollableWrapper(this.wrapperDom);
     }
     {
@@ -95,7 +102,7 @@ export class CarotinNovel {
       this.loaderDom = loader as HTMLDivElement;
       this.loader = new Loader(this.loaderDom);
     }
-    this.scrollManager = new ScrollStateManager(this.wrapper);
+    this.scrollManager = new ScrollStateManager(this.wrapper, this._articleId);
     this.menu = new Menu({
       app: this,
       enable: true,

@@ -9,9 +9,9 @@ export class ScrollStateManager {
   private prevState: PageStore | null = null;
   private wrapper: ScrollableWrapper;
 
-  constructor(wrapper: ScrollableWrapper) {
+  constructor(wrapper: ScrollableWrapper, articleId: string) {
     this.wrapper = wrapper;
-    this.articleId = this.getArticleId(wrapper.dom);
+    this.articleId = articleId;
   }
 
   public start(): void {
@@ -83,14 +83,6 @@ export class ScrollStateManager {
         resolve();
       }, 300);
     });
-  }
-
-  private getArticleId(contentElement: HTMLElement): string {
-    const data = contentElement.getAttribute('data-article-id');
-    if (data) {
-      return data;
-    }
-    return location.pathname;
   }
 
   private save(auto: boolean): void {
