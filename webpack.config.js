@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = (_, { mode }) => ({
   entry: {
     'scripts/carotin': './src/scripts/index.ts',
+    'scripts/carotin_mini': './src/scripts/indexMini.ts',
     'styles/carotin': './src/styles/base.scss',
     'styles/demo': './src/styles/demo.scss',
     'styles/fonts/GenEiKoburiMin6-R-sub':
