@@ -7,8 +7,8 @@ import {
   isSlidepadPosition,
   ConfigStore
 } from '../store/IStore';
-import { FontManagerInstance } from '../font/FontManager';
 import { ThemeSettings } from './settings/ThemeSettings';
+import { FontSettings } from './settings/FontSettings';
 
 const MENUITEM_CANCEL: MenuItemOption = {
   id: 'back',
@@ -50,37 +50,6 @@ function createSlidepadDiv(): HTMLDivElement {
   return div;
 }
 
-function createFontDiv(): HTMLDivElement {
-  const div = document.createElement('div');
-  div.classList.add('menu_center');
-  {
-    const sel = document.createElement('select');
-    sel.id = 'font_select';
-    sel.addEventListener('change', (ev: Event) => {
-      if (!ev.target) {
-        return;
-      }
-      const target = ev.target as HTMLSelectElement;
-      const opt = target.selectedOptions[0];
-      sel.style.fontFamily = opt.style.fontFamily;
-    });
-    const curFont = StoreManagerInstance.config.font;
-    FontManagerInstance.fonts.forEach(font => {
-      const opt = document.createElement('option');
-      opt.value = font.id;
-      opt.textContent = font.name;
-      opt.style.fontFamily = font.family;
-      if (font.id === curFont.id) {
-        opt.selected = true;
-        sel.style.fontFamily = font.family;
-      }
-      sel.appendChild(opt);
-    });
-    div.appendChild(sel);
-  }
-  return div;
-}
-
 function createControls(cb: OnMenuItemCallback): HTMLDivElement {
   const div = document.createElement('div');
   div.classList.add('menu_center');
@@ -98,10 +67,10 @@ function createControls(cb: OnMenuItemCallback): HTMLDivElement {
 export class SettingsMenu {
   private configRootDom: HTMLDivElement;
   private slidepadDom: HTMLDivElement;
-  private fontDom: HTMLDivElement;
   private controlsDom: HTMLDivElement;
 
   private themeSettings: ThemeSettings;
+  private fontSettings: FontSettings;
 
   public get dom(): HTMLDivElement {
     return this.configRootDom;
@@ -119,26 +88,10 @@ export class SettingsMenu {
     return checked;
   }
 
-  private getSelectedFont(): { id: string } {
-    const df = FontManagerInstance.default.font;
-    const r = { id: df ? df.id : '' };
-    const select = this.fontDom.querySelector('select');
-    if (!select) {
-      return r;
-    }
-    const opts = (select as HTMLSelectElement).selectedOptions;
-    if (opts.length < 1) {
-      return r;
-    }
-    const opt = opts[0];
-    r.id = opt.value;
-    return r;
-  }
-
   private save(): void {
     const sp = this.getSlidepadPosition();
     const theme = this.themeSettings.selected;
-    const font = this.getSelectedFont();
+    const font = this.fontSettings.selected;
     const d: ConfigStore = {
       update: new Date().getTime(),
       slidepad: {
@@ -169,8 +122,8 @@ export class SettingsMenu {
     }
     {
       this.configRootDom.appendChild(createMenuTitle('フォント'));
-      this.fontDom = createFontDiv();
-      this.configRootDom.appendChild(this.fontDom);
+      this.fontSettings = new FontSettings();
+      this.configRootDom.appendChild(this.fontSettings.dom);
     }
     {
       this.controlsDom = createControls((id: string) => {
