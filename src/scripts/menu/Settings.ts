@@ -1,10 +1,6 @@
 import { OnMenuItemCallback, MenuItem, MenuItemOption } from './MenuItem';
 import { createMenuContent, createMenuTitle } from './util';
-import {
-  ThemeManagerInstance,
-  DEFAULT_THEME_NAMESPACE
-} from '../theme/ThemeManager';
-import { Theme } from '../theme/Theme';
+import { ThemeManagerInstance } from '../theme/ThemeManager';
 import { StoreManagerInstance } from '../store/StoreManager';
 import {
   SlidepadPosition,
@@ -12,6 +8,7 @@ import {
   ConfigStore
 } from '../store/IStore';
 import { FontManagerInstance } from '../font/FontManager';
+import { ThemeSettings } from './settings/ThemeSettings';
 
 const MENUITEM_CANCEL: MenuItemOption = {
   id: 'back',
@@ -24,40 +21,6 @@ const MENUITEM_SAVE: MenuItemOption = {
   icon: 'ion-md-checkmark-circle-outline',
   title: '保存'
 };
-
-function getColor(theme: Theme): { bc: string; tc: string } {
-  const b1 = theme.getValue('background-base');
-  const b2 = theme.getValue('background-base-a');
-  const bc = 'rgba(' + b1 + ', ' + b2 + ')';
-  const t1 = theme.getValue('text-base');
-  const t2 = theme.getValue('text-base-a');
-  const tc = 'rgba(' + t1 + ', ' + t2 + ')';
-  return { bc, tc };
-}
-
-function setSample(sample: HTMLDivElement, theme: Theme): void {
-  sample.innerHTML = '';
-  sample.textContent += theme.description;
-  if (theme.namespace != DEFAULT_THEME_NAMESPACE) {
-    // sample.appendChild(document.createElement('br'));
-    const span = document.createElement('span');
-    span.classList.add('author');
-    span.textContent += '作者：';
-    if (theme.href.length > 0) {
-      const a = document.createElement('a');
-      a.target = '_blank';
-      a.href = theme.href;
-      a.textContent = theme.author;
-      span.appendChild(a);
-    } else {
-      span.textContent += theme.author;
-    }
-    sample.appendChild(span);
-  }
-  const colors = getColor(theme);
-  sample.style.backgroundColor = colors.bc;
-  sample.style.color = colors.tc;
-}
 
 function createSlidepadDiv(): HTMLDivElement {
   const cur = StoreManagerInstance.config.slidepad.position;
@@ -84,50 +47,6 @@ function createSlidepadDiv(): HTMLDivElement {
     d.appendChild(l);
     div.appendChild(d);
   });
-  return div;
-}
-
-const DATA_NAMESPACE = 'data-theme-namespace';
-const DATA_ID = 'data-theme-id';
-
-function createThemeDiv(): HTMLDivElement {
-  const theme = ThemeManagerInstance.getTheme(
-    StoreManagerInstance.config.theme.namespace,
-    StoreManagerInstance.config.theme.id
-  );
-  const div = document.createElement('div');
-  div.classList.add('menu_center');
-  {
-    const sample = document.createElement('div');
-    sample.id = 'theme_sample';
-    if (theme.theme) {
-      setSample(sample, theme.theme);
-    }
-    const sel = document.createElement('select');
-    sel.id = 'theme_select';
-    sel.addEventListener('change', (ev: Event) => {
-      if (!ev.target) {
-        return;
-      }
-      const target = ev.target as HTMLSelectElement;
-      const idx = target.selectedIndex;
-      setSample(sample, ThemeManagerInstance.themes[idx]);
-    });
-    const curTheme = StoreManagerInstance.config.theme;
-    ThemeManagerInstance.themes.forEach(theme => {
-      const opt = document.createElement('option');
-      opt.value = theme.id;
-      opt.textContent = theme.name;
-      opt.setAttribute(DATA_NAMESPACE, theme.namespace);
-      opt.setAttribute(DATA_ID, theme.id);
-      if (theme.id === curTheme.id && theme.namespace === curTheme.namespace) {
-        opt.selected = true;
-      }
-      sel.appendChild(opt);
-    });
-    div.appendChild(sel);
-    div.appendChild(sample);
-  }
   return div;
 }
 
@@ -179,9 +98,10 @@ function createControls(cb: OnMenuItemCallback): HTMLDivElement {
 export class SettingsMenu {
   private configRootDom: HTMLDivElement;
   private slidepadDom: HTMLDivElement;
-  private themeDom: HTMLDivElement;
   private fontDom: HTMLDivElement;
   private controlsDom: HTMLDivElement;
+
+  private themeSettings: ThemeSettings;
 
   public get dom(): HTMLDivElement {
     return this.configRootDom;
@@ -197,32 +117,6 @@ export class SettingsMenu {
       }
     });
     return checked;
-  }
-
-  private getSelectedTheme(): {
-    id: string;
-    namespace: string;
-  } {
-    const dt = ThemeManagerInstance.default.theme;
-    const r = {
-      id: dt ? dt.id : '',
-      namespace: dt ? dt.namespace : ''
-    };
-    const select = this.themeDom.querySelector('select');
-    if (!select) {
-      return r;
-    }
-    const opts = (select as HTMLSelectElement).selectedOptions;
-    if (opts.length < 1) {
-      return r;
-    }
-    const opt = opts[0];
-    const id = opt.getAttribute(DATA_ID);
-    const namespace = opt.getAttribute(DATA_NAMESPACE);
-    if (!id || !namespace) {
-      return r;
-    }
-    return { id, namespace };
   }
 
   private getSelectedFont(): { id: string } {
@@ -243,7 +137,7 @@ export class SettingsMenu {
 
   private save(): void {
     const sp = this.getSlidepadPosition();
-    const theme = this.getSelectedTheme();
+    const theme = this.themeSettings.selected;
     const font = this.getSelectedFont();
     const d: ConfigStore = {
       update: new Date().getTime(),
@@ -265,9 +159,13 @@ export class SettingsMenu {
       this.configRootDom.appendChild(this.slidepadDom);
     }
     {
+      const theme = ThemeManagerInstance.getTheme(
+        StoreManagerInstance.config.theme.namespace,
+        StoreManagerInstance.config.theme.id
+      );
       this.configRootDom.appendChild(createMenuTitle('テーマ'));
-      this.themeDom = createThemeDiv();
-      this.configRootDom.appendChild(this.themeDom);
+      this.themeSettings = new ThemeSettings(theme.theme);
+      this.configRootDom.appendChild(this.themeSettings.dom);
     }
     {
       this.configRootDom.appendChild(createMenuTitle('フォント'));
