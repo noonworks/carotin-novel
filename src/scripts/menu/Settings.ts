@@ -100,7 +100,9 @@ function createThemeDiv(): HTMLDivElement {
   {
     const sample = document.createElement('div');
     sample.id = 'theme_sample';
-    setSample(sample, theme.theme);
+    if (theme.theme) {
+      setSample(sample, theme.theme);
+    }
     const sel = document.createElement('select');
     sel.id = 'theme_select';
     sel.addEventListener('change', (ev: Event) => {
@@ -201,9 +203,10 @@ export class SettingsMenu {
     id: string;
     namespace: string;
   } {
+    const dt = ThemeManagerInstance.default.theme;
     const r = {
-      id: ThemeManagerInstance.default.id,
-      namespace: ThemeManagerInstance.default.namespace
+      id: dt ? dt.id : '',
+      namespace: dt ? dt.namespace : ''
     };
     const select = this.themeDom.querySelector('select');
     if (!select) {

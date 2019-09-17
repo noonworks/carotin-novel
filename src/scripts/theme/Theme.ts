@@ -50,6 +50,7 @@ export class Theme {
   }
 
   public getValue(name: string): string {
-    return this.data[name] || ThemeManagerInstance.default.data[name];
+    const dt = ThemeManagerInstance.default.theme;
+    return this.data[name] || (dt ? dt.data[name] : '');
   }
 }

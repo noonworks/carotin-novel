@@ -24,35 +24,29 @@ export const DEFAULT_THEME_NAMESPACE = 'carotin_novel';
 
 class ThemeManager {
   private _themes: Theme[];
-  private _default: Theme;
   private _defaultIndex: number;
 
   public get themes(): Theme[] {
     return this._themes;
   }
 
-  public get default(): Theme {
-    return this._default;
-  }
-
-  public get defaultIndex(): number {
-    return this._defaultIndex;
+  public get default(): { index: number; theme: Theme | null } {
+    return {
+      index: this._defaultIndex,
+      theme: this._defaultIndex >= 0 ? this._themes[this._defaultIndex] : null
+    };
   }
 
   public getTheme(
     namespace: string,
     id: string
-  ): { index: number; theme: Theme } {
-    const r = { index: this._defaultIndex, theme: this._default };
+  ): { index: number; theme: Theme | null } {
     for (let i = 0; i < this._themes.length; i++) {
-      const t = this._themes[i];
-      if (t.namespace == namespace && t.id == id) {
-        r.index = i;
-        r.theme = t;
-        return r;
+      if (this._themes[i].namespace == namespace && this._themes[i].id == id) {
+        return { index: i, theme: this._themes[i] };
       }
     }
-    return r;
+    return this.default;
   }
 
   public apply(theme: { identifer: string }): void {
@@ -61,8 +55,7 @@ class ThemeManager {
 
   constructor() {
     this._themes = [];
-    this._default = this.themes[0];
-    this._defaultIndex = 0;
+    this._defaultIndex = -1;
     this.load();
   }
 
@@ -76,7 +69,6 @@ class ThemeManager {
     for (let i = 0; i < this._themes.length; i++) {
       const t = this._themes[i];
       if (t.namespace == DEFAULT_THEME_NAMESPACE && t.id == 'default') {
-        this._default = t;
         this._defaultIndex = i;
         break;
       }
