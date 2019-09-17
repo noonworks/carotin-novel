@@ -29,6 +29,9 @@ const emptyStore: Store = {
       theme: {
         id: 'default',
         namespace: DEFAULT_THEME_NAMESPACE
+      },
+      font: {
+        id: 'serif'
       }
     },
     works: {}

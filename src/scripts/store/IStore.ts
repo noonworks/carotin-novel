@@ -31,6 +31,9 @@ export interface ConfigStore {
     id: string;
     namespace: string;
   };
+  font: {
+    id: string;
+  };
 }
 
 export interface WorksStore {
