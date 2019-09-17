@@ -6,6 +6,7 @@ import { deleteTextNodeInRuby, setCustomRuby, addDummyForEdge } from './util';
 import { Menu } from './menu';
 import { ThemeManagerInstance } from './theme/ThemeManager';
 import { StoreManagerInstance } from './store/StoreManager';
+import { FontManagerInstance } from './font/FontManager';
 
 export class CarotinNovel {
   private rootDom: HTMLDivElement;
@@ -24,6 +25,7 @@ export class CarotinNovel {
   public applyConfig(): void {
     const config = StoreManagerInstance.config;
     ThemeManagerInstance.apply(config.theme);
+    FontManagerInstance.apply(config.font.id);
     {
       const pos = config.slidepad.position;
       this.slidepad.hide();
