@@ -1,19 +1,16 @@
 import { StoreManagerInstance } from '../../store/StoreManager';
-import { FontManagerInstance } from '../../font/FontManager';
 import { OverwritableSettings } from './OverwritableSettings';
+import { WorkConfigInstance } from '../../WorkConfig';
 
 export class FontSettings extends OverwritableSettings {
   private select: HTMLSelectElement;
 
   public get selected(): { id: string } {
-    const df = FontManagerInstance.default.font;
-    const r = { id: df ? df.id : '' };
     const opts = this.select.selectedOptions;
     if (opts.length < 1) {
-      return r;
+      return { id: '' };
     }
-    r.id = opts[0].value;
-    return r;
+    return { id: opts[0].value };
   }
 
   protected onChangeOverwriteCheck(): void {
@@ -24,7 +21,7 @@ export class FontSettings extends OverwritableSettings {
     super({
       cautionLabel: 'フォント',
       checkboxId: 'overwrite-font',
-      overwritable: FontManagerInstance.authorDefault.index >= 0
+      overwritable: WorkConfigInstance.authorDefault.font.index >= 0
     });
     {
       this.select = document.createElement('select');
@@ -38,7 +35,7 @@ export class FontSettings extends OverwritableSettings {
       this.select.style.fontFamily = opt.style.fontFamily;
     };
     const fNotChecked = (): void => {};
-    const opts = FontManagerInstance.fonts.map(font => {
+    const opts = WorkConfigInstance.fonts.map(font => {
       return {
         value: font.id,
         text: font.name,

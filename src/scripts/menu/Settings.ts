@@ -1,6 +1,5 @@
 import { OnMenuItemCallback, MenuItem, MenuItemOption } from './MenuItem';
 import { createMenuContent, createMenuTitle } from './util';
-import { ThemeManagerInstance } from '../theme/ThemeManager';
 import { StoreManagerInstance } from '../store/StoreManager';
 import { ConfigStore } from '../store/IStore';
 import { ThemeSettings } from './settings/ThemeSettings';
@@ -93,12 +92,8 @@ export class SettingsMenu {
       this.configRootDom.appendChild(this.slidepadSettings.dom);
     }
     {
-      const theme = ThemeManagerInstance.getTheme(
-        StoreManagerInstance.config.theme.namespace,
-        StoreManagerInstance.config.theme.id
-      );
       this.configRootDom.appendChild(createMenuTitle('テーマ'));
-      this.themeSettings = new ThemeSettings(theme.theme);
+      this.themeSettings = new ThemeSettings();
       if (this.themeSettings.overwritable) {
         this.themeSettings.overwrite = overwrite.theme;
       }

@@ -5,6 +5,7 @@ import {
 import { StoreManagerInstance } from '../../store/StoreManager';
 import { Theme } from '../../theme/Theme';
 import { OverwritableSettings } from './OverwritableSettings';
+import { WorkConfigInstance } from '../../WorkConfig';
 
 const DATA_NAMESPACE = 'data-theme-namespace';
 const DATA_ID = 'data-theme-id';
@@ -17,10 +18,9 @@ export class ThemeSettings extends OverwritableSettings {
     id: string;
     namespace: string;
   } {
-    const dt = ThemeManagerInstance.default.theme;
     const r = {
-      id: dt ? dt.id : '',
-      namespace: dt ? dt.namespace : ''
+      id: '',
+      namespace: ''
     };
     if (this.select.selectedOptions.length < 1) {
       return r;
@@ -61,26 +61,23 @@ export class ThemeSettings extends OverwritableSettings {
     this.sampleDiv.style.color = colors.text;
   }
 
-  constructor(theme: Theme | null) {
+  constructor() {
     super({
       cautionLabel: 'テーマ',
       checkboxId: 'overwrite-theme',
-      overwritable: ThemeManagerInstance.authorDefault.index >= 0
+      overwritable: WorkConfigInstance.authorDefault.theme.index >= 0
     });
     {
       this.select = document.createElement('select');
       this.sampleDiv = document.createElement('div');
-      this.constructChangeDiv(theme);
+      this.constructChangeDiv();
     }
   }
 
-  private constructChangeDiv(theme: Theme | null): void {
+  private constructChangeDiv(): void {
     this.sampleDiv.id = 'theme_sample';
-    if (theme) {
-      this.setSample(theme);
-    }
     const curTheme = StoreManagerInstance.config.theme;
-    const opts = ThemeManagerInstance.themes.map(theme => {
+    const opts = WorkConfigInstance.themes.map(theme => {
       return {
         value: theme.id,
         text: theme.name,
@@ -98,11 +95,16 @@ export class ThemeSettings extends OverwritableSettings {
       select: this.select,
       id: 'theme_select',
       onchange: target => {
-        this.setSample(ThemeManagerInstance.themes[target.selectedIndex]);
+        this.setSample(WorkConfigInstance.themes[target.selectedIndex]);
       },
       options: opts
     });
     this.changeDiv.appendChild(this.select);
     this.changeDiv.appendChild(this.sampleDiv);
+    const sel = this.selected;
+    const t = ThemeManagerInstance.getTheme(sel.namespace, sel.id);
+    if (t.theme) {
+      this.setSample(t.theme);
+    }
   }
 }
