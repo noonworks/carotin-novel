@@ -17,19 +17,17 @@ function createFont(map: { [key: string]: string }, dataVal: string): Font {
 
 class FontManager {
   private _fonts: Font[];
-  private _default: Font;
   private _defaultIndex: number;
 
   public get fonts(): Font[] {
     return this._fonts;
   }
 
-  public get default(): Font {
-    return this._default;
-  }
-
-  public get defaultIndex(): number {
-    return this._defaultIndex;
+  public get default(): { index: number; font: Font | null } {
+    return {
+      index: this._defaultIndex,
+      font: this._defaultIndex >= 0 ? this._fonts[this._defaultIndex] : null
+    };
   }
 
   public apply(fontId: string): void {
@@ -38,8 +36,7 @@ class FontManager {
 
   constructor() {
     this._fonts = [];
-    this._default = this._fonts[0];
-    this._defaultIndex = 0;
+    this._defaultIndex = -1;
     this.load();
   }
 
@@ -53,7 +50,6 @@ class FontManager {
     for (let i = 0; i < this._fonts.length; i++) {
       const t = this._fonts[i];
       if (t.id == 'serif') {
-        this._default = t;
         this._defaultIndex = i;
         break;
       }

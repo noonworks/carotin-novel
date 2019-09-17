@@ -226,7 +226,8 @@ export class SettingsMenu {
   }
 
   private getSelectedFont(): { id: string } {
-    const r = { id: FontManagerInstance.default.id };
+    const df = FontManagerInstance.default.font;
+    const r = { id: df ? df.id : '' };
     const select = this.fontDom.querySelector('select');
     if (!select) {
       return r;
