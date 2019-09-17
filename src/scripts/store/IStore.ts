@@ -41,8 +41,11 @@ export interface WorksStore {
 }
 
 export interface WorkStore {
-  autosave: PageStore;
-  bookmark: PageStore;
+  autosave?: PageStore;
+  styles?: {
+    overwriteTheme: boolean;
+    overwriteFont: boolean;
+  };
 }
 
 export interface PageStore {

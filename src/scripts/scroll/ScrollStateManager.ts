@@ -44,7 +44,7 @@ export class ScrollStateManager {
   private doRestore(bm: WorkStore): Promise<void> {
     return new Promise(
       (resolve: () => void, reject: (reason?: Error) => void): void => {
-        const ps = bm.autosave || bm.bookmark;
+        const ps = bm.autosave;
         // console.log(ps);
         if (!ps) {
           resolve();
@@ -109,15 +109,12 @@ export class ScrollStateManager {
     const upd = {
       works: {
         [this.articleId]: {
-          autosave: {},
-          bookmark: {}
+          autosave: {}
         }
       }
     };
     if (auto) {
       upd.works[this.articleId].autosave = s;
-    } else {
-      upd.works[this.articleId].bookmark = s;
     }
     window.clearTimeout(this.saveQueueId);
     this.saveQueueId = window.setTimeout(() => {
