@@ -77,8 +77,8 @@ export function removeCSSCustomVariablePrefix(str: string): string {
   return str.replace(CSS_CUSTOM_VARIABLE_PREFIX, '');
 }
 
-const DOUBLE_QUOTED = /^"(.*)"$/;
-const SINGLE_QUOTED = /^'(.*)'$/;
+const DOUBLE_QUOTED = /^[ \t\r\n\s]*"([^"]*)"[ \t\r\n\s]*$/;
+const SINGLE_QUOTED = /^[ \t\r\n\s]*'([^']*)'[ \t\r\n\s]*$/;
 export function removeQuotes(str: string): string {
   return str.replace(DOUBLE_QUOTED, '$1').replace(SINGLE_QUOTED, '$1');
 }
