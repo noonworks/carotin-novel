@@ -2,7 +2,8 @@ import { Font } from './Font';
 import {
   getCSSStyleRules,
   getCSSRuleKeyValue,
-  setRootDataValue
+  setRootDataValue,
+  getRootDataValue
 } from '../util';
 import { DATA_TAG_FONT } from '../define';
 
@@ -18,6 +19,8 @@ function createFont(map: { [key: string]: string }, dataVal: string): Font {
 class FontManager {
   private _fonts: Font[];
   private _defaultIndex: number;
+  private _authorDefaultIndex: number;
+  private _authorDefault: string;
 
   public get fonts(): Font[] {
     return this._fonts;
@@ -30,13 +33,25 @@ class FontManager {
     };
   }
 
+  public get authorDefault(): { index: number; font: Font | null } {
+    return {
+      index: this._authorDefaultIndex,
+      font:
+        this._authorDefaultIndex >= 0
+          ? this._fonts[this._authorDefaultIndex]
+          : null
+    };
+  }
+
   public apply(fontId: string): void {
     setRootDataValue(DATA_TAG_FONT, fontId);
   }
 
   constructor() {
+    this._authorDefault = getRootDataValue(DATA_TAG_FONT) || '';
     this._fonts = [];
     this._defaultIndex = -1;
+    this._authorDefaultIndex = -1;
     this.load();
   }
 
@@ -47,11 +62,14 @@ class FontManager {
       const map = getCSSRuleKeyValue(rules[i].rules);
       this._fonts.push(createFont(map, rules[i].dataValue));
     }
+    this._authorDefaultIndex = -1;
     for (let i = 0; i < this._fonts.length; i++) {
       const t = this._fonts[i];
+      if (t.id == this._authorDefault) {
+        this._authorDefaultIndex = i;
+      }
       if (t.id == 'serif') {
         this._defaultIndex = i;
-        break;
       }
     }
   }

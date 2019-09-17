@@ -2,7 +2,8 @@ import { Theme } from './Theme';
 import {
   getCSSStyleRules,
   getCSSRuleKeyValue,
-  setRootDataValue
+  setRootDataValue,
+  getRootDataValue
 } from '../util';
 import { DATA_TAG_THEME } from '../define';
 
@@ -25,6 +26,8 @@ export const DEFAULT_THEME_NAMESPACE = 'carotin_novel';
 class ThemeManager {
   private _themes: Theme[];
   private _defaultIndex: number;
+  private _authorDefaultIndex: number;
+  private _authorDefault: string;
 
   public get themes(): Theme[] {
     return this._themes;
@@ -34,6 +37,16 @@ class ThemeManager {
     return {
       index: this._defaultIndex,
       theme: this._defaultIndex >= 0 ? this._themes[this._defaultIndex] : null
+    };
+  }
+
+  public get authorDefault(): { index: number; theme: Theme | null } {
+    return {
+      index: this._authorDefaultIndex,
+      theme:
+        this._authorDefaultIndex >= 0
+          ? this._themes[this._authorDefaultIndex]
+          : null
     };
   }
 
@@ -54,8 +67,10 @@ class ThemeManager {
   }
 
   constructor() {
+    this._authorDefault = getRootDataValue(DATA_TAG_THEME) || '';
     this._themes = [];
     this._defaultIndex = -1;
+    this._authorDefaultIndex = -1;
     this.load();
   }
 
@@ -66,11 +81,14 @@ class ThemeManager {
       const map = getCSSRuleKeyValue(rules[i].rules);
       this._themes.push(createTheme(map));
     }
+    this._authorDefaultIndex = -1;
     for (let i = 0; i < this._themes.length; i++) {
       const t = this._themes[i];
+      if (t.identifier === this._authorDefault) {
+        this._authorDefaultIndex = i;
+      }
       if (t.namespace == DEFAULT_THEME_NAMESPACE && t.id == 'default') {
         this._defaultIndex = i;
-        break;
       }
     }
   }
