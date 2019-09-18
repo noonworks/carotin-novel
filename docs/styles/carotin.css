@@ -576,6 +576,12 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu-ch
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu-checkbox input[type=checkbox] {
   width: 1.1rem;
   height: 1.1rem;
+  padding: 0;
+  margin: 0;
+  margin-right: 0.2em;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu-caution.off ~ div.menu-checkbox {
+  margin-top: 0;
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu-caution {
   box-sizing: border-box;
@@ -598,6 +604,9 @@ div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu-ca
   max-height: 0;
   padding: 0;
   opacity: 0;
+}
+div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu-caution.off {
+  border-width: 0;
 }
 div.carotin_novel div.menu div.menu-content-wrapper div.menu-content div.menu-change {
   padding: 0;

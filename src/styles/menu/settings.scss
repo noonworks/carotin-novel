@@ -130,7 +130,14 @@ div.menu-checkbox {
   input[type='checkbox'] {
     width: 1.1rem;
     height: 1.1rem;
+    padding: 0;
+    margin: 0;
+    margin-right: 0.2em;
   }
+}
+
+div.menu-caution.off ~ div.menu-checkbox {
+  margin-top: 0;
 }
 
 div.menu-caution {
@@ -145,6 +152,10 @@ div.menu-caution {
   border-radius: $radius;
   opacity: 1;
   @include hideableBox(100px);
+
+  &.off {
+    border-width: 0;
+  }
 }
 
 div.menu-change {
