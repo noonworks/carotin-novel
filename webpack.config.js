@@ -7,8 +7,8 @@ module.exports = (_, { mode }) => ({
     'scripts/carotin_mini': './src/scripts/indexMini.ts',
     'styles/carotin': './src/styles/base.scss',
     'styles/demo': './src/styles/demo.scss',
-    'styles/fonts/GenEiKoburiMin6-R-sub':
-      './src/styles/fonts/GenEiKoburiMin6-R-sub.scss'
+    'styles/fonts/GenEiKoburiMin6-R-demo':
+      './src/styles/fonts/GenEiKoburiMin6-R-demo.scss'
   },
 
   output: {
